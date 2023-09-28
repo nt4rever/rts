@@ -17,6 +17,7 @@ import {
 } from "@tanstack/react-query";
 import { config } from "@/libs/react-query-config";
 import Devtools from "@/components/Devtools";
+import { appWithTranslation } from "next-i18next";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -62,4 +63,4 @@ const App = (props) => {
   );
 };
 
-export default App;
+export default appWithTranslation(App);
