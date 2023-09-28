@@ -40,7 +40,7 @@ export const getServerSideProps = withCSR(async (ctx) => {
     props: {
       isError,
       dehydratedState: dehydrate(queryClient),
-      ...(await serverSideTranslations(ctx.locale)),
+      ...(await serverSideTranslations(ctx.locale || 'vi')),
     },
   };
 });
