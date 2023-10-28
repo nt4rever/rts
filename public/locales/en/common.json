@@ -1,3 +1,13 @@
 {
-  "page_not_found": "404: The page you are looking for isn’t here"
+  "page_not_found": "404: The page you are looking for isn’t here",
+  "login": "Login",
+  "logout": "Logout",
+  "phone-number": "Phone Number",
+  "coming-soon": "Coming Soon...",
+  "account": "Account",
+  "upload-picture": "Upload picture",
+  "email": "Email",
+  "password": "Password",
+  "forgot-password": "Forgot password",
+  "welcome-to": "Welcome to"
 }
