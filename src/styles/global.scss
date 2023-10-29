@@ -1,0 +1,13 @@
+:root {
+  --indigo-400: #818cf8;
+}
+
+a.rts {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.1s;
+
+  &:hover {
+    color: var(--indigo-400, #818cf8);
+  }
+}

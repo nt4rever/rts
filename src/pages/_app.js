@@ -18,9 +18,9 @@ import {
 import { config } from "@/libs/react-query-config";
 import Devtools from "@/components/Devtools";
 import { appWithTranslation } from "next-i18next";
+import "@/styles/global.scss";
 
 const clientSideEmotionCache = createEmotionCache();
-
 
 const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
@@ -38,13 +38,8 @@ const App = (props) => {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <title>
-          Devias Kit
-        </title>
-        <meta
-          name="viewport"
-          content="initial-scale=1, width=device-width"
-        />
+        <title>RTS</title>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <QueryClientProvider client={queryClient}>

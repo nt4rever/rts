@@ -1,0 +1,9 @@
+{
+  "login": {
+    "email-valid": "Must be a valid email",
+    "email-required": "Email is required",
+    "password-required": "Password is required",
+    "password-min-length": "Password must be at least 6 characters",
+    "password-max-length": "Password must be at most 20 characters"
+  }
+}

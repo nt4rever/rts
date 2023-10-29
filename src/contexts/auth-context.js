@@ -8,7 +8,7 @@ const HANDLERS = {
 };
 
 const initialState = {
-  isAuthenticated: false,
+  isAuthenticated: true,
   isLoading: true,
   user: null
 };
@@ -72,13 +72,13 @@ export const AuthProvider = (props) => {
 
     initialized.current = true;
 
-    let isAuthenticated = false;
+    let isAuthenticated = true;
 
-    try {
-      isAuthenticated = window.sessionStorage.getItem('authenticated') === 'true';
-    } catch (err) {
-      console.error(err);
-    }
+    // try {
+    //   isAuthenticated = window.sessionStorage.getItem('authenticated') === 'true';
+    // } catch (err) {
+    //   console.error(err);
+    // }
 
     if (isAuthenticated) {
       const user = {
