@@ -1,6 +1,7 @@
 {
   "page_not_found": "404: Không tìm thấy trang",
   "login": "Đăng nhập",
+  "register": "Đăng ký",
   "logout": "Đăng xuất",
   "phone-number": "Số điện thoại",
   "coming-soon": "Coming Soon...",
@@ -12,5 +13,8 @@
   "welcome-to": "Chào mừng đến với",
   "hint-register": "Bạn chưa có tài khoản?",
   "register-now": "Đăng ký ngay",
-  "legal-usage": "Bằng việc tiếp tục, bạn đã đồng ý với Điều khoản sử dụng"
+  "legal-usage": "Bằng việc tiếp tục, bạn đã đồng ý với Điều khoản sử dụng",
+  "hint-login": "Bạn đã có tài khoản?",
+  "first-name": "Họ",
+  "last-name": "Tên"
 }

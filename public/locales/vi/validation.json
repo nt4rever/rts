@@ -5,5 +5,8 @@
     "password-required": "Mật khẩu là bắt buộc",
     "password-min-length": "Mật khẩu phải có ít nhất 6 ký tự",
     "password-max-length": "Mật khẩu tối đa 20 ký tự"
+  },
+  "account"  : {
+    "last-name-required" : "Tên là bắt buộc"
   }
 }
