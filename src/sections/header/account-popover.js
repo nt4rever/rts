@@ -26,6 +26,10 @@ export const AccountPopover = (props) => {
     router.push("/");
   }, [logout, onClose, router]);
 
+  const handleOpenDashboard = () => {
+    router.push("/dashboard");
+  };
+
   return (
     <Popover
       anchorEl={anchorEl}
@@ -59,6 +63,7 @@ export const AccountPopover = (props) => {
           },
         }}
       >
+        <MenuItem onClick={handleOpenDashboard}>Dashboard</MenuItem>
         <MenuItem onClick={handleSignOut}>{t("common.logout")}</MenuItem>
       </MenuList>
     </Popover>
