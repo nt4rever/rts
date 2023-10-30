@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 80px auto;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  border: 5px solid #4C1D95;
+  padding: 20px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  z-index: 1;
+  position: relative;
+}
+
+.skeleton {
+  width: clamp(300px, 70%, 1024px);
+  position: relative;
+}
+
+.rightBanner {
+  position: absolute;
+  right: -90px;
+  top: -100px;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+

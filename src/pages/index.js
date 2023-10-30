@@ -1,11 +1,13 @@
 import MainLayout from "@/layouts/main/layout";
-import CreateReport from "@/sections/report/create-report";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Banner from "@/sections/home/banner";
+import Statistical from "@/sections/home/statistical";
 
 const Page = () => {
   return (
     <div>
-      <CreateReport />
+      <Banner />
+      <Statistical />
     </div>
   );
 };

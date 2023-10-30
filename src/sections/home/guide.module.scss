@@ -1,0 +1,48 @@
+.title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  .index {
+    font-size: 48px;
+    font-weight: 700;
+    width: 30px;
+    color: #666;
+  }
+}
+
+.divider {
+  height: 5px;
+  width: 100%;
+  background: #4C1D95;
+  margin-top: 10px;
+}
+
+.number {
+  display: flex;
+
+  .itemStats {
+    padding: 10px;
+    h1,
+    p {
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 32px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }
+}
