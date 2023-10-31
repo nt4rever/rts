@@ -36,7 +36,7 @@ const Page = () => {
       first_name: "",
       last_name: "",
       password: "",
-      osName,
+      device_name: osName,
       submit: null,
     },
     validationSchema: Yup.object({
