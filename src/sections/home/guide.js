@@ -13,19 +13,21 @@ export default function Guide() {
   return (
     <div>
       <h2 className={styles.title}>How to report a problem</h2>
-      <GuideItem
-        index={1}
-        content={"Enter a nearby UK postcode, or street name and area"}
-      />
-      <GuideItem
-        index={2}
-        content={"Locate the problem on a map of the area"}
-      />
-      <GuideItem index={3} content={"Enter details of the problem"} />
-      <GuideItem
-        index={4}
-        content={"We send it to the council on your behalf"}
-      />
+      <div>
+        <GuideItem
+          index={1}
+          content={"Enter a nearby UK postcode, or street name and area"}
+        />
+        <GuideItem
+          index={2}
+          content={"Locate the problem on a map of the area"}
+        />
+        <GuideItem index={3} content={"Enter details of the problem"} />
+        <GuideItem
+          index={4}
+          content={"We send it to the council on your behalf"}
+        />
+      </div>
       <div className={styles.divider}></div>
       <div className={styles.number}>
         <div className={styles.itemStats}>

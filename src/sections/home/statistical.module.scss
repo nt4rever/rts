@@ -1,3 +1,15 @@
+@mixin mobile {
+  @media only screen and (max-width: 739px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
 .wrapper {
   display: flex;
   justify-content: center;
@@ -8,23 +20,34 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
-  border: 5px solid #4C1D95;
+  border: 5px solid #4c1d95;
   padding: 20px;
   border-radius: 20px;
   background: #f1f5f9;
   z-index: 1;
   position: relative;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
 }
 
 .skeleton {
   width: clamp(300px, 70%, 1024px);
   position: relative;
+
+  @include mobile {
+    width: calc(100% - 20px);
+  }
 }
 
 .rightBanner {
   position: absolute;
   right: -90px;
   top: -100px;
+  @include mobile {
+    display: none;
+  }
 }
 
 .title {
@@ -34,3 +57,28 @@
   margin-bottom: 10px;
 }
 
+.report_item_container {
+  display: flex;
+  cursor: pointer;
+
+  * {
+    margin: 0;
+  }
+
+  h4 {
+    font-weight: 500;
+  }
+
+  p {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  &:hover {
+    color: #4c1d95;
+    background: #e2e1e4;
+  }
+  padding: 10px;
+  border-radius: 8px;
+}

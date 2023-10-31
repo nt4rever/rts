@@ -11,10 +11,13 @@
   gap: 15px;
 
   .index {
-    font-size: 48px;
+    font-size: 42px;
     font-weight: 700;
     width: 30px;
     color: #666;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
   }
 }
 
