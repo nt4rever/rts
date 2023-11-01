@@ -26,13 +26,12 @@ const Page = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          py: 8,
+          py: 2,
         }}
       >
         <Container maxWidth="lg">
           <Grid container justifyContent="center">
             <Grid xs={12} md={6} lg={8} item>
-              <Typography variant="h4" mb={4}>Create a new report</Typography>
               {isLoggedIn ? (
                 <CreateReportForm />
               ) : (

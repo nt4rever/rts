@@ -18,7 +18,10 @@ import {
 import { config } from "@/libs/react-query-config";
 import Devtools from "@/components/Devtools";
 import { appWithTranslation } from "next-i18next";
+import "@mantine/core/styles.css";
 import "@/styles/global.scss";
+import { MantineProvider } from "@mantine/core";
+import { ModalsProvider } from "@mantine/modals";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -42,17 +45,21 @@ const App = (props) => {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <QueryClientProvider client={queryClient}>
-          <Hydrate state={pageProps.dehydratedState}>
-            <AuthProvider>
-              <ThemeProvider theme={theme}>
-                <CssBaseline />
-                {getLayout(<Component {...pageProps} />)}
-              </ThemeProvider>
-            </AuthProvider>
-            <Devtools />
-          </Hydrate>
-        </QueryClientProvider>
+        <MantineProvider>
+          <ModalsProvider>
+            <QueryClientProvider client={queryClient}>
+              <Hydrate state={pageProps.dehydratedState}>
+                <AuthProvider>
+                  <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    {getLayout(<Component {...pageProps} />)}
+                  </ThemeProvider>
+                </AuthProvider>
+                <Devtools />
+              </Hydrate>
+            </QueryClientProvider>
+          </ModalsProvider>
+        </MantineProvider>
       </LocalizationProvider>
     </CacheProvider>
   );
