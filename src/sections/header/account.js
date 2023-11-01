@@ -1,9 +1,9 @@
 import { usePopover } from "@/hooks/use-popover";
 import useAuthStore from "@/store/useAuthStore.js";
 import { Avatar, Box, Button } from "@mui/material";
+import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { AccountPopover } from "./account-popover";
-import { useTranslation } from "next-i18next";
 
 const Account = () => {
   const { isLoggedIn, user } = useAuthStore();

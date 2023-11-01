@@ -1,8 +1,29 @@
+@mixin mobile {
+  @media only screen and (max-width: 739px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
 .container {
   padding: 24px 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  z-index: 999;
+
+
+  @include mobile {
+    padding: 24px 16px;
+  }
 }
 
 .logo {
@@ -12,9 +33,39 @@
   line-height: 110%;
   text-transform: uppercase;
   color: inherit;
+  @include mobile {
+    font-size: 28px;
+  }
 }
 
 .nav {
   display: flex;
   gap: 16px;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.navMobile {
+  @include mobile {
+    margin-top: 24px;
+    min-width: 70vw;
+  }
+}
+
+
+.menu {
+  display: flex;
+  align-items: center;
+  button {
+    display: none;
+    margin-right: 5px;
+    @include mobile {
+      display: inline-flex;
+    }
+
+    border: none;
+    background: transparent;
+  }
 }

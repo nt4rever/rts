@@ -4,8 +4,14 @@
   }
 }
 
-@mixin desktop {
+@mixin tablet {
   @media only screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (max-width: 1400px) {
     @content;
   }
 }
@@ -29,6 +35,12 @@
 
   @include mobile {
     grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  @include tablet {
+    grid-template-columns: 1fr;
+    padding: 10px;
   }
 }
 
@@ -55,11 +67,15 @@
   font-size: 28px;
   font-weight: 400;
   margin-bottom: 10px;
+  @include mobile {
+    font-size: 24px;
+  }
 }
 
 .report_item_container {
   display: flex;
   cursor: pointer;
+  justify-content: space-between;
 
   * {
     margin: 0;
@@ -67,6 +83,9 @@
 
   h4 {
     font-weight: 500;
+    @include mobile {
+      font-size: 14px;
+    }
   }
 
   p {

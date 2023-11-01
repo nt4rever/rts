@@ -136,7 +136,7 @@ export const CreateReportForm = () => {
   return (
     <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
       <Card>
-        <CardHeader title="Create a new report" />
+        <CardHeader subheader="Enter details of the problem" />
         <CardContent sx={{ pt: 0 }}>
           <Box sx={{ m: -1.5 }}>
             <Grid container spacing={3}>
