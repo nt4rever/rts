@@ -1,3 +1,15 @@
+@mixin mobile {
+  @media only screen and (max-width: 739px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
 .wrapper {
   display: flex;
   align-items: center;
@@ -8,8 +20,18 @@
 .title {
   font-size: 48px;
   margin: 0 32px;
+  text-align: center;
+
+  @include mobile {
+    font-size: 32px;
+  }
 }
 
 .subTitle {
   font-weight: 400;
+  text-align: center;
+
+  @include mobile {
+    font-size: 14px;
+  }
 }

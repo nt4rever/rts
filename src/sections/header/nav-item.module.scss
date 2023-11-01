@@ -1,3 +1,15 @@
+@mixin mobile {
+  @media only screen and (max-width: 739px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
 .item {
   text-transform: capitalize;
   font-size: 16px;
@@ -6,4 +18,8 @@
   line-height: 24px;
   letter-spacing: 0.5px;
   padding: 12px 8px;
+
+  @include mobile {
+    margin-left: 20px;
+  }
 }

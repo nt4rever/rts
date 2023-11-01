@@ -2,3 +2,42 @@
   display: flex;
   justify-content: center;
 }
+
+.file_upload_wrapper {
+  padding: 30px;
+  border: 2px dashed #6366f1;
+
+  * {
+    margin: 0;
+  }
+}
+
+.list_upload_file {
+  margin-top: 20px;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .text {
+      display: flex;
+      align-items: center;
+      span {
+        display: flex;
+        align-items: center;
+        margin-right: 5px;
+      }
+    }
+
+    .remove_btn {
+      cursor: pointer;
+      color: red;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

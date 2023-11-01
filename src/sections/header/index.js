@@ -1,12 +1,15 @@
-import Link from "next/link";
-import styles from "./index.module.scss";
+import { Drawer } from "@mui/material";
 import classNames from "classnames";
+import Link from "next/link";
+import { useState } from "react";
+import { Menu } from "react-feather";
 import Account from "./account";
+import styles from "./index.module.scss";
 import NavItem from "./nav-item";
 
 const mockData = [
   {
-    href: "/home1",
+    href: "/",
     name: "home",
   },
   {
@@ -28,17 +31,31 @@ const mockData = [
 ];
 
 const Header = () => {
+  const [navMobile, setNavMobile] = useState(false);
   const navItems = mockData.map((item) => (
     <NavItem key={item.href} {...item} />
   ));
 
   return (
     <div className={styles.container}>
-      <Link href="/" className={classNames(styles.logo, "rts")}>
-        RTS
-      </Link>
+      <div className={styles.menu}>
+        <button onClick={() => setNavMobile(true)}>
+          <Menu />
+        </button>
+        <Link href="/" className={classNames(styles.logo, "rts")}>
+          RTS
+        </Link>
+      </div>
+
       <div className={styles.nav}>{navItems}</div>
       <Account />
+      <Drawer
+        anchor="left"
+        open={navMobile}
+        onClose={() => setNavMobile(false)}
+      >
+        <div className={styles.navMobile}>{navItems}</div>
+      </Drawer>
     </div>
   );
 };

@@ -1,0 +1,24 @@
+@mixin mobile {
+  @media only screen and (max-width: 739px) {
+    @content;
+  }
+}
+
+.footer {
+  margin: auto 80px;
+  @include mobile {
+    margin: auto 20px;
+  }
+}
+
+.reserveBox {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include mobile {
+    font-size: 14px;
+  }
+}
