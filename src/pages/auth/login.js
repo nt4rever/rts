@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import Head from "next/head";
 import NextLink from "next/link";
-import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -24,11 +23,16 @@ import { isAxiosError } from "axios";
 import { userService } from "@/apis/user";
 import { setTokens } from "@/utils/storage";
 import useAuthStore from "@/store/useAuthStore";
+import { useRouter } from "next/router";
 
 const Page = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const [method, setMethod] = useState("email");
+
+  const {
+    query: { continueUrl: continueUrl },
+  } = router;
 
   const { login } = useAuthStore();
 
@@ -63,7 +67,7 @@ const Page = () => {
         setTokens(data);
         const { data: user } = await getMeQuery.refetch({ throwOnError: true });
         login(user);
-        router.push("/");
+        router.push(continueUrl || "/");
       } catch (err) {
         if (isAxiosError(err)) {
           const data = err.response.data;

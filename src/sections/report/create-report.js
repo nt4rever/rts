@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { areaService } from "@/apis/area";
+import useGeoLocation from "@/hooks/use-geo-location";
 import {
   Box,
   Button,
@@ -8,16 +9,25 @@ import {
   CardContent,
   CardHeader,
   Divider,
+  FormControl,
+  FormHelperText,
   Unstable_Grid2 as Grid,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useFormik } from "formik";
-import { useEffect } from "react";
-import Dropzone from "react-dropzone";
+import { useEffect, useMemo } from "react";
+import { useDropzone } from "react-dropzone";
 import * as Yup from "yup";
+import styles from "./create-report.module.scss";
+import { useRouter } from "next/router";
+import { Image, X as XIcon } from "react-feather";
 
 export const CreateReportForm = () => {
+  const router = useRouter();
   const {
     data: areas,
     isLoading,
@@ -29,14 +39,11 @@ export const CreateReportForm = () => {
         select: "name|address",
         order: "name|asc",
       }),
-    onSuccess: (data) => {
-      formik.setFieldValue("area_id", data[0].id || undefined);
-    },
   });
 
   const formik = useFormik({
     initialValues: {
-      area_id: undefined,
+      area_id: "",
       title: "",
       description: "",
       lat: "",
@@ -49,41 +56,81 @@ export const CreateReportForm = () => {
       description: Yup.string(),
       lat: Yup.number().required(),
       lng: Yup.number().required(),
-      images: Yup.array().required(),
+      images: Yup.array().required().max(5).min(1),
     }),
     onSubmit: async (values, helpers) => {
       console.log(values);
     },
   });
 
+  const location = useGeoLocation();
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success, error);
-      } else {
-        console.log("Geolocation not supported");
-      }
-
-      function success(position) {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        formik.setFieldValue("lat", latitude);
-        formik.setFieldValue("lng", longitude);
-        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-      }
-
-      function error() {
-        console.log("Unable to retrieve your location");
-      }
+    if (location.loaded) {
+      formik.setFieldValue("lat", location.coordinates.lat);
+      formik.setFieldValue("lng", location.coordinates.lng);
     }
-  }, []);
+  }, [location.loaded]);
+
+  const areaItems = useMemo(
+    () =>
+      areas?.map((item) => (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      )),
+    [areas]
+  );
+
+  const { getRootProps, getInputProps, isDragActive, fileRejections } =
+    useDropzone({
+      accept: { "image/jpeg": [], "image/png": [] },
+      maxSize: 1000 * 5000,
+      onDrop: (acceptedFiles) => {
+        if (acceptedFiles.length === 0) {
+          return;
+        }
+        formik.setFieldValue(
+          "images",
+          formik.values.images.concat(acceptedFiles)
+        );
+      },
+    });
+
+  const handleRemoveFile = (index) => {
+    formik.setFieldValue(
+      "images",
+      formik.values.images.filter((v, i) => i !== index)
+    );
+  };
+
+  const listFileSelected = useMemo(
+    () =>
+      formik.values.images.map((file, index) => (
+        <div key={index} className={styles.container}>
+          <div className={styles.text}>
+            <span>
+              <Image size={20}/>
+            </span>
+            {file.name}
+          </div>
+          <div
+            className={styles.remove_btn}
+            onClick={() => handleRemoveFile(index)}
+          >
+            <XIcon size={20} />
+          </div>
+        </div>
+      )),
+    [formik.values.images]
+  );
 
   if (isLoading) {
     return null;
   }
 
   if (isError) {
-    return <div>Error</div>;
+    router.push("/500");
   }
 
   return (
@@ -94,25 +141,26 @@ export const CreateReportForm = () => {
           <Box sx={{ m: -1.5 }}>
             <Grid container spacing={3}>
               <Grid xs={12} md={12}>
-                <TextField
-                  fullWidth
-                  label="Select Your Area"
-                  name="area_id"
-                  required
-                  select
-                  SelectProps={{ native: true }}
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.area_id}
-                  error={!!(formik.touched.area_id && formik.errors.area_id)}
-                  helperText={formik.touched.area_id && formik.errors.area_id}
-                >
-                  {areas.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.name}
-                    </option>
-                  ))}
-                </TextField>
+                <FormControl fullWidth variant="filled">
+                  <InputLabel
+                    id="area_id"
+                    error={!!(formik.touched.area_id && formik.errors.area_id)}
+                  >
+                    Area
+                  </InputLabel>
+                  <Select
+                    label="Area"
+                    value={formik.values.area_id}
+                    onChange={formik.handleChange}
+                    name="area_id"
+                    error={!!(formik.touched.area_id && formik.errors.area_id)}
+                  >
+                    {areaItems}
+                  </Select>
+                  <FormHelperText error>
+                    {formik.touched.area_id && formik.errors.area_id}
+                  </FormHelperText>
+                </FormControl>
               </Grid>
               <Grid xs={12} md={12}>
                 <TextField
@@ -171,32 +219,23 @@ export const CreateReportForm = () => {
                 />
               </Grid>
               <Grid lg={12}>
-                <Dropzone
-                  accept={{ "image/jpeg": [], "image/png": [] }}
-                  onDrop={(acceptedFiles) => {
-                    if (acceptedFiles.length === 0) {
-                      return;
-                    }
-                    formik.setFieldValue(
-                      "images",
-                      formik.values.images.concat(acceptedFiles)
-                    );
-                  }}
-                >
-                  {({ getRootProps, getInputProps }) => (
-                    <section>
-                      <div {...getRootProps()}>
-                        <input {...getInputProps()} />
-                        <p>
-                          Drag drop some files here, or click to select files
-                        </p>
-                        {formik.values.images.map((file, i) => (
-                          <div key={i}>{file.name}</div>
-                        ))}
-                      </div>
-                    </section>
+                <div {...getRootProps()} className={styles.file_upload_wrapper}>
+                  <input {...getInputProps()} />
+                  {isDragActive ? (
+                    <p>Drop the files here ...</p>
+                  ) : (
+                    <p>
+                      Drag and drop some files here, or click to select files
+                    </p>
                   )}
-                </Dropzone>
+                </div>
+                <div className={styles.list_upload_file}>
+                  {listFileSelected}
+                </div>
+                <FormHelperText error>
+                  {fileRejections.length > 0 && "Unacceptable file"}
+                  {formik.touched.images && formik.errors.images}
+                </FormHelperText>
               </Grid>
             </Grid>
           </Box>
@@ -204,7 +243,7 @@ export const CreateReportForm = () => {
         <Divider />
         <CardActions sx={{ justifyContent: "flex-end" }}>
           <Button type="submit" variant="contained">
-            Save details
+            Submit
           </Button>
         </CardActions>
       </Card>
