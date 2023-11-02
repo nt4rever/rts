@@ -34,6 +34,8 @@ import { useDropzone } from "react-dropzone";
 import { Image, X as XIcon } from "react-feather";
 import * as Yup from "yup";
 import styles from "./create-report.module.scss";
+import { modals } from "@mantine/modals";
+import { Text } from "@mantine/core";
 
 export const CreateReportForm = () => {
   const router = useRouter();
@@ -59,6 +61,7 @@ export const CreateReportForm = () => {
   const checkLocation = (area, location) => {
     const distance =
       calcCrow(area.lat, area.lng, location.lat, location.lng) * 1000;
+    console.log({ distance, area });
     return distance <= area.radius;
   };
 
@@ -83,9 +86,22 @@ export const CreateReportForm = () => {
       try {
         const area = areas?.find((item) => item.id === values.area_id);
         if (!checkLocation(area, values)) {
-          helpers.setStatus({ success: false });
-          helpers.setErrors({ submit: "Location so far" });
-          helpers.setSubmitting(false);
+          modals.openConfirmModal({
+            title: "Confirm your location",
+            centered: true,
+            children: (
+              <Text size="sm">
+                Your location is too far from the current area. Do you want to
+                continue using this location?
+              </Text>
+            ),
+            labels: { confirm: "Confirm", cancel: "No don't submit it" },
+            confirmProps: { color: "red" },
+            onConfirm: async () => {
+              await reportMutation.mutateAsync(values);
+              setIsSubmitted(true);
+            },
+          });
           return;
         }
         await reportMutation.mutateAsync(values);
@@ -180,7 +196,6 @@ export const CreateReportForm = () => {
             alignItems: "center",
             display: "flex",
             flexDirection: "column",
-            height: "calc(100vh - 220px)",
           }}
         >
           <Typography align="center" sx={{ mb: 3 }} variant="h5">
