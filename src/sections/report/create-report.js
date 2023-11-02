@@ -3,8 +3,9 @@ import { areaService } from "@/apis/area";
 import { ticketService } from "@/apis/ticket";
 import { SuccessIcon } from "@/assets/icon/success";
 import useGeoLocation from "@/hooks/use-geo-location";
-import { calcCrow } from "@/utils/distance";
 import ArrowRightIcon from "@heroicons/react/24/solid/ArrowRightIcon";
+import { Text } from "@mantine/core";
+import { modals } from "@mantine/modals";
 import {
   Box,
   Button,
@@ -26,6 +27,7 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 import { useFormik } from "formik";
+import { getDistance } from "geolib";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -34,8 +36,6 @@ import { useDropzone } from "react-dropzone";
 import { Image, X as XIcon } from "react-feather";
 import * as Yup from "yup";
 import styles from "./create-report.module.scss";
-import { modals } from "@mantine/modals";
-import { Text } from "@mantine/core";
 
 export const CreateReportForm = () => {
   const router = useRouter();
@@ -59,9 +59,16 @@ export const CreateReportForm = () => {
   });
 
   const checkLocation = (area, location) => {
-    const distance =
-      calcCrow(area.lat, area.lng, location.lat, location.lng) * 1000;
-    console.log({ distance, area });
+    const distance = getDistance(
+      {
+        latitude: area.lat,
+        longitude: area.lng,
+      },
+      {
+        latitude: location.lat,
+        longitude: location.lng,
+      }
+    );
     return distance <= area.radius;
   };
 
