@@ -3,8 +3,9 @@ import { areaService } from "@/apis/area";
 import { ticketService } from "@/apis/ticket";
 import { SuccessIcon } from "@/assets/icon/success";
 import useGeoLocation from "@/hooks/use-geo-location";
-import { calcCrow } from "@/utils/distance";
 import ArrowRightIcon from "@heroicons/react/24/solid/ArrowRightIcon";
+import { Text } from "@mantine/core";
+import { modals } from "@mantine/modals";
 import {
   Box,
   Button,
@@ -26,6 +27,7 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 import { useFormik } from "formik";
+import { getDistance } from "geolib";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -57,8 +59,16 @@ export const CreateReportForm = () => {
   });
 
   const checkLocation = (area, location) => {
-    const distance =
-      calcCrow(area.lat, area.lng, location.lat, location.lng) * 1000;
+    const distance = getDistance(
+      {
+        latitude: area.lat,
+        longitude: area.lng,
+      },
+      {
+        latitude: location.lat,
+        longitude: location.lng,
+      }
+    );
     return distance <= area.radius;
   };
 
@@ -83,9 +93,22 @@ export const CreateReportForm = () => {
       try {
         const area = areas?.find((item) => item.id === values.area_id);
         if (!checkLocation(area, values)) {
-          helpers.setStatus({ success: false });
-          helpers.setErrors({ submit: "Location so far" });
-          helpers.setSubmitting(false);
+          modals.openConfirmModal({
+            title: "Confirm your location",
+            centered: true,
+            children: (
+              <Text size="sm">
+                Your location is too far from the current area. Do you want to
+                continue using this location?
+              </Text>
+            ),
+            labels: { confirm: "Confirm", cancel: "No don't submit it" },
+            confirmProps: { color: "red" },
+            onConfirm: async () => {
+              await reportMutation.mutateAsync(values);
+              setIsSubmitted(true);
+            },
+          });
           return;
         }
         await reportMutation.mutateAsync(values);
@@ -180,7 +203,6 @@ export const CreateReportForm = () => {
             alignItems: "center",
             display: "flex",
             flexDirection: "column",
-            height: "calc(100vh - 220px)",
           }}
         >
           <Typography align="center" sx={{ mb: 3 }} variant="h5">

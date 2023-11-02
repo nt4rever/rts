@@ -5,15 +5,17 @@
 }
 
 .footer {
-  margin: auto 80px;
+  margin-left: 80px;
+  margin-right: 80px;
   @include mobile {
-    margin: auto 20px;
+    margin-left: 20px;
+    margin-right: 20px;
   }
+  padding-bottom: 24px;
 }
 
 .reserveBox {
   margin-top: 24px;
-  margin-bottom: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
