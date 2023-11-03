@@ -4,6 +4,6 @@ module.exports = {
   reactStrictMode: true,
   i18n,
   images: {
-    domains: ['www.fixmystreet.com'],
+    domains: ['minio.hmmmm.tech'],
   },
 };
