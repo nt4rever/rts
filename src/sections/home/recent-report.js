@@ -3,6 +3,7 @@ import styles from "./statistical.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import { ticketService } from "@/apis/ticket";
 import { format } from "date-fns";
+import { NoSsr } from "@mui/material";
 
 export default function RecentReport() {
   const params = { per_page: 4, order: "created_at|desc" };
@@ -28,7 +29,9 @@ export const ReportItem = ({ data }) => {
     <div className={styles.report_item_container}>
       <div>
         <h4>{data.title}</h4>
-        <p>{format(new Date(data.created_at), "hh:mm dd-MM-yyyy")}</p>
+        <NoSsr>
+          <p>{format(new Date(data.created_at), "hh:mm dd-MM-yyyy")}</p>
+        </NoSsr>
       </div>
       <div>
         <Image src={data.images[0]} width={90} height={60} alt="sample" />
