@@ -9,5 +9,7 @@
   "email": "Email",
   "password": "Password",
   "forgot-password": "Forgot password",
-  "welcome-to": "Welcome to"
+  "welcome-to": "Welcome to",
+  "search": "Search",
+  "views": "Views"
 }

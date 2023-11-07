@@ -18,10 +18,12 @@ import {
 import { config } from "@/libs/react-query-config";
 import Devtools from "@/components/Devtools";
 import { appWithTranslation } from "next-i18next";
-import "@mantine/core/styles.css";
+import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 import "@/styles/global.scss";
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
+import { Notifications } from "@mantine/notifications";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -47,6 +49,7 @@ const App = (props) => {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <MantineProvider>
           <ModalsProvider>
+            <Notifications position="top-center" zIndex={9999} />
             <QueryClientProvider client={queryClient}>
               <Hydrate state={pageProps.dehydratedState}>
                 <AuthProvider>

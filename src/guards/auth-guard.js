@@ -1,3 +1,4 @@
+import FullPageLoading from "@/components/Loading/FullPageLoading";
 import useAuthStore from "@/store/useAuthStore";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
@@ -6,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 export const AuthGuard = (props) => {
   const { children } = props;
   const router = useRouter();
-  const { isLoggedIn, user } = useAuthStore();
+  const { isLoggedIn, user, isLoading } = useAuthStore();
   const ignore = useRef(false);
   const [checked, setChecked] = useState(false);
 
@@ -15,7 +16,7 @@ export const AuthGuard = (props) => {
   // triggered and will automatically redirect to sign-in page.
 
   useEffect(() => {
-    if (!router.isReady) {
+    if (!router.isReady || isLoading) {
       return;
     }
 
@@ -37,11 +38,11 @@ export const AuthGuard = (props) => {
     } else {
       setChecked(true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady, isLoggedIn, user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady, isLoggedIn, user, isLoading]);
 
   if (!checked) {
-    return null;
+    return <FullPageLoading />;
   }
 
   // If got here, it means that the redirect did not occur, and that tells us that the user is
