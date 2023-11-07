@@ -23,7 +23,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Account | Admin RTS</title>
+        <title>Account | RTS</title>
       </Head>
       <Box
         component="main"

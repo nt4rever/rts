@@ -200,7 +200,7 @@ const Page = () => {
     <>
       <Head>
         <title>
-          Customers | Devias Kit
+          Tasks | RTS
         </title>
       </Head>
       <Box
