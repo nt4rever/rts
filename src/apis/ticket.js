@@ -31,4 +31,14 @@ const all = async (params) => {
   return data;
 };
 
-export const ticketService = { create, all };
+const createByMe = async (params) => {
+  const { data } = await axiosClient.get(TICKET_ENDPOINT.all, {
+    params: {
+      ...params,
+      per_page: 6,
+    },
+  });
+  return data;
+};
+
+export const ticketService = { create, all, createByMe };
