@@ -11,7 +11,7 @@ export const AuthContext = createContext({ undefined });
 export const AuthProvider = (props) => {
   const { children } = props;
   const ref = useRef(false);
-  const { login } = useAuthStore();
+  const { login, loading } = useAuthStore();
   const getMeQuery = useQuery({
     queryKey: ["me"],
     queryFn: userService.me,
@@ -29,6 +29,7 @@ export const AuthProvider = (props) => {
         user = (await getMeQuery.refetch()).data;
         if (user) login(user);
       }
+      loading(false);
     };
     loadAccessToken();
   }, []);

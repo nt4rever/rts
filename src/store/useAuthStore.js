@@ -1,10 +1,16 @@
 import { create } from "zustand";
 
 const useAuthStore = create((set) => ({
+  isLoading: true,
   isLoggedIn: undefined,
   user: undefined,
+  loading: (status) =>
+    set((state) => ({
+      isLoading: status,
+    })),
   login: (user) => {
     set((state) => ({
+      isLoading: false,
       isLoggedIn: true,
       user,
     }));
