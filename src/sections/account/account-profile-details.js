@@ -1,3 +1,4 @@
+import { genders } from "@/constants/gender";
 import { useProfileMutation } from "@/hooks/mutations/user";
 import { notifications } from "@mantine/notifications";
 import {
@@ -23,31 +24,16 @@ import { useFormik } from "formik";
 import { useTranslation } from "next-i18next";
 import * as Yup from "yup";
 
-const genders = [
-  {
-    value: "MALE",
-    label: "Male",
-  },
-  {
-    value: "FEMALE",
-    label: "Female",
-  },
-  {
-    value: "OTHER",
-    label: "Other",
-  },
-];
-
-const genderItems = genders.map((gender, index) => (
-  <MenuItem key={index} value={gender.value}>
-    {gender.label}
-  </MenuItem>
-));
-
 export const AccountProfileDetails = ({ user }) => {
   const profileMutation = useProfileMutation();
   const queryClient = useQueryClient();
   const { t } = useTranslation();
+
+  const genderItems = genders.map((gender, index) => (
+    <MenuItem key={index} value={gender}>
+      {t(`constraint.gender.${gender}`)}
+    </MenuItem>
+  ));
 
   const formik = useFormik({
     initialValues: {
@@ -65,7 +51,7 @@ export const AccountProfileDetails = ({ user }) => {
       phone_number: Yup.string().optional().max(15),
       date_of_birth: Yup.date().optional(),
       gender: Yup.mixed().oneOf(["MALE", "FEMALE", "OTHER"]).optional(),
-      address: Yup.string().optional().max(100),
+      address: Yup.string().optional().max(200),
     }),
     onSubmit: async (values, helpers) => {
       try {
