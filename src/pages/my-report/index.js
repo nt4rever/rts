@@ -15,6 +15,7 @@ import {
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { CompanyCard } from 'src/sections/companies/company-card';
 import { CompaniesSearch } from 'src/sections/companies/companies-search';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const companies = [
   {
@@ -164,6 +165,14 @@ const Page = () => (
     </Box>
   </>
 );
+
+export const getStaticProps = async (ctx) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(ctx.locale || "vi")),
+    },
+  };
+};
 
 Page.getLayout = (page) => (
   <DashboardLayout>

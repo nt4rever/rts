@@ -10,6 +10,7 @@ import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { CustomersTable } from 'src/sections/customer/customers-table';
 import { CustomersSearch } from 'src/sections/customer/customers-search';
 import { applyPagination } from 'src/utils/apply-pagination';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const now = new Date();
 
@@ -279,6 +280,14 @@ const Page = () => {
       </Box>
     </>
   );
+};
+
+export const getStaticProps = async (ctx) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(ctx.locale || "vi")),
+    },
+  };
 };
 
 Page.getLayout = (page) => (
