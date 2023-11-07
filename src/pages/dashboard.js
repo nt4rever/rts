@@ -10,6 +10,7 @@ import { OverviewTasksProgress } from 'src/sections/overview/overview-tasks-prog
 import { OverviewTotalCustomers } from 'src/sections/overview/overview-total-customers';
 import { OverviewTotalProfit } from 'src/sections/overview/overview-total-profit';
 import { OverviewTraffic } from 'src/sections/overview/overview-traffic';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const now = new Date();
 
@@ -222,6 +223,14 @@ const Page = () => (
     </Box>
   </>
 );
+
+export const getStaticProps = async (ctx) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(ctx.locale || "vi")),
+    },
+  };
+};
 
 Page.getLayout = (page) => (
   <DashboardLayout>
