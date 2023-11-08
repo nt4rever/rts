@@ -12,5 +12,13 @@
       "RESOLVED": "đã xử lý",
       "CLOSED": "đóng"
     }
+  },
+  "task": {
+    "status": {
+      "PENDING": "Đang chờ",
+      "CANCELED": "Bị huỷ",
+      "DONE": "Hoàn thành"
+    },
+    "expires_at": "Thời hạn"
   }
 }

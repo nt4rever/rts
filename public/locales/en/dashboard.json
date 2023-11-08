@@ -12,5 +12,13 @@
       "RESOLVED": "resolved",
       "CLOSED": "closed"
     }
+  },
+  "task": {
+    "status": {
+      "PENDING": "pending",
+      "CANCELED": "canceled",
+      "DONE": "done"
+    },
+    "expires_at": "Deadline"
   }
 }

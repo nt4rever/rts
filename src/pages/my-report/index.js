@@ -34,6 +34,7 @@ const Page = () => {
     queryKey: ["my-report", { page, created_by: user?.id }],
     queryFn: () => ticketService.createByMe({ page, created_by: user?.id }),
     keepPreviousData: true,
+    enabled: !!user?.id,
   });
 
   useEffect(() => {

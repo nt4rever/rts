@@ -20,12 +20,13 @@ export const AccountPopover = (props) => {
   const queryClient = useQueryClient();
 
   const handleSignOut = useCallback(() => {
+    queryClient.clear();
     onClose?.();
     logout();
     clearTokens();
-    queryClient.removeQueries();
     router.push("/auth/login");
-  }, [onClose, logout, router, queryClient]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onClose, logout]);
 
   return (
     <Popover
