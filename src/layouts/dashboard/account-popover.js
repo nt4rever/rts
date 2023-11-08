@@ -8,6 +8,7 @@ import {
   Popover,
   Typography,
 } from "@mui/material";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import PropTypes from "prop-types";
 import { useCallback } from "react";
@@ -16,13 +17,15 @@ export const AccountPopover = (props) => {
   const { anchorEl, onClose, open } = props;
   const router = useRouter();
   const { logout } = useAuthStore();
+  const queryClient = useQueryClient();
 
   const handleSignOut = useCallback(() => {
     onClose?.();
     logout();
     clearTokens();
+    queryClient.removeQueries();
     router.push("/auth/login");
-  }, [onClose, logout, router]);
+  }, [onClose, logout, router, queryClient]);
 
   return (
     <Popover

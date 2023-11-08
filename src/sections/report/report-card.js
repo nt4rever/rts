@@ -44,7 +44,9 @@ export const ReportCard = (props) => {
       }}
     >
       <CardContent>
-        <Box>
+        <Box sx={{
+          pb: 1
+        }}>
           <SeverityPill color={statusMap[report.status]}>
             {t(`dashboard.report.status.${report.status}`)}
           </SeverityPill>
