@@ -31,8 +31,8 @@ const Page = () => {
   const [page, setPage] = useState(1);
   const { user } = useAuthStore();
   const { data } = useQuery({
-    queryKey: ["my-report", page],
-    queryFn: () => ticketService.createByMe({ page, created_by: user.id }),
+    queryKey: ["my-report", { page, created_by: user?.id }],
+    queryFn: () => ticketService.createByMe({ page, created_by: user?.id }),
     keepPreviousData: true,
   });
 

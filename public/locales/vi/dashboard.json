@@ -2,6 +2,15 @@
   "report": {
     "your-report": "Báo cáo của bạn",
     "create": "Tạo mới",
-    "ago": "trước"
+    "ago": "trước",
+    "status": {
+      "NEW": "mới",
+      "PENDING": "chờ xác nhận",
+      "CONFIRMED": "đã xác nhận",
+      "REJECTED": "từ chối",
+      "IN_PROCESS": "đang xử lý",
+      "RESOLVED": "đã xử lý",
+      "CLOSED": "đóng"
+    }
   }
 }

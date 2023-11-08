@@ -2,6 +2,15 @@
   "report": {
     "your-report": "Your report",
     "create": "Create",
-    "ago": "ago"
+    "ago": "ago",
+    "status": {
+      "NEW": "new",
+      "PENDING": "pending",
+      "CONFIRMED": "confirmed",
+      "REJECTED": "rejected",
+      "IN_PROCESS": "in process",
+      "RESOLVED": "resolved",
+      "CLOSED": "closed"
+    }
   }
 }

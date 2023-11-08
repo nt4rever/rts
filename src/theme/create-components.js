@@ -188,6 +188,16 @@ export function createComponents(config) {
         }
       }
     },
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          fontSize: 14,
+          fontWeight: 500,
+          lineHeight: '20px'
+        }
+      }
+    },
+
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
