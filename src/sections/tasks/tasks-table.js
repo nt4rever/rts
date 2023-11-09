@@ -2,6 +2,7 @@ import { SeverityPill } from "@/components/severity-pill";
 import {
   Avatar,
   Box,
+  ButtonBase,
   Card,
   Stack,
   Table,
@@ -13,7 +14,9 @@ import {
 } from "@mui/material";
 import { format } from "date-fns";
 import { useTranslation } from "next-i18next";
+import { ArrowRight } from "react-feather";
 import { Scrollbar } from "src/components/scrollbar";
+import NextLink from "next/link";
 
 const statusMap = {
   PENDING: "secondary",
@@ -80,18 +83,34 @@ export const TasksTable = (props) => {
                         </Box>
                       </Stack>
                     </TableCell>
-                    <TableCell
-                      align="right"
-                      sx={{
-                        display: {
-                          xs: "none",
-                          sm: "table-cell",
-                        },
-                      }}
-                    >
-                      <SeverityPill color={statusMap[task.status]}>
+                    <TableCell align="right">
+                      <SeverityPill
+                        color={statusMap[task.status]}
+                        sx={{
+                          display: {
+                            xs: "none",
+                            sm: "inline-flex",
+                          },
+                          mr: 1,
+                        }}
+                      >
                         {t(`dashboard.task.status.${task.status}`)}
                       </SeverityPill>
+                      <ButtonBase
+                        title={`Detail`}
+                        sx={{
+                          color: "rgb(108, 115, 127)",
+                          p: 1,
+                          ":hover": {
+                            background: "rgba(108, 115, 127, 0.04)",
+                            borderRadius: 8,
+                          },
+                        }}
+                        href={`/tasks/${task.id}`}
+                        component={NextLink}
+                      >
+                        <ArrowRight />
+                      </ButtonBase>
                     </TableCell>
                   </TableRow>
                 );
