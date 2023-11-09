@@ -50,11 +50,11 @@ const Page = () => {
                   >
                     <img
                       alt="Under development"
-                      src="/assets/errors/error-404.png"
+                      src="/assets/errors/error-401.png"
                       style={{
                         display: "inline-block",
                         maxWidth: "100%",
-                        width: 400,
+                        width: 200,
                       }}
                     />
                   </Box>

@@ -214,7 +214,15 @@ export const CreateReportForm = () => {
               textAlign: "center",
             }}
           >
-            <SuccessIcon />
+            <img
+                alt="Under development"
+                src="/assets/icons/iconly-glass-tick.svg"
+                style={{
+                  display: "inline-block",
+                  maxWidth: "100%",
+                  width: 150,
+                }}
+              />
           </Box>
           <Button
             component={NextLink}

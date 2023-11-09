@@ -17,6 +17,17 @@ import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
+import { SeverityPill } from "@/components/severity-pill";
+
+const statusMap = {
+  NEW: "primary",
+  PENDING: "secondary",
+  CONFIRMED: "info",
+  REJECTED: "warning",
+  IN_PROCESS: "secondary",
+  RESOLVED: "success",
+  CLOSED: "error",
+};
 
 export const ReportCard = (props) => {
   const { t } = useTranslation();
@@ -33,6 +44,13 @@ export const ReportCard = (props) => {
       }}
     >
       <CardContent>
+        <Box sx={{
+          pb: 1
+        }}>
+          <SeverityPill color={statusMap[report.status]}>
+            {t(`dashboard.report.status.${report.status}`)}
+          </SeverityPill>
+        </Box>
         <Box
           sx={{
             display: "flex",

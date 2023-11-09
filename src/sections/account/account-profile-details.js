@@ -41,7 +41,7 @@ export const AccountProfileDetails = ({ user }) => {
       last_name: user.last_name,
       phone_number: user.phone_number,
       date_of_birth: user.date_of_birth,
-      gender: user.gender,
+      gender: user.gender || '',
       address: user.address,
       submit: null,
     },
