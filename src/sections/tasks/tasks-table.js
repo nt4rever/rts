@@ -17,12 +17,7 @@ import { useTranslation } from "next-i18next";
 import { ArrowRight } from "react-feather";
 import { Scrollbar } from "src/components/scrollbar";
 import NextLink from "next/link";
-
-const statusMap = {
-  PENDING: "secondary",
-  CANCELED: "error",
-  DONE: "success",
-};
+import { taskStatusMap } from "@/constants/task-status";
 
 export const TasksTable = (props) => {
   const {
@@ -77,7 +72,7 @@ export const TasksTable = (props) => {
                             },
                           }}
                         >
-                          <SeverityPill color={statusMap[task.status]}>
+                          <SeverityPill color={taskStatusMap[task.status]}>
                             {t(`dashboard.task.status.${task.status}`)}
                           </SeverityPill>
                         </Box>
@@ -85,7 +80,7 @@ export const TasksTable = (props) => {
                     </TableCell>
                     <TableCell align="right">
                       <SeverityPill
-                        color={statusMap[task.status]}
+                        color={taskStatusMap[task.status]}
                         sx={{
                           display: {
                             xs: "none",

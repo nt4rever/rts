@@ -76,7 +76,7 @@ const Page = () => {
             </Box>
             {data && (
               <TasksTable
-                count={100}
+                count={data.length}
                 items={data}
                 onPageChange={handlePageChange}
                 onRowsPerPageChange={handleRowsPerPageChange}

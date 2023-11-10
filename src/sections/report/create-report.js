@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { areaService } from "@/apis/area";
 import { ticketService } from "@/apis/ticket";
-import { SuccessIcon } from "@/assets/icon/success";
 import useGeoLocation from "@/hooks/use-geo-location";
 import ArrowRightIcon from "@heroicons/react/24/solid/ArrowRightIcon";
 import { Text } from "@mantine/core";
