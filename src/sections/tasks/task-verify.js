@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import CommonTaskRow from "@/components/Task/common-task-row";
 import { EVIDENCE_TYPE } from "@/constants/task-status";
+import useGeoLocation from "@/hooks/use-geo-location";
 import {
   Box,
   Button,
@@ -19,17 +19,68 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { useTranslation } from "next-i18next";
-import { Image, X as XIcon } from "react-feather";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
-import useGeoLocation from "@/hooks/use-geo-location";
-import { useEffect } from "react";
-import styles from "../report/create-report.module.scss";
+import { Image, X as XIcon } from "react-feather";
 import * as Yup from "yup";
+import styles from "../report/create-report.module.scss";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { taskService } from "@/apis/task";
+import { Text } from "@mantine/core";
+import { modals } from "@mantine/modals";
+import { notifications } from "@mantine/notifications";
+import { isAxiosError } from "axios";
+import { getDistance } from "geolib";
+import { VOLUNTEER_VERIFY_MAX_DISTANCE } from "@/constants/shared";
+
+const checkLocation = (reportLocation, location) => {
+  const distance = getDistance(
+    {
+      latitude: reportLocation.lat,
+      longitude: reportLocation.lng,
+    },
+    {
+      latitude: location.lat,
+      longitude: location.lng,
+    }
+  );
+  console.log(distance);
+  return distance <= VOLUNTEER_VERIFY_MAX_DISTANCE;
+};
 
 const TaskVerify = (props) => {
-  const { taskId, hide } = props;
+  const { taskId, reportLocation, hide } = props;
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
+
+  const taskMutation = useMutation({
+    mutationKey: ["task-update", taskId],
+    mutationFn: taskService.update,
+  });
+
+  const cancelMutate = useMutation({
+    mutationKey: ["task-cancel", taskId],
+    mutationFn: () => taskService.cancel(taskId),
+  });
+
+  const mutationSuccess = () => {
+    queryClient.invalidateQueries(["tasks", taskId]);
+    queryClient.invalidateQueries(["tasks"]);
+    notifications.show({
+      title: "Task update successfully",
+      color: "green",
+      autoClose: 2000,
+    });
+  };
+
+  const mutationFail = () => {
+    notifications.show({
+      title: "Task update failed",
+      color: "red",
+    });
+    queryClient.invalidateQueries(["tasks", taskId]);
+    queryClient.invalidateQueries(["tasks"]);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -46,7 +97,40 @@ const TaskVerify = (props) => {
       images: Yup.array().required().max(5).min(1),
       type: Yup.mixed().oneOf(EVIDENCE_TYPE).required(),
     }),
-    onSubmit: async (values, helpers) => {},
+    onSubmit: async (values, helpers) => {
+      try {
+        if (!checkLocation(reportLocation, values)) {
+          modals.openConfirmModal({
+            title: "Confirm your location",
+            centered: true,
+            children: (
+              <Text size="sm">
+                Your location is too far from the report location. Do you want
+                to continue using this location?
+              </Text>
+            ),
+            labels: { confirm: "Confirm", cancel: "No don't submit it" },
+            confirmProps: { color: "red" },
+            onConfirm: async () => {
+              await taskMutation.mutateAsync({ ...values, id: taskId });
+              mutationSuccess();
+            },
+          });
+          return;
+        }
+        await taskMutation.mutateAsync({ ...values, id: taskId });
+        mutationSuccess();
+      } catch (error) {
+        mutationFail();
+        if (isAxiosError(err)) {
+          const data = err.response.data;
+          const { message } = data;
+          helpers.setStatus({ success: false });
+          helpers.setErrors({ submit: t(message, { ns: "message" }) });
+          helpers.setSubmitting(false);
+        }
+      }
+    },
   });
 
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
@@ -100,6 +184,25 @@ const TaskVerify = (props) => {
       formik.setFieldValue("lng", location.coordinates.lng);
     }
   }, [location.loaded]);
+
+  const handelCancelTask = () => {
+    modals.openConfirmModal({
+      title: "You want to cancel this task",
+      centered: true,
+      labels: { confirm: "Confirm", cancel: "Cancel" },
+      confirmProps: { color: "red" },
+      onConfirm: () => {
+        cancelMutate.mutate(null, {
+          onSuccess: () => {
+            mutationSuccess();
+          },
+          onError: () => {
+            mutationFail();
+          },
+        });
+      },
+    });
+  };
 
   if (hide) return null;
 
@@ -201,16 +304,19 @@ const TaskVerify = (props) => {
         direction="row"
         m={3}
         alignItems="center"
-        gap={5}
         sx={{
           justifyContent: {
             xs: "space-between",
             md: "flex-start",
           },
+          gap: {
+            xs: 0,
+            md: 5,
+          },
         }}
       >
         <Typography variant="subtitle2">{"You can't verify?"}</Typography>
-        <Button variant="outlined" color="error">
+        <Button variant="outlined" color="error" onClick={handelCancelTask}>
           Cancel this task
         </Button>
       </Stack>

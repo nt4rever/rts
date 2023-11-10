@@ -50,7 +50,14 @@ const Page = () => {
             {taskData && (
               <>
                 <TaskInformation data={taskData} />
-                <TaskVerify taskId={taskData.id} hide={notVerify(taskData.status)} />
+                <TaskVerify
+                  taskId={taskData.id}
+                  reportLocation={{
+                    lat: taskData.ticket.lat,
+                    lng: taskData.ticket.lng,
+                  }}
+                  hide={notVerify(taskData.status)}
+                />
               </>
             )}
           </Stack>

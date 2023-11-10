@@ -2,9 +2,9 @@ import CommonTaskRow from "@/components/Task/common-task-row";
 import MapLink from "@/components/Task/map-link";
 import { SeverityPill } from "@/components/severity-pill";
 import { reportStatusMap } from "@/constants/report-status";
-import { taskStatusMap } from "@/constants/task-status";
+import { evidenceTypeMap, taskStatusMap } from "@/constants/task-status";
 import { baseFormatDateTime } from "@/utils/time";
-import { Card, CardHeader, Stack, Typography } from "@mui/material";
+import { Card, CardHeader, Divider, Stack, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { Calendar } from "react-feather";
 
@@ -30,6 +30,7 @@ const TaskInformation = (props) => {
       <Stack spacing={3}>
         <Card>
           <CardHeader title="Report information" />
+          <CommonTaskRow title="ID" content={data.ticket.id} />
           <CommonTaskRow title="Title" content={data.ticket.title} />
           <CommonTaskRow
             title="Description"
@@ -88,6 +89,44 @@ const TaskInformation = (props) => {
             content={`${data.ticket.area.radius} (m)`}
           />
         </Card>
+        {data.ticket?.evidences && (
+          <Card>
+            <CardHeader title="Evidences" />
+            {data.ticket?.evidences?.map((evidence) => (
+              <>
+                <CommonTaskRow
+                  title="Volunteer"
+                  content={`${evidence.created_by.first_name} ${evidence.created_by.last_name}`}
+                />
+                <CommonTaskRow title="Content" content={evidence.content} />
+                <CommonTaskRow title="Status" hasChild>
+                  <SeverityPill color={evidenceTypeMap[evidence.type]}>
+                    {t(`dashboard.report.status.${evidence.type}`)}
+                  </SeverityPill>
+                </CommonTaskRow>
+                <CommonTaskRow
+                  title="Created at"
+                  content={baseFormatDateTime(evidence.created_at)}
+                />
+                <CommonTaskRow title="Images" hasChild>
+                  <Stack direction="row" gap={1} flexWrap="wrap">
+                    {evidence.images.map((img) => (
+                      <img
+                        key={img}
+                        src={img}
+                        style={{
+                          aspectRatio: "1/1",
+                          width: "200px",
+                        }}
+                      />
+                    ))}
+                  </Stack>
+                </CommonTaskRow>
+                <Divider />
+              </>
+            ))}
+          </Card>
+        )}
       </Stack>
     </>
   );
