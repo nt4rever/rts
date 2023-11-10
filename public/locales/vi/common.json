@@ -18,5 +18,18 @@
   "first-name": "Họ",
   "last-name": "Tên",
   "search": "Tìm kiếm",
-  "views": "Lượt xem"
+  "views": "Lượt xem",
+  "area": "Khu vực",
+  "title": "Tiêu đề",
+  "description": "Mô tả",
+  "latitude": "Vĩ độ",
+  "longitude": "Kinh độ",
+  "drop-file-here": "Thả tập tin vào đây ...",
+  "upload-file-here": "Kéo thả tập tin vào đây, hoặc nhấp để chọn tập tin",
+  "submit": "Hoàn thành",
+  "unacceptable-file": "Tập tin không hợp lệ",
+  "go-to-home-page": "Đi đến trang chủ",
+  "confirm-location": "Xác nhận vị trí",
+  "confirm": "Xác nhận",
+  "dont-submit": "Huỷ"
 }

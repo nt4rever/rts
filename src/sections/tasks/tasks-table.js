@@ -2,6 +2,7 @@ import { SeverityPill } from "@/components/severity-pill";
 import {
   Avatar,
   Box,
+  ButtonBase,
   Card,
   Stack,
   Table,
@@ -13,13 +14,10 @@ import {
 } from "@mui/material";
 import { format } from "date-fns";
 import { useTranslation } from "next-i18next";
+import { ArrowRight } from "react-feather";
 import { Scrollbar } from "src/components/scrollbar";
-
-const statusMap = {
-  PENDING: "secondary",
-  CANCELED: "error",
-  DONE: "success",
-};
+import NextLink from "next/link";
+import { taskStatusMap } from "@/constants/task-status";
 
 export const TasksTable = (props) => {
   const {
@@ -74,24 +72,40 @@ export const TasksTable = (props) => {
                             },
                           }}
                         >
-                          <SeverityPill color={statusMap[task.status]}>
+                          <SeverityPill color={taskStatusMap[task.status]}>
                             {t(`dashboard.task.status.${task.status}`)}
                           </SeverityPill>
                         </Box>
                       </Stack>
                     </TableCell>
-                    <TableCell
-                      align="right"
-                      sx={{
-                        display: {
-                          xs: "none",
-                          sm: "table-cell",
-                        },
-                      }}
-                    >
-                      <SeverityPill color={statusMap[task.status]}>
+                    <TableCell align="right">
+                      <SeverityPill
+                        color={taskStatusMap[task.status]}
+                        sx={{
+                          display: {
+                            xs: "none",
+                            sm: "inline-flex",
+                          },
+                          mr: 1,
+                        }}
+                      >
                         {t(`dashboard.task.status.${task.status}`)}
                       </SeverityPill>
+                      <ButtonBase
+                        title={`Detail`}
+                        sx={{
+                          color: "rgb(108, 115, 127)",
+                          p: 1,
+                          ":hover": {
+                            background: "rgba(108, 115, 127, 0.04)",
+                            borderRadius: 8,
+                          },
+                        }}
+                        href={`/tasks/${task.id}`}
+                        component={NextLink}
+                      >
+                        <ArrowRight />
+                      </ButtonBase>
                     </TableCell>
                   </TableRow>
                 );

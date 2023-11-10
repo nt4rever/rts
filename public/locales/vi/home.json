@@ -1,1 +1,14 @@
-{}
+{
+  "recent-report-problem": "Các báo cáo gần đây",
+  "how-to-report": "Các bước tạo báo cáo",
+  "step-1": "Chọn khu vực bạn muốn báo cáo",
+  "step-2": "Xác định vị trí hư hỏng",
+  "step-3": "Nhập các thông tin và hình ảnh cần thiết",
+  "step-4": "Chúng tôi sẽ gửi nó đến cơ quan có thẩm quyền",
+  "report-in-past-week": "báo cáo trong tuần qua",
+  "fixed-in-past-month": "đã sửa trong tháng qua",
+  "updates-on-reports": "báo cáo được xác thực",
+  "report-a-problem": "Báo cáo vấn đề về mặt đường",
+  "report-your-problem": "Tạo báo cáo",
+  "problem-example": "like graffiti, fly tipping, broken paving slabs, or street lighting"
+}

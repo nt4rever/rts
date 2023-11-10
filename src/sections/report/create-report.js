@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { areaService } from "@/apis/area";
 import { ticketService } from "@/apis/ticket";
-import { SuccessIcon } from "@/assets/icon/success";
 import useGeoLocation from "@/hooks/use-geo-location";
 import ArrowRightIcon from "@heroicons/react/24/solid/ArrowRightIcon";
 import { Text } from "@mantine/core";
@@ -82,27 +81,56 @@ export const CreateReportForm = () => {
       images: [],
     },
     validationSchema: Yup.object({
-      area_id: Yup.string().required(),
-      title: Yup.string().max(200).required(),
-      description: Yup.string().max(500),
-      lat: Yup.number().min(-90).max(90).required(),
-      lng: Yup.number().min(-180).max(180).required(),
-      images: Yup.array().required().max(5).min(1),
+      area_id: Yup.string().required(t("validation.area.required")),
+      title: Yup.string()
+        .max(
+          200,
+          t("validation.common.max-length", {
+            max: 200,
+          })
+        )
+        .required(t("validation.common.title-required")),
+      description: Yup.string().max(
+        500,
+        t("validation.common.max-length", {
+          max: 500,
+        })
+      ),
+      lat: Yup.number()
+        .min(-90, t("validation.common.latitude-invalid"))
+        .max(90, t("validation.common.latitude-invalid"))
+        .required(t("validation.common.latitude-required")),
+      lng: Yup.number()
+        .min(-180, t("validation.common.longitude-invalid"))
+        .max(180, t("validation.common.longitude-invalid"))
+        .required(t("validation.common.longitude-required")),
+      images: Yup.array()
+        .required(t("validation.common.image-required"))
+        .max(
+          5,
+          t("validation.common.max-length-image", {
+            max: 5,
+          })
+        )
+        .min(
+          1,
+          t("validation.common.min-length-image", {
+            min: 1,
+          })
+        ),
     }),
     onSubmit: async (values, helpers) => {
       try {
         const area = areas?.find((item) => item.id === values.area_id);
         if (!checkLocation(area, values)) {
           modals.openConfirmModal({
-            title: "Confirm your location",
+            title: t("common.confirm-location"),
             centered: true,
-            children: (
-              <Text size="sm">
-                Your location is too far from the current area. Do you want to
-                continue using this location?
-              </Text>
-            ),
-            labels: { confirm: "Confirm", cancel: "No don't submit it" },
+            children: <Text size="sm">{t("report.location-so-far")}</Text>,
+            labels: {
+              confirm: t("common.confirm"),
+              cancel: t("common.dont-submit"),
+            },
             confirmProps: { color: "red" },
             onConfirm: async () => {
               await reportMutation.mutateAsync(values);
@@ -206,7 +234,7 @@ export const CreateReportForm = () => {
           }}
         >
           <Typography align="center" sx={{ mb: 3 }} variant="h5">
-            Your report has been submitted successfully
+            {t("report.submit-report-success")}
           </Typography>
           <Box
             sx={{
@@ -215,14 +243,14 @@ export const CreateReportForm = () => {
             }}
           >
             <img
-                alt="Under development"
-                src="/assets/icons/iconly-glass-tick.svg"
-                style={{
-                  display: "inline-block",
-                  maxWidth: "100%",
-                  width: 150,
-                }}
-              />
+              alt="Under development"
+              src="/assets/icons/iconly-glass-tick.svg"
+              style={{
+                display: "inline-block",
+                maxWidth: "100%",
+                width: 150,
+              }}
+            />
           </Box>
           <Button
             component={NextLink}
@@ -235,17 +263,17 @@ export const CreateReportForm = () => {
             sx={{ mt: 3 }}
             variant="contained"
           >
-            Go to home page
+            {t("common.go-to-home-page")}
           </Button>
         </Box>
       ) : (
         <>
-          <Typography variant="h4" mb={4}>
-            Create a new report
+          <Typography variant="h5" mb={4}>
+            {t("report.create-a-report")}
           </Typography>
           <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
             <Card>
-              <CardHeader subheader="Enter details of the problem" />
+              <CardHeader subheader={t("report.enter-detail")} />
               <CardContent sx={{ pt: 0 }}>
                 <Box sx={{ m: -1.5 }}>
                   <Grid container spacing={3}>
@@ -257,7 +285,7 @@ export const CreateReportForm = () => {
                             !!(formik.touched.area_id && formik.errors.area_id)
                           }
                         >
-                          Area
+                          {t("common.area")}
                         </InputLabel>
                         <Select
                           label="Area"
@@ -278,7 +306,7 @@ export const CreateReportForm = () => {
                     <Grid xs={12} md={12}>
                       <TextField
                         fullWidth
-                        label="Title"
+                        label={t("common.title")}
                         name="title"
                         required
                         onBlur={formik.handleBlur}
@@ -291,7 +319,7 @@ export const CreateReportForm = () => {
                     <Grid xs={12} md={12}>
                       <TextField
                         fullWidth
-                        label="Description"
+                        label={t("common.description")}
                         name="description"
                         multiline
                         minRows={3}
@@ -313,7 +341,7 @@ export const CreateReportForm = () => {
                       <TextField
                         fullWidth
                         type="number"
-                        label="Latitude"
+                        label={t("common.latitude")}
                         name="lat"
                         required
                         onBlur={formik.handleBlur}
@@ -327,7 +355,7 @@ export const CreateReportForm = () => {
                       <TextField
                         fullWidth
                         type="number"
-                        label="Longitude"
+                        label={t("common.longitude")}
                         name="lng"
                         required
                         onBlur={formik.handleBlur}
@@ -337,26 +365,28 @@ export const CreateReportForm = () => {
                         helperText={formik.touched.lng && formik.errors.lng}
                       />
                     </Grid>
-                    <Grid lg={12}>
+                    <Grid lg={12} sx={{ width: "100%" }}>
                       <div
                         {...getRootProps()}
                         className={styles.file_upload_wrapper}
                       >
                         <input {...getInputProps()} />
                         {isDragActive ? (
-                          <p>Drop the files here ...</p>
+                          <p>{t("common.drop-file-here")}</p>
                         ) : (
-                          <p>
-                            Drag and drop some files here, or click to select
-                            files
-                          </p>
+                          <p>{t("common.upload-file-here")}</p>
                         )}
                       </div>
                       <div className={styles.list_upload_file}>
                         {listFileSelected}
                       </div>
                       <FormHelperText sx={{ marginTop: 1 }} error>
-                        {fileRejections.length > 0 && "Unacceptable file"}
+                        {fileRejections.length > 0 && (
+                          <>
+                            {t("common.unacceptable-file")}
+                            <br />
+                          </>
+                        )}
                         {formik.touched.images && formik.errors.images}
                         {formik.errors.submit}
                       </FormHelperText>
@@ -367,7 +397,7 @@ export const CreateReportForm = () => {
               <Divider />
               <CardActions sx={{ justifyContent: "flex-end" }}>
                 <Button type="submit" variant="contained">
-                  Submit
+                  {t("common.submit")}
                 </Button>
               </CardActions>
             </Card>

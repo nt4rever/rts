@@ -1,9 +1,27 @@
 {
+  "common": {
+    "title-required": "Title is required",
+    "image-required": "Image is required",
+    "latitude-required": "Latitude is required",
+    "longitude-required": "Longitude is required",
+    "max-length": "Max {{max}} characters",
+    "min-length": "Min {{min}} characters",
+    "latitude-invalid": "Latitude invalid",
+    "longitude-invalid": "Longitude invalid",
+    "max-length-image": "Max {{max}} image",
+    "min-length-image": "Min {{min}} image"
+  },
   "login": {
     "email-valid": "Must be a valid email",
     "email-required": "Email is required",
     "password-required": "Password is required",
     "password-min-length": "Password must be at least 6 characters",
     "password-max-length": "Password must be at most 20 characters"
+  },
+  "account": {
+    "last-name-required": "Last name is required"
+  },
+  "area": {
+    "required": "Please choose area"
   }
 }

@@ -10,7 +10,8 @@
       "REJECTED": "rejected",
       "IN_PROCESS": "in process",
       "RESOLVED": "resolved",
-      "CLOSED": "closed"
+      "CLOSED": "closed",
+      "TENTATIVE": "tentative"
     }
   },
   "task": {

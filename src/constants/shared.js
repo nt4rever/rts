@@ -1,0 +1,1 @@
+export const VOLUNTEER_VERIFY_MAX_DISTANCE = 1000; // 1000m

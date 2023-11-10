@@ -10,7 +10,8 @@
       "REJECTED": "từ chối",
       "IN_PROCESS": "đang xử lý",
       "RESOLVED": "đã xử lý",
-      "CLOSED": "đóng"
+      "CLOSED": "đóng",
+      "TENTATIVE": "không chắc chắn"
     }
   },
   "task": {

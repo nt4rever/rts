@@ -10,12 +10,14 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import NextLink from "next/link";
 
 const Page = () => {
   const { isLoggedIn } = useAuthStore();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -58,8 +60,8 @@ const Page = () => {
                       }}
                     />
                   </Box>
-                  <Typography align="center" sx={{ mb: 3 }} variant="h3">
-                    Please login to create a new report
+                  <Typography align="center" sx={{ mb: 3 }} variant="h4">
+                    {t("report.login-required")}
                   </Typography>
                   <Button
                     component={NextLink}
@@ -72,7 +74,7 @@ const Page = () => {
                     sx={{ mt: 3 }}
                     variant="contained"
                   >
-                    Go to login page
+                    {t("report.go-to-login-page")}
                   </Button>
                 </Box>
               )}

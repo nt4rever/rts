@@ -11,5 +11,18 @@
   "forgot-password": "Forgot password",
   "welcome-to": "Welcome to",
   "search": "Search",
-  "views": "Views"
+  "views": "Views",
+  "area": "Area",
+  "title": "Title",
+  "description": "Title",
+  "latitude": "Latitude",
+  "longitude": "Longitude",
+  "drop-file-here": "Drop the files here ...",
+  "upload-file-here": "Drag and drop some files here, or click to select files",
+  "submit": "Submit",
+  "unacceptable-file": "Unacceptable file",
+  "go-to-home-page": "Go to home page",
+  "confirm-location": "Confirm your location",
+  "confirm": "Confirm",
+  "dont-submit": "No don't submit it"
 }

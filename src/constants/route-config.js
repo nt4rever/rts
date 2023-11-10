@@ -25,7 +25,7 @@ const routeConfig = {
     [RouteNames.dashboard]: RouteNames.dashboard,
     [RouteNames.account]: RouteNames.account,
     [RouteNames.myReport]: RouteNames.myReport,
-    [RouteNames.task]: RouteNames.myReport,
+    [RouteNames.tasks]: RouteNames.tasks,
   },
 };
 

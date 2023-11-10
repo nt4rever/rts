@@ -1,0 +1,8 @@
+{
+  "login-required": "Please login to create a new report",
+  "go-to-login-page": "Go to login page",
+  "create-a-report": "Create a new report",
+  "enter-detail": "Enter details of the problem",
+  "submit-report-success": "Your report has been submitted successfully",
+  "location-so-far": "Your location is too far from the current area. Do you want to continue using this location?"
+}
