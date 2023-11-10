@@ -1,4 +1,16 @@
 {
+  "common": {
+    "title-required": "Tiêu là bắt buộc",
+    "image-required": "Vui lòng đính kèm hình ảnh",
+    "latitude-required": "Vĩ độ là bắt buộc",
+    "longitude-required": "Kinh độ là bắt buộc",
+    "max-length": "Tối đa {{max}} kí tự",
+    "min-length": "Tối thiểu {{min}} kí tự",
+    "latitude-invalid": "Vĩ độ không hợp lệ",
+    "longitude-invalid": "Kinh độ không hợp lệ",
+    "max-length-image": "Tối đa {{max}} hình ảnh",
+    "min-length-image": "Tối thiểu {{min}} hình ảnh"
+  },
   "login": {
     "email-valid": "Email không hợp lệ",
     "email-required": "Email là bắt buộc",
@@ -6,7 +18,10 @@
     "password-min-length": "Mật khẩu phải có ít nhất 6 ký tự",
     "password-max-length": "Mật khẩu tối đa 20 ký tự"
   },
-  "account"  : {
-    "last-name-required" : "Tên là bắt buộc"
+  "account": {
+    "last-name-required": "Tên là bắt buộc"
+  },
+  "area": {
+    "required": "Vui lòng chọn khu vực"
   }
 }

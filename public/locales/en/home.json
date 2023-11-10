@@ -1,1 +1,14 @@
-{}
+{
+  "recent-report-problem": "Recently reported problems",
+  "how-to-report": "How to report a problem",
+  "step-1": "Choose the area you want to report",
+  "step-2": "Locate the problem on a map of the area",
+  "step-3": "Enter details of the problem",
+  "step-4": "We send it to the council on your behalf",
+  "report-in-past-week": "reports in past week",
+  "fixed-in-past-month": "fixed in past month",
+  "updates-on-reports": "updates on reports",
+  "report-a-problem": "Report a problem",
+  "report-your-problem": "Report your problem",
+  "problem-example": "like graffiti, fly tipping, broken paving slabs, or street lighting"
+}

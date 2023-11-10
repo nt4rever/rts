@@ -89,7 +89,7 @@ const TaskInformation = (props) => {
             content={`${data.ticket.area.radius} (m)`}
           />
         </Card>
-        {data.ticket?.evidences && (
+        {data.ticket?.evidences?.length > 0 && (
           <Card>
             <CardHeader title="Evidences" />
             {data.ticket?.evidences?.map((evidence) => (
