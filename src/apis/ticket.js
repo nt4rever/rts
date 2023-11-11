@@ -3,6 +3,7 @@ import axiosClient from "@/libs/axios";
 const TICKET_ENDPOINT = {
   create: "/tickets",
   all: "/tickets",
+  get: "/tickets",
 };
 
 export const ticketDto = (data) => {
@@ -41,4 +42,9 @@ const createByMe = async (params) => {
   return data;
 };
 
-export const ticketService = { create, all, createByMe };
+const get = async (id) => {
+  const { data } = await axiosClient.get(`${TICKET_ENDPOINT.get}/${id}`);
+  return data;
+};
+
+export const ticketService = { create, all, createByMe, get };

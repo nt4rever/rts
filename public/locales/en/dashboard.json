@@ -4,6 +4,7 @@
     "create": "Create",
     "ago": "ago",
     "status": {
+      "ALL": "all",
       "NEW": "new",
       "PENDING": "pending",
       "CONFIRMED": "confirmed",

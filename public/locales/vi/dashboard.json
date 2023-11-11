@@ -4,6 +4,7 @@
     "create": "Tạo mới",
     "ago": "trước",
     "status": {
+      "ALL": "Tất cả",
       "NEW": "mới",
       "PENDING": "chờ xác nhận",
       "CONFIRMED": "đã xác nhận",
