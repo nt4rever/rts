@@ -18,8 +18,15 @@
     "status": {
       "PENDING": "pending",
       "CANCELED": "canceled",
-      "DONE": "done"
+      "DONE": "done",
+      "ALL": "All"
     },
     "expires_at": "Deadline"
+  },
+  "nav": {
+    "overview": "Overview",
+    "reports": "Reports",
+    "tasks": "Tasks",
+    "account": "Account"
   }
 }

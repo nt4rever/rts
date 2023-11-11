@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "next-i18next";
 import { useRouter } from "next/navigation";
 import PropTypes from "prop-types";
 import { useCallback } from "react";
@@ -18,6 +19,8 @@ export const AccountPopover = (props) => {
   const router = useRouter();
   const { logout } = useAuthStore();
   const queryClient = useQueryClient();
+  const { user } = useAuthStore();
+  const { t } = useTranslation();
 
   const handleSignOut = useCallback(() => {
     queryClient.clear();
@@ -25,8 +28,12 @@ export const AccountPopover = (props) => {
     logout();
     clearTokens();
     router.push("/auth/login");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onClose, logout]);
+
+  const handleOpenHomePage = () => {
+    router.push("/");
+  };
 
   return (
     <Popover
@@ -38,6 +45,7 @@ export const AccountPopover = (props) => {
       onClose={onClose}
       open={open}
       PaperProps={{ sx: { width: 200 } }}
+      disableScrollLock
     >
       <Box
         sx={{
@@ -45,9 +53,9 @@ export const AccountPopover = (props) => {
           px: 2,
         }}
       >
-        <Typography variant="overline">Account</Typography>
+        <Typography variant="overline">{t("common.account")}</Typography>
         <Typography color="text.secondary" variant="body2">
-          Anika Visser
+          {`${user?.first_name || ""} ${user?.last_name}`}
         </Typography>
       </Box>
       <Divider />
@@ -61,7 +69,11 @@ export const AccountPopover = (props) => {
           },
         }}
       >
-        <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
+        <MenuItem onClick={handleOpenHomePage}>
+          {t("common.home-page")}
+        </MenuItem>
+
+        <MenuItem onClick={handleSignOut}>{t("common.sign-out")}</MenuItem>
       </MenuList>
     </Popover>
   );

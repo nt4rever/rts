@@ -31,5 +31,18 @@
   "go-to-home-page": "Đi đến trang chủ",
   "confirm-location": "Xác nhận vị trí",
   "confirm": "Xác nhận",
-  "dont-submit": "Huỷ"
+  "dont-submit": "Huỷ",
+  "sign-out": "Đăng xuất",
+  "home-page": "Trang chủ",
+  "role": {
+    "USER": "Người dùng",
+    "AREA_MANAGER": "Quản lý khu vực",
+    "VOLUNTEER": "Tình nguyện viên",
+    "ADMIN": "Quản trị viên"
+  },
+  "profile": "Hồ sơ",
+  "can-edit": "Những thông tin dưới đây có thể chỉnh sửa",
+  "date-of-birth": "Ngày sinh",
+  "gender": "Giới tính",
+  "address": "Địa chỉ"
 }

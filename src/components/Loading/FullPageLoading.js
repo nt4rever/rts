@@ -1,4 +1,5 @@
-import { Box, CircularProgress } from "@mui/material";
+import { Box } from "@mui/material";
+import { Logo } from "../logo";
 
 const FullPageLoading = () => {
   return (
@@ -10,7 +11,15 @@ const FullPageLoading = () => {
         justifyContent: "center",
       }}
     >
-      <CircularProgress disableShrink />
+      <Box
+        sx={{
+          display: "inline-flex",
+          height: 32,
+          width: 32,
+        }}
+      >
+        <Logo />
+      </Box>
     </Box>
   );
 };

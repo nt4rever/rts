@@ -24,5 +24,25 @@
   "go-to-home-page": "Go to home page",
   "confirm-location": "Confirm your location",
   "confirm": "Confirm",
-  "dont-submit": "No don't submit it"
+  "dont-submit": "No don't submit it",
+  "sign-out": "Sign out",
+  "home-page": "Home page",
+  "role": {
+    "USER": "User",
+    "AREA_MANAGER": "Area manager",
+    "VOLUNTEER": "Volunteer",
+    "ADMIN": "Admin"
+  },
+  "first-name": "First name",
+  "hint-login": "Do you have account?",
+  "hint-register": "Don't have an account?",
+  "last-name": "Last name",
+  "legal-usage": " By continuing, you agree to the Terms of Use",
+  "register": "Sign up",
+  "register-now": "Register now",
+  "profile": "Profile",
+  "can-edit": "The information can be edited",
+  "date-of-birth": "Date of birth",
+  "gender": "Gender",
+  "address": "Address"
 }

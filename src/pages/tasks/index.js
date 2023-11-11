@@ -2,6 +2,7 @@ import { taskService } from "@/apis/task";
 import { TasksTable } from "@/sections/tasks/tasks-table";
 import { Box, Container, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useSearchParams } from "next/navigation";
@@ -10,6 +11,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 
 const Page = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const searchParam = useSearchParams();
   const [page, setPage] = useState(1);
@@ -63,15 +65,15 @@ const Page = () => {
           <Stack spacing={3}>
             <Stack direction="row" justifyContent="space-between" spacing={4}>
               <Stack spacing={1}>
-                <Typography variant="h4">Tasks</Typography>
+                <Typography variant="h4">{t("dashboard.nav.tasks")}</Typography>
               </Stack>
             </Stack>
             <Box>
               <Tabs value={value} onChange={handleChange}>
-                <Tab label="All" />
-                <Tab label="Pending" />
-                <Tab label="Canceled" />
-                <Tab label="Done" />
+                <Tab label={t('dashboard.task.status.ALL')} />
+                <Tab label={t('dashboard.task.status.PENDING')} />
+                <Tab label={t('dashboard.task.status.DONE')} />
+                <Tab label={t('dashboard.task.status.CANCELED')} />
               </Tabs>
             </Box>
             {data && (

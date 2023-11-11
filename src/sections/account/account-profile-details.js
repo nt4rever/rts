@@ -41,24 +41,32 @@ export const AccountProfileDetails = ({ user }) => {
       last_name: user.last_name,
       phone_number: user.phone_number,
       date_of_birth: user.date_of_birth,
-      gender: user.gender || '',
+      gender: user.gender || "",
       address: user.address,
       submit: null,
     },
     validationSchema: new Yup.object({
-      first_name: Yup.string().optional().max(50),
-      last_name: Yup.string().required().max(50),
-      phone_number: Yup.string().optional().max(15),
+      first_name: Yup.string()
+        .optional()
+        .max(50, t("validation.common.max-length", { max: 50 })),
+      last_name: Yup.string()
+        .required(t("validation.account.last-name-required"))
+        .max(50, t("validation.common.max-length", { max: 50 })),
+      phone_number: Yup.string()
+        .optional()
+        .max(15, t("validation.common.max-length", { max: 15 })),
       date_of_birth: Yup.date().optional(),
       gender: Yup.mixed().oneOf(["MALE", "FEMALE", "OTHER"]).optional(),
-      address: Yup.string().optional().max(200),
+      address: Yup.string()
+        .optional()
+        .max(200, t("validation.common.max-length", { max: 200 })),
     }),
     onSubmit: async (values, helpers) => {
       try {
         await profileMutation.mutateAsync(values);
         queryClient.invalidateQueries(["me"]);
         notifications.show({
-          title: "Your profile update successfully",
+          title: t("message.update-profile-success"),
           color: "green",
           autoClose: 2000,
         });
@@ -68,7 +76,7 @@ export const AccountProfileDetails = ({ user }) => {
           helpers.setSubmitting(false);
         }
         notifications.show({
-          title: "Your profile update failed",
+          title: t("message.update-profile-fail"),
           color: "red",
         });
       }
@@ -78,7 +86,10 @@ export const AccountProfileDetails = ({ user }) => {
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
       <Card>
-        <CardHeader subheader="The information can be edited" title="Profile" />
+        <CardHeader
+          subheader={t("common.can-edit")}
+          title={t("common.profile")}
+        />
         <CardContent sx={{ pt: 0 }}>
           <Box sx={{ m: -1.5 }}>
             <Grid container spacing={3}>
@@ -91,7 +102,7 @@ export const AccountProfileDetails = ({ user }) => {
                   helperText={
                     formik.touched.first_name && formik.errors.first_name
                   }
-                  label="First name"
+                  label={t("common.first-name")}
                   name="first_name"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -107,7 +118,7 @@ export const AccountProfileDetails = ({ user }) => {
                   helperText={
                     formik.touched.last_name && formik.errors.last_name
                   }
-                  label="Last name"
+                  label={t("common.last-name")}
                   name="last_name"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -125,7 +136,7 @@ export const AccountProfileDetails = ({ user }) => {
                   helperText={
                     formik.touched.phone_number && formik.errors.phone_number
                   }
-                  label="Phone number"
+                  label={t("common.phone-number")}
                   name="phone_number"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -134,7 +145,7 @@ export const AccountProfileDetails = ({ user }) => {
               </Grid>
               <Grid xs={12} md={6}>
                 <DatePicker
-                  label="Date of birth"
+                  label={t("common.date-of-birth")}
                   name="date_of_birth"
                   inputFormat="dd/MM/yyyy"
                   value={formik.values.date_of_birth}
@@ -153,7 +164,7 @@ export const AccountProfileDetails = ({ user }) => {
                   fullWidth
                   error={!!(formik.touched.address && formik.errors.address)}
                   helperText={formik.touched.address && formik.errors.address}
-                  label="Address"
+                  label={t("common.address")}
                   name="address"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -162,7 +173,7 @@ export const AccountProfileDetails = ({ user }) => {
               </Grid>
               <Grid xs={12} md={6}>
                 <FormControl fullWidth variant="filled">
-                  <InputLabel id="gender">Gender</InputLabel>
+                  <InputLabel id="gender">{t("common.gender")}</InputLabel>
                   <Select
                     label="Age"
                     value={formik.values.gender}
@@ -184,7 +195,7 @@ export const AccountProfileDetails = ({ user }) => {
             </Typography>
           )}
           <Button variant="contained" type="submit">
-            Save details
+            {t("common.submit")}
           </Button>
         </CardActions>
       </Card>
