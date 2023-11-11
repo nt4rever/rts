@@ -12,7 +12,9 @@
       "RESOLVED": "đã xử lý",
       "CLOSED": "đóng",
       "TENTATIVE": "không chắc chắn"
-    }
+    },
+    "verify-report": "Xác thực báo cáo",
+    "report-information": "Thông tin báo cáo"
   },
   "task": {
     "status": {

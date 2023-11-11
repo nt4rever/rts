@@ -4,5 +4,7 @@
   "update-profile-success": "Your profile update successfully",
   "update-profile-fail": "Your profile update failed",
   "image-size-too-large": "Image size too large",
-  "ATH_0091": "Email has been used by another user"
+  "ATH_0091": "Email has been used by another user",
+  "update-task-success": "Task update successfully",
+  "update-task-fail": "Task update failed"
 }

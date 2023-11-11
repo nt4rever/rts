@@ -4,5 +4,7 @@
   "ATH_0091": "Email này đã được sử dụng",
   "update-profile-success": "Cập nhật thành công",
   "update-profile-fail": "Cập nhật thất bại",
-  "image-size-too-large": "Kích thước ảnh quá lớn"
+  "image-size-too-large": "Kích thước ảnh quá lớn",
+  "update-task-success": "Cập nhật thành công",
+  "update-task-fail": "Cập nhật thất bại"
 }

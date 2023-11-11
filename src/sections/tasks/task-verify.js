@@ -16,6 +16,7 @@ import {
   Stack,
   TextField,
   Typography,
+  capitalize,
 } from "@mui/material";
 import { useFormik } from "formik";
 import { useTranslation } from "next-i18next";
@@ -67,7 +68,7 @@ const TaskVerify = (props) => {
     queryClient.invalidateQueries(["tasks", taskId]);
     queryClient.invalidateQueries(["tasks"]);
     notifications.show({
-      title: "Task update successfully",
+      title: t("message.update-task-success"),
       color: "green",
       autoClose: 2000,
     });
@@ -75,7 +76,7 @@ const TaskVerify = (props) => {
 
   const mutationFail = () => {
     notifications.show({
-      title: "Task update failed",
+      title: t("message.update-task-fail"),
       color: "red",
     });
     queryClient.invalidateQueries(["tasks", taskId]);
@@ -91,25 +92,48 @@ const TaskVerify = (props) => {
       type: EVIDENCE_TYPE[0],
     },
     validationSchema: Yup.object({
-      content: Yup.string().max(500).required(),
-      lat: Yup.number().min(-90).max(90).required(),
-      lng: Yup.number().min(-180).max(180).required(),
-      images: Yup.array().required().max(5).min(1),
-      type: Yup.mixed().oneOf(EVIDENCE_TYPE).required(),
+      content: Yup.string()
+        .max(500, t("validation.common.max-length", { max: 500 }))
+        .required(t("validation.common.content-required")),
+      lat: Yup.number()
+        .min(-90, t("validation.common.latitude-invalid"))
+        .max(90, t("validation.common.latitude-invalid"))
+        .required(t("validation.common.latitude-required")),
+      lng: Yup.number()
+        .min(-180, t("validation.common.longitude-invalid"))
+        .max(180, t("validation.common.longitude-invalid"))
+        .required(t("validation.common.longitude-required")),
+      images: Yup.array()
+        .required(t("validation.common.image-required"))
+        .max(
+          5,
+          t("validation.common.max-length-image", {
+            max: 5,
+          })
+        )
+        .min(
+          1,
+          t("validation.common.min-length-image", {
+            min: 1,
+          })
+        ),
+      type: Yup.mixed()
+        .oneOf(EVIDENCE_TYPE)
+        .required(t("validation.common.evidence-type-required")),
     }),
     onSubmit: async (values, helpers) => {
       try {
         if (!checkLocation(reportLocation, values)) {
           modals.openConfirmModal({
-            title: "Confirm your location",
+            title: t("common.confirm-location"),
             centered: true,
             children: (
-              <Text size="sm">
-                Your location is too far from the report location. Do you want
-                to continue using this location?
-              </Text>
+              <Text size="sm">{t("report.location-so-far-report")}</Text>
             ),
-            labels: { confirm: "Confirm", cancel: "No don't submit it" },
+            labels: {
+              confirm: t("common.confirm"),
+              cancel: t("common.dont-submit"),
+            },
             confirmProps: { color: "red" },
             onConfirm: async () => {
               await taskMutation.mutateAsync({ ...values, id: taskId });
@@ -187,9 +211,9 @@ const TaskVerify = (props) => {
 
   const handelCancelTask = () => {
     modals.openConfirmModal({
-      title: "You want to cancel this task",
+      title: t("common.confirm-cancel-task"),
       centered: true,
-      labels: { confirm: "Confirm", cancel: "Cancel" },
+      labels: { confirm: t("common.confirm"), cancel: t("common.cancel") },
       confirmProps: { color: "red" },
       onConfirm: () => {
         cancelMutate.mutate(null, {
@@ -208,14 +232,14 @@ const TaskVerify = (props) => {
 
   return (
     <Card>
-      <CardHeader title="Verify" />
+      <CardHeader title={t("common.verify")} />
       <Divider />
       <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
         <Grid container sx={{ px: 3, py: 2, gap: 2 }}>
           <Grid xs={12} item>
             <TextField
               fullWidth
-              label="Content"
+              label={t("common.content")}
               name="content"
               multiline
               minRows={3}
@@ -231,7 +255,7 @@ const TaskVerify = (props) => {
             <TextField
               fullWidth
               type="number"
-              label="Latitude"
+              label={t("common.latitude")}
               name="lat"
               required
               onBlur={formik.handleBlur}
@@ -245,7 +269,7 @@ const TaskVerify = (props) => {
             <TextField
               fullWidth
               type="number"
-              label="Longitude"
+              label={t("common.longitude")}
               name="lng"
               required
               onBlur={formik.handleBlur}
@@ -257,17 +281,17 @@ const TaskVerify = (props) => {
           </Grid>
           <Grid xs={12} item>
             <FormControl fullWidth variant="filled">
-              <InputLabel id="type">Type</InputLabel>
+              <InputLabel id="type">{t("common.type")}</InputLabel>
               <Select
-                label="Type"
+                label={t("common.type")}
                 name="type"
                 value={formik.values.type}
                 onChange={formik.handleChange}
                 error={!!(formik.touched.type && formik.errors.type)}
               >
-                {EVIDENCE_TYPE.map((t, index) => (
-                  <MenuItem key={index} value={t}>
-                    {t}
+                {EVIDENCE_TYPE.map((et, index) => (
+                  <MenuItem key={index} value={et}>
+                    {capitalize(t(`dashboard.report.status.${et}`))}
                   </MenuItem>
                 ))}
               </Select>
@@ -280,21 +304,21 @@ const TaskVerify = (props) => {
             <div {...getRootProps()} className={styles.file_upload_wrapper}>
               <input {...getInputProps()} />
               {isDragActive ? (
-                <p>Drop the files here ...</p>
+                <p>{t("common.drop-file-here")}</p>
               ) : (
-                <p>Drag and drop some files here, or click to select files</p>
+                <p>{t("common.upload-file-here")}</p>
               )}
             </div>
             <div className={styles.list_upload_file}>{listFileSelected}</div>
             <FormHelperText sx={{ marginTop: 1 }} error>
-              {fileRejections.length > 0 && "Unacceptable file"}
+              {fileRejections.length > 0 && t("common.unacceptable-file")}
               {formik.touched.images && formik.errors.images}
               {formik.errors.submit}
             </FormHelperText>
           </Grid>
           <Box sx={{ width: "100%" }} display="flex" justifyContent="flex-end">
             <Button type="submit" variant="contained">
-              Submit
+              {t("common.submit")}
             </Button>
           </Box>
         </Grid>
@@ -315,9 +339,9 @@ const TaskVerify = (props) => {
           },
         }}
       >
-        <Typography variant="subtitle2">{"You can't verify?"}</Typography>
+        <Typography variant="subtitle2">{t("common.cannot-verify")}</Typography>
         <Button variant="outlined" color="error" onClick={handelCancelTask}>
-          Cancel this task
+          {t("common.cancel-task")}
         </Button>
       </Stack>
     </Card>

@@ -9,7 +9,9 @@
     "latitude-invalid": "Latitude invalid",
     "longitude-invalid": "Longitude invalid",
     "max-length-image": "Max {{max}} image",
-    "min-length-image": "Min {{min}} image"
+    "min-length-image": "Min {{min}} image",
+    "content-required": "Content is required",
+    "evidence-type-required": "Please choose evidence type"
   },
   "login": {
     "email-valid": "Must be a valid email",

@@ -55,7 +55,7 @@ export const AccountPopover = (props) => {
       >
         <Typography variant="overline">{t("common.account")}</Typography>
         <Typography color="text.secondary" variant="body2">
-          {`${user?.first_name || ""} ${user?.last_name}`}
+          {`${user?.first_name || ""} ${user?.last_name || ""}`}
         </Typography>
       </Box>
       <Divider />

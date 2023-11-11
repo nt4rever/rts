@@ -9,7 +9,9 @@
     "latitude-invalid": "Vĩ độ không hợp lệ",
     "longitude-invalid": "Kinh độ không hợp lệ",
     "max-length-image": "Tối đa {{max}} hình ảnh",
-    "min-length-image": "Tối thiểu {{min}} hình ảnh"
+    "min-length-image": "Tối thiểu {{min}} hình ảnh",
+    "content-required": "Vui lòng nhập nội dung",
+    "evidence-type-required": "Vui lòng chọn loại chứng cứ"
   },
   "login": {
     "email-valid": "Email không hợp lệ",

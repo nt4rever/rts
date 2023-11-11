@@ -44,5 +44,21 @@
   "can-edit": "Những thông tin dưới đây có thể chỉnh sửa",
   "date-of-birth": "Ngày sinh",
   "gender": "Giới tính",
-  "address": "Địa chỉ"
+  "address": "Địa chỉ",
+  "created_at": "Thời gian tạo",
+  "created_by": "Người tạo",
+  "updated_at": "Cập nhật lúc",
+  "location": "Vị trí",
+  "status": "Trạng thái",
+  "images": "Hình ảnh",
+  "name": "Tên",
+  "radius": "Bán kính",
+  "evidences": "Bằng chứng",
+  "content": "Nội dung",
+  "verify": "Xác thực",
+  "type": "Loại",
+  "cannot-verify": "Bạn không thể  xác thực",
+  "cancel-task": "Huỷ nhiệm vụ",
+  "confirm-cancel-task": "Bạn muốn huỷ nhiệm vụ này",
+  "cancel": "Huỷ"
 }

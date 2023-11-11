@@ -12,13 +12,15 @@
       "RESOLVED": "resolved",
       "CLOSED": "closed",
       "TENTATIVE": "tentative"
-    }
+    },
+    "verify-report": "Verify report",
+    "report-information": "Report information"
   },
   "task": {
     "status": {
-      "PENDING": "pending",
-      "CANCELED": "canceled",
-      "DONE": "done",
+      "PENDING": "Pending",
+      "CANCELED": "Canceled",
+      "DONE": "Done",
       "ALL": "All"
     },
     "expires_at": "Deadline"
