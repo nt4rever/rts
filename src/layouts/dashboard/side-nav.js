@@ -1,7 +1,4 @@
-import NextLink from "next/link";
-import { usePathname } from "next/navigation";
-import PropTypes from "prop-types";
-import ArrowTopRightOnSquareIcon from "@heroicons/react/24/solid/ArrowTopRightOnSquareIcon";
+import useAuthStore from "@/store/useAuthStore";
 import ChevronUpDownIcon from "@heroicons/react/24/solid/ChevronUpDownIcon";
 import {
   Box,
@@ -13,11 +10,14 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
+import NextLink from "next/link";
+import { usePathname } from "next/navigation";
+import PropTypes from "prop-types";
+import { Cpu } from "react-feather";
 import { Logo } from "src/components/logo";
 import { Scrollbar } from "src/components/scrollbar";
 import { getItems } from "./config";
 import { SideNavItem } from "./side-nav-item";
-import useAuthStore from "@/store/useAuthStore";
 
 export const SideNav = (props) => {
   const { open, onClose } = props;
@@ -125,10 +125,11 @@ export const SideNav = (props) => {
           }}
         >
           <Typography color="neutral.100" variant="subtitle2">
-            Need more features?
+            RTS System
           </Typography>
           <Typography color="neutral.500" variant="body2">
-            Check out our Pro solution template.
+            A system assist in the evaluation and repair of road surface
+            problems
           </Typography>
           <Box
             sx={{
@@ -144,19 +145,16 @@ export const SideNav = (props) => {
             <img alt="Go to pro" src="/assets/devias-kit-pro.png" />
           </Box>
           <Button
-            component="a"
             endIcon={
               <SvgIcon fontSize="small">
-                <ArrowTopRightOnSquareIcon />
+                <Cpu />
               </SvgIcon>
             }
             fullWidth
-            href="https://material-kit-pro-react.devias.io/"
             sx={{ mt: 2 }}
-            target="_blank"
             variant="contained"
           >
-            Pro Live Preview
+            With AI Support
           </Button>
         </Box>
       </Box>

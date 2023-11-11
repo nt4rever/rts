@@ -22,8 +22,12 @@ import { reportStatusMap } from "@/constants/report-status";
 
 export const ReportCard = (props) => {
   const { t } = useTranslation();
-  const { locale } = useRouter();
+  const { locale, push } = useRouter();
   const { report } = props;
+
+  const handleClick = () => {
+    push(`/my-report/${report.id}`);
+  };
 
   return (
     <Card
@@ -33,6 +37,7 @@ export const ReportCard = (props) => {
         height: "100%",
         cursor: "pointer",
       }}
+      onClick={handleClick}
     >
       <CardContent>
         <Box

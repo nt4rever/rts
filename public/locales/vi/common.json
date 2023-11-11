@@ -60,5 +60,9 @@
   "cannot-verify": "Bạn không thể  xác thực",
   "cancel-task": "Huỷ nhiệm vụ",
   "confirm-cancel-task": "Bạn muốn huỷ nhiệm vụ này",
-  "cancel": "Huỷ"
+  "cancel": "Huỷ",
+  "vote": "Vote",
+  "resolve-message": "Nội dung giải quyết",
+  "close-message": "Nội dung huỷ",
+  "severity-level": "Mức độ nghiêm trọng (Hỗ trợ bởi AI)"
 }
