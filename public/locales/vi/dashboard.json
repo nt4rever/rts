@@ -12,14 +12,23 @@
       "RESOLVED": "đã xử lý",
       "CLOSED": "đóng",
       "TENTATIVE": "không chắc chắn"
-    }
+    },
+    "verify-report": "Xác thực báo cáo",
+    "report-information": "Thông tin báo cáo"
   },
   "task": {
     "status": {
       "PENDING": "Đang chờ",
       "CANCELED": "Bị huỷ",
-      "DONE": "Hoàn thành"
+      "DONE": "Hoàn thành",
+      "ALL": "Tất cả"
     },
     "expires_at": "Thời hạn"
+  },
+  "nav": {
+    "overview": "Tổng quan",
+    "reports": "Báo cáo",
+    "tasks": "Nhiệm vụ",
+    "account": "Tài khoản"
   }
 }

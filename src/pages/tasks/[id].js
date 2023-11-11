@@ -44,7 +44,7 @@ const Page = () => {
             <Stack direction="row">
               <ButtonBase href="/tasks" component={NextLink} sx={{ gap: 1 }}>
                 <ArrowLeft />
-                <Typography variant="body1">Tasks</Typography>
+                <Typography variant="body1">{t("dashboard.nav.tasks")}</Typography>
               </ButtonBase>
             </Stack>
             {taskData && (

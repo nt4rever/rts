@@ -4,5 +4,6 @@
   "create-a-report": "Create a new report",
   "enter-detail": "Enter details of the problem",
   "submit-report-success": "Your report has been submitted successfully",
-  "location-so-far": "Your location is too far from the current area. Do you want to continue using this location?"
+  "location-so-far": "Your location is too far from the current area. Do you want to continue using this location?",
+  "location-so-far-report": "Your location is too far from the report location. Do you want to continue using this location?"
 }

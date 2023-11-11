@@ -8,7 +8,7 @@ import { SvgIcon } from "@mui/material";
 export const items = [
   {
     role: [ROLES.Admin, ROLES.AreaManager, ROLES.User, ROLES.Volunteer],
-    title: "Overview",
+    title: "overview",
     path: "/dashboard",
     icon: (
       <SvgIcon fontSize="small">
@@ -18,7 +18,7 @@ export const items = [
   },
   {
     role: [ROLES.Admin, ROLES.AreaManager, ROLES.User, ROLES.Volunteer],
-    title: "Reports",
+    title: "reports",
     path: "/my-report",
     icon: (
       <SvgIcon fontSize="small">
@@ -28,7 +28,7 @@ export const items = [
   },
   {
     role: [ROLES.Volunteer],
-    title: "Tasks",
+    title: "tasks",
     path: "/tasks",
     icon: (
       <SvgIcon fontSize="small">
@@ -38,7 +38,7 @@ export const items = [
   },
   {
     role: [ROLES.Admin, ROLES.AreaManager, ROLES.User, ROLES.Volunteer],
-    title: "Account",
+    title: "account",
     path: "/account",
     icon: (
       <SvgIcon fontSize="small">

@@ -1,5 +1,10 @@
 {
   "ATH_0001": "Tài khoản, mật khẩu không chính xác",
   "Unauthorized": "Xác thực thất bại",
-  "ATH_0091": "Email này đã được sử dụng"
+  "ATH_0091": "Email này đã được sử dụng",
+  "update-profile-success": "Cập nhật thành công",
+  "update-profile-fail": "Cập nhật thất bại",
+  "image-size-too-large": "Kích thước ảnh quá lớn",
+  "update-task-success": "Cập nhật thành công",
+  "update-task-fail": "Cập nhật thất bại"
 }
