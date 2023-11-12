@@ -64,5 +64,8 @@
   "vote": "Vote",
   "resolve-message": "Nội dung giải quyết",
   "close-message": "Nội dung huỷ",
-  "severity-level": "Mức độ nghiêm trọng (Hỗ trợ bởi AI)"
+  "severity-level": "Mức độ nghiêm trọng (Hỗ trợ bởi AI)",
+  "rows-per-page": "Số lượng",
+  "of": "trên",
+  "more-than": "hơn"
 }

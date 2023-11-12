@@ -15,23 +15,33 @@ const Page = () => {
   const router = useRouter();
   const searchParam = useSearchParams();
   const [page, setPage] = useState(1);
+  const [value, setValue] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const { data } = useQuery({
-    queryKey: ["tasks"],
-    queryFn: () => taskService.all(),
+    queryKey: ["tasks", { page, rowsPerPage, status: value }],
+    queryFn: () =>
+      taskService.all({
+        page,
+        per_page: rowsPerPage,
+        status: value || undefined,
+        order: "expires_at|desc",
+      }),
+    keepPreviousData: true,
   });
 
   useEffect(() => {
-    router.push(`?page=${page}&per_page=${rowsPerPage}`, null, {
+    router.push(`?page=${page}&per_page=${rowsPerPage}&status=${value}`, null, {
       scroll: false,
       shallow: true,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, rowsPerPage]);
+  }, [page, rowsPerPage, value]);
 
   useEffect(() => {
     setPage(+searchParam.get("page") || 1);
+    setRowsPerPage(+searchParam.get("per_page") || 5);
+    setValue(searchParam.get("status") || "");
   }, [searchParam]);
 
   const handlePageChange = useCallback((event, value) => {
@@ -42,8 +52,6 @@ const Page = () => {
     setRowsPerPage(event.target.value);
     setPage(1);
   }, []);
-
-  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -70,16 +78,22 @@ const Page = () => {
             </Stack>
             <Box>
               <Tabs value={value} onChange={handleChange}>
-                <Tab label={t('dashboard.task.status.ALL')} />
-                <Tab label={t('dashboard.task.status.PENDING')} />
-                <Tab label={t('dashboard.task.status.DONE')} />
-                <Tab label={t('dashboard.task.status.CANCELED')} />
+                <Tab value={""} label={t("dashboard.task.status.ALL")} />
+                <Tab
+                  value={"PENDING"}
+                  label={t("dashboard.task.status.PENDING")}
+                />
+                <Tab value={"DONE"} label={t("dashboard.task.status.DONE")} />
+                <Tab
+                  value={"CANCELED"}
+                  label={t("dashboard.task.status.CANCELED")}
+                />
               </Tabs>
             </Box>
             {data && (
               <TasksTable
-                count={data.length}
-                items={data}
+                count={data.meta.item_count}
+                items={data.items}
                 onPageChange={handlePageChange}
                 onRowsPerPageChange={handleRowsPerPageChange}
                 page={page - 1}
