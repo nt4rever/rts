@@ -64,5 +64,8 @@
   "vote": "Vote",
   "resolve-message": "Resolve message",
   "close-message": "Close message",
-  "severity-level": "Severity level (Powered by AI)"
+  "severity-level": "Severity level (Powered by AI)",
+  "rows-per-page": "Rows per page",
+  "of": "of",
+  "more-than": "more than"
 }

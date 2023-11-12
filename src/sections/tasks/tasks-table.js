@@ -122,6 +122,12 @@ export const TasksTable = (props) => {
         page={page}
         rowsPerPage={rowsPerPage}
         rowsPerPageOptions={[5, 10, 25]}
+        labelRowsPerPage={t("common.rows-per-page")}
+        labelDisplayedRows={({ from, to, count }) => {
+          return `${from}–${to} ${t("common.of")} ${
+            count !== -1 ? count : `${t("common.more-than")} ${to}`
+          }`;
+        }}
       />
     </Card>
   );

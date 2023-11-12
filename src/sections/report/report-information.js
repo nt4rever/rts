@@ -96,6 +96,12 @@ const ReportInformation = (props) => {
                   {t(`dashboard.report.status.${evidence.type}`)}
                 </SeverityPill>
               </CommonTaskRow>
+              <CommonTaskRow title={t("common.location")} hasChild>
+                <Stack direction="row" spacing={2}>
+                  <Typography variant="body2">{`${evidence.lat}, ${evidence.lng}`}</Typography>
+                  <MapLink lat={evidence.lat} lng={evidence.lng} />
+                </Stack>
+              </CommonTaskRow>
               <CommonTaskRow
                 title={t("common.created_at")}
                 content={baseFormatDateTime(evidence.created_at)}
