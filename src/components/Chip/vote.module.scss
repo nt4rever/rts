@@ -1,6 +1,9 @@
 .wrapper {
   display: flex;
-  gap: 10px;
+  gap: 5px;
+  border-radius: 20px;
+  padding: 5px 8px;
+  background: rgba(17, 25, 39, 0.04);
 }
 
 .btn {
@@ -12,6 +15,14 @@
   border: none;
   cursor: pointer;
   color: #bdbdbd;
+
+  &.up.active {
+    color: #d93a00;
+  }
+
+  &.down.active {
+    color: #6a5cff;
+  }
 
   &.up:hover {
     color: #d93a00;

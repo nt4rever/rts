@@ -67,5 +67,12 @@
   "severity-level": "Severity level (Powered by AI)",
   "rows-per-page": "Rows per page",
   "of": "of",
-  "more-than": "more than"
+  "more-than": "more than",
+  "all-area": "All area",
+  "this-is-useful": "This is useful",
+  "this-is-not-useful": "This answer is not useful",
+  "sort-by": "Sort by",
+  "newest": "Newest",
+  "frequent": "Frequent",
+  "most-vote": "Most voted"
 }

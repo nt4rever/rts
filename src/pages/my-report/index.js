@@ -1,6 +1,5 @@
 import { ticketService } from "@/apis/ticket";
 import { ReportCard } from "@/sections/report/report-card";
-import { ReportSearch } from "@/sections/report/report-search";
 import useAuthStore from "@/store/useAuthStore";
 import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
 import {
@@ -23,8 +22,7 @@ import Head from "next/head";
 import NextLink from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 
 const Page = () => {
