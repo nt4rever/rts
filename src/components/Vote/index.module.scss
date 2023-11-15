@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 0;
+  background: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  color: #bdbdbd;
+
+  &.up:hover {
+    color: #d93a00;
+  }
+  &.down:hover {
+    color: #6a5cff;
+  }
+}

@@ -1,4 +1,4 @@
-import { Drawer } from "@mui/material";
+import { Divider, Drawer } from "@mui/material";
 import classNames from "classnames";
 import Link from "next/link";
 import { useState } from "react";
@@ -13,7 +13,7 @@ const mockData = [
     name: "home",
   },
   {
-    href: "/home2",
+    href: "/forum",
     name: "forum",
   },
   {
