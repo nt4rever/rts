@@ -83,7 +83,7 @@ const ReportInformation = (props) => {
         <Card>
           <CardHeader title={t("common.evidences")} />
           {data?.evidences?.map((evidence) => (
-            <>
+            <div key={evidence.id}>
               <CommonTaskRow
                 title={t("common.role.VOLUNTEER")}
                 content={`${evidence.created_by.first_name || ""} ${
@@ -123,7 +123,7 @@ const ReportInformation = (props) => {
                   ))}
                 </Stack>
               </CommonTaskRow>
-            </>
+            </div>
           ))}
         </Card>
       )}

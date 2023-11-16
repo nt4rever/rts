@@ -10,5 +10,7 @@
   "VO_0099": "You have used up all of today's votes",
   "TK_0091": "You have voted for this report",
   "VO_0091": "You have voted this comment",
-  "vote-successfully": "You have been voted successfully"
+  "vote-successfully": "You have been voted successfully",
+  "comment-success": "Your comment has been recorded",
+  "error": "Error when handle your request"
 }

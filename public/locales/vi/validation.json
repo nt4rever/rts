@@ -25,5 +25,8 @@
   },
   "area": {
     "required": "Vui lòng chọn khu vực"
+  },
+  "comment": {
+    "required": "Vui lòng nhập bình luận của bạn"
   }
 }

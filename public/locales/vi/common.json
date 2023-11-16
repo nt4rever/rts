@@ -61,7 +61,7 @@
   "cancel-task": "Huỷ nhiệm vụ",
   "confirm-cancel-task": "Bạn muốn huỷ nhiệm vụ này",
   "cancel": "Huỷ",
-  "vote": "Vote",
+  "vote": "Bình chọn",
   "resolve-message": "Nội dung giải quyết",
   "close-message": "Nội dung huỷ",
   "severity-level": "Mức độ nghiêm trọng (Hỗ trợ bởi AI)",
@@ -78,5 +78,9 @@
   "updated": "Cập nhật",
   "comment": "bình luận",
   "forum": "Diễn đàn",
-  "hint-login-to-vote": "Vui lòng đăng nhập để bình chọn"
+  "hint-login-to-vote": "Vui lòng đăng nhập để bình chọn",
+  "your-comment": "Để lại bình luận",
+  "message": {
+    "comment-success": "Gửi bình luận thành công"
+  }
 }

@@ -78,5 +78,6 @@
   "updated": "Updated",
   "comment": "comments",
   "forum": "Forum",
-  "hint-login-to-vote": "Please login to vote this report"
+  "hint-login-to-vote": "Please login to vote this report",
+  "your-comment": "Leave your comment"
 }

@@ -44,7 +44,7 @@ const ForumReportItem = (props) => {
       <Stack p={2} spacing={2}>
         <Stack direction="row" justifyContent="space-between">
           <Stack direction="row" alignItems="center" spacing={1}>
-            <Avatar />
+            <Avatar src={report.created_by.avatar} />
             <Stack direction="row" flexWrap="wrap" columnGap={1}>
               <Typography variant="subtitle2" fontWeight={700}>
                 {getFullName(
