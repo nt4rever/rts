@@ -1,12 +1,19 @@
 import Link from "next/link";
 import styles from "./nav-item.module.scss";
+import classNames from "classnames";
 
 const NavItem = (props) => {
-  const { href, name } = props;
+  const { href, name, onClick, active } = props;
 
   return (
-    <Link href={href} shallow className="rts">
-      <div className={styles.item}>{name}</div>
+    <Link href={href} shallow className="rts" onClick={onClick}>
+      <div
+        className={classNames(styles.item, {
+          [styles.active]: active,
+        })}
+      >
+        {name}
+      </div>
     </Link>
   );
 };

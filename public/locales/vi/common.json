@@ -67,5 +67,13 @@
   "severity-level": "Mức độ nghiêm trọng (Hỗ trợ bởi AI)",
   "rows-per-page": "Số lượng",
   "of": "trên",
-  "more-than": "hơn"
+  "more-than": "hơn",
+  "all-area": "Tất cả khu vực",
+  "this-is-useful": "Hữu ích",
+  "this-is-not-useful": "Không hữu ích",
+  "sort-by": "Sắp xếp",
+  "newest": "Mới nhất",
+  "frequent": "Thường xuyên",
+  "most-vote": "Nổi bật",
+  "updated": "Cập nhật"
 }
