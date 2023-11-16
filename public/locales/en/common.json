@@ -77,5 +77,6 @@
   "most-vote": "Most voted",
   "updated": "Updated",
   "comment": "comments",
-  "forum": "Forum"
+  "forum": "Forum",
+  "hint-login-to-vote": "Please login to vote this report"
 }

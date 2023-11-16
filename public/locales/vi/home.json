@@ -10,5 +10,12 @@
   "updates-on-reports": "báo cáo được xác thực",
   "report-a-problem": "Báo cáo vấn đề về mặt đường",
   "report-your-problem": "Tạo báo cáo",
-  "problem-example": "like graffiti, fly tipping, broken paving slabs, or street lighting"
+  "problem-example": "like graffiti, fly tipping, broken paving slabs, or street lighting",
+  "nav": {
+    "home": "Trang chủ",
+    "forum": "Diễn đàng",
+    "map": "Bản đồ",
+    "post": "Bài đăng",
+    "about": "Giới thiệu"
+  }
 }

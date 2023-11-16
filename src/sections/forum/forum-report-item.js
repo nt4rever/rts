@@ -89,6 +89,7 @@ const ForumReportItem = (props) => {
             </Typography>
             <Stack direction="row" gap={1}>
               <Vote
+                reportId={report.id}
                 score={report.score}
                 votedByMe={report.voted_by_me}
                 isUpVote={report.voted_by_me?.is_up_vote}

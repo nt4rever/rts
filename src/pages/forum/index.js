@@ -17,10 +17,10 @@ const Page = (props) => {
   const router = useRouter();
   const { user } = useAuthStore();
   const [forumParams, setForumParams] = useState({
-    page: props.page || 1,
-    area: props.area || "ALL",
-    order: props.order || "created_at|desc",
-    status: props.status || "ALL",
+    page: +props.page || +router.query.page || 1,
+    area: props.area || router.query.area || "ALL",
+    order: props.order || router.query.order || "created_at|desc",
+    status: props.status || router.query.status || "ALL",
   });
 
   const { data } = useQuery({
@@ -51,7 +51,7 @@ const Page = (props) => {
       `?page=${forumParams.page}&area=${forumParams.area}&status=${forumParams.status}&order=${forumParams.order}`,
       null,
       {
-        scroll: true,
+        scroll: false,
         shallow: true,
       }
     );

@@ -6,5 +6,9 @@
   "update-profile-fail": "Cập nhật thất bại",
   "image-size-too-large": "Kích thước ảnh quá lớn",
   "update-task-success": "Cập nhật thành công",
-  "update-task-fail": "Cập nhật thất bại"
+  "update-task-fail": "Cập nhật thất bại",
+  "VO_0099": "Bạn đã sử dụng hết lượt bình chọn của ngày hôm nay",
+  "TK_0091": "Bạn đã bình chọn báo cáo này",
+  "VO_0091": "Bạn đã bình chọn bình luận này",
+  "vote-successfully": "Bình chọn thành công"
 }
