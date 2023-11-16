@@ -10,5 +10,12 @@
   "updates-on-reports": "updates on reports",
   "report-a-problem": "Report a problem",
   "report-your-problem": "Report your problem",
-  "problem-example": "like graffiti, fly tipping, broken paving slabs, or street lighting"
+  "problem-example": "like graffiti, fly tipping, broken paving slabs, or street lighting",
+  "nav": {
+    "home": "Home",
+    "forum": "Forum",
+    "map": "Map",
+    "post": "Posts",
+    "about": "About"
+  }
 }

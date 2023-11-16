@@ -25,5 +25,8 @@
   },
   "area": {
     "required": "Please choose area"
+  },
+  "comment": {
+    "required": "Please fill your comment before submit"
   }
 }

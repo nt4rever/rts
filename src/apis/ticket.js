@@ -42,8 +42,10 @@ const createByMe = async (params) => {
   return data;
 };
 
-const get = async (id) => {
-  const { data } = await axiosClient.get(`${TICKET_ENDPOINT.get}/${id}`);
+const get = async (id, params = {}) => {
+  const { data } = await axiosClient.get(`${TICKET_ENDPOINT.get}/${id}`, {
+    params,
+  });
   return data;
 };
 

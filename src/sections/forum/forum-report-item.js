@@ -5,12 +5,14 @@ import { SeverityPill } from "@/components/severity-pill";
 import { reportStatusMap } from "@/constants/report-status";
 import { dateLocales } from "@/utils/date-locale";
 import { getFullName } from "@/utils/string";
+import { baseFormatDateTime } from "@/utils/time";
 import {
   Avatar,
   Box,
   Card,
   NoSsr,
   Stack,
+  Tooltip,
   Typography,
   capitalize,
 } from "@mui/material";
@@ -42,7 +44,7 @@ const ForumReportItem = (props) => {
       <Stack p={2} spacing={2}>
         <Stack direction="row" justifyContent="space-between">
           <Stack direction="row" alignItems="center" spacing={1}>
-            <Avatar />
+            <Avatar src={report.created_by.avatar} />
             <Stack direction="row" flexWrap="wrap" columnGap={1}>
               <Typography variant="subtitle2" fontWeight={700}>
                 {getFullName(
@@ -51,15 +53,17 @@ const ForumReportItem = (props) => {
                 )}
               </Typography>
               <NoSsr>
-                <Typography variant="body2" color="#6C737F">
-                  {capitalize(`${t("common.updated")} ${formatDistanceToNow(
-                    new Date(report.updated_at),
-                    {
-                      locale: dateLocales[locale || "vi"],
-                    }
-                  )}
+                <Tooltip title={baseFormatDateTime(report.updated_at)}>
+                  <Typography variant="body2" color="#6C737F">
+                    {capitalize(`${t("common.updated")} ${formatDistanceToNow(
+                      new Date(report.updated_at),
+                      {
+                        locale: dateLocales[locale || "vi"],
+                      }
+                    )}
             ${t("dashboard.report.ago")}`)}
-                </Typography>
+                  </Typography>
+                </Tooltip>
               </NoSsr>
             </Stack>
           </Stack>
@@ -85,6 +89,7 @@ const ForumReportItem = (props) => {
             </Typography>
             <Stack direction="row" gap={1}>
               <Vote
+                reportId={report.id}
                 score={report.score}
                 votedByMe={report.voted_by_me}
                 isUpVote={report.voted_by_me?.is_up_vote}
