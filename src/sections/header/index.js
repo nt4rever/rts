@@ -36,12 +36,17 @@ const Header = () => {
   const { pathname } = useRouter();
   const [navMobile, setNavMobile] = useState(false);
 
+  const isActive = (path, href) => {
+    if (href !== "/") return path.startsWith(href);
+    return path === "/";
+  };
+
   const navItems = mockData.map((item) => (
     <NavItem
       key={item.href}
       {...item}
       onClick={() => setNavMobile(false)}
-      active={item.href === pathname}
+      active={isActive(pathname, item.href)}
     />
   ));
 

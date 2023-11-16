@@ -4,7 +4,7 @@ import { SeverityPill } from "@/components/severity-pill";
 import { reportStatusMap } from "@/constants/report-status";
 import { evidenceTypeMap } from "@/constants/task-status";
 import { baseFormatDateTime } from "@/utils/time";
-import { Card, CardHeader, Stack, Typography } from "@mui/material";
+import { Card, CardHeader, Stack, Typography, capitalize } from "@mui/material";
 import { useTranslation } from "next-i18next";
 
 const ReportInformation = (props) => {
@@ -73,7 +73,10 @@ const ReportInformation = (props) => {
           title={t("common.close-message")}
           content={data.close_message || "-"}
         />
-        <CommonTaskRow title={t("common.views")} content={data.view_count} />
+        <CommonTaskRow
+          title={capitalize(t("common.views"))}
+          content={data.view_count}
+        />
         <CommonTaskRow title={t("common.vote")} content={data.score} />
       </Card>
       {data.evidences?.length > 0 && (

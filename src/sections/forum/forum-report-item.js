@@ -5,12 +5,14 @@ import { SeverityPill } from "@/components/severity-pill";
 import { reportStatusMap } from "@/constants/report-status";
 import { dateLocales } from "@/utils/date-locale";
 import { getFullName } from "@/utils/string";
+import { baseFormatDateTime } from "@/utils/time";
 import {
   Avatar,
   Box,
   Card,
   NoSsr,
   Stack,
+  Tooltip,
   Typography,
   capitalize,
 } from "@mui/material";
@@ -51,15 +53,17 @@ const ForumReportItem = (props) => {
                 )}
               </Typography>
               <NoSsr>
-                <Typography variant="body2" color="#6C737F">
-                  {capitalize(`${t("common.updated")} ${formatDistanceToNow(
-                    new Date(report.updated_at),
-                    {
-                      locale: dateLocales[locale || "vi"],
-                    }
-                  )}
+                <Tooltip title={baseFormatDateTime(report.updated_at)}>
+                  <Typography variant="body2" color="#6C737F">
+                    {capitalize(`${t("common.updated")} ${formatDistanceToNow(
+                      new Date(report.updated_at),
+                      {
+                        locale: dateLocales[locale || "vi"],
+                      }
+                    )}
             ${t("dashboard.report.ago")}`)}
-                </Typography>
+                  </Typography>
+                </Tooltip>
               </NoSsr>
             </Stack>
           </Stack>

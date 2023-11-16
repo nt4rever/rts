@@ -11,7 +11,7 @@
   "forgot-password": "Forgot password",
   "welcome-to": "Welcome to",
   "search": "Search",
-  "views": "Views",
+  "views": "views",
   "area": "Area",
   "title": "Title",
   "description": "Description",
@@ -75,5 +75,7 @@
   "newest": "Newest",
   "frequent": "Frequent",
   "most-vote": "Most voted",
-  "updated": "Updated"
+  "updated": "Updated",
+  "comment": "comments",
+  "forum": "Forum"
 }

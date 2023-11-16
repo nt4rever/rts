@@ -18,7 +18,7 @@
   "first-name": "Họ",
   "last-name": "Tên",
   "search": "Tìm kiếm",
-  "views": "Lượt xem",
+  "views": "lượt xem",
   "area": "Khu vực",
   "title": "Tiêu đề",
   "description": "Mô tả",
@@ -75,5 +75,7 @@
   "newest": "Mới nhất",
   "frequent": "Thường xuyên",
   "most-vote": "Nổi bật",
-  "updated": "Cập nhật"
+  "updated": "Cập nhật",
+  "comment": "bình luận",
+  "forum": "Diễn đàn"
 }
