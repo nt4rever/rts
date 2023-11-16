@@ -13,9 +13,10 @@ import NextLink from "next/link";
 import ForumGroupFilter from "./forum-group-filter";
 import { areaService } from "@/apis/area";
 import { useQuery } from "@tanstack/react-query";
+import { useForumContext } from "@/contexts/forum-context";
 
 const ForumHeader = (props) => {
-  const { area, setArea } = props;
+  const { forumParams, setForumParams } = useForumContext();
   const { t } = useTranslation();
   const { data: areas } = useQuery({
     queryKey: ["area"],
@@ -25,7 +26,10 @@ const ForumHeader = (props) => {
       }),
   });
   const onAreaChange = (e) => {
-    setArea(e.target.value);
+    setForumParams((prev) => ({
+      ...prev,
+      area: e.target.value,
+    }));
   };
 
   return (
@@ -45,7 +49,7 @@ const ForumHeader = (props) => {
             <Select
               size="small"
               name="area"
-              value={area}
+              value={forumParams.area}
               onChange={onAreaChange}
             >
               <MenuItem value={"ALL"}>{t("common.all-area")}</MenuItem>

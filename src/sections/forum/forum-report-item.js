@@ -1,14 +1,29 @@
 import CommentChip from "@/components/Chip/comment";
+import ViewChip from "@/components/Chip/view";
 import Vote from "@/components/Chip/vote";
+import { SeverityPill } from "@/components/severity-pill";
+import { reportStatusMap } from "@/constants/report-status";
+import { dateLocales } from "@/utils/date-locale";
 import { getFullName } from "@/utils/string";
-import { baseFormatDateTime } from "@/utils/time";
-import { Avatar, Box, Button, Card, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Card,
+  NoSsr,
+  Stack,
+  Typography,
+  capitalize,
+} from "@mui/material";
+import { formatDistanceToNow } from "date-fns";
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import NextLink from "next/link";
-import { MoreHorizontal } from "react-feather";
+import { useRouter } from "next/router";
 
 const ForumReportItem = (props) => {
   const { report } = props;
+  const { t } = useTranslation();
+  const { locale } = useRouter();
 
   return (
     <Card
@@ -28,19 +43,31 @@ const ForumReportItem = (props) => {
         <Stack direction="row" justifyContent="space-between">
           <Stack direction="row" alignItems="center" spacing={1}>
             <Avatar />
-            <Typography variant="subtitle2">
-              {getFullName(
-                report.created_by.first_name,
-                report.created_by.last_name
-              )}
-            </Typography>
-            <Typography variant="subtitle2">
-              {baseFormatDateTime(report.updated_at)}
-            </Typography>
+            <Stack direction="row" flexWrap="wrap" columnGap={1}>
+              <Typography variant="subtitle2" fontWeight={700}>
+                {getFullName(
+                  report.created_by.first_name,
+                  report.created_by.last_name
+                )}
+              </Typography>
+              <NoSsr>
+                <Typography variant="body2" color="#6C737F">
+                  {capitalize(`${t("common.updated")} ${formatDistanceToNow(
+                    new Date(report.updated_at),
+                    {
+                      locale: dateLocales[locale || "vi"],
+                    }
+                  )}
+            ${t("dashboard.report.ago")}`)}
+                </Typography>
+              </NoSsr>
+            </Stack>
           </Stack>
-          <Button size="small">
-            <MoreHorizontal size={14} />
-          </Button>
+          <Box>
+            <SeverityPill color={reportStatusMap[report.status]}>
+              {t(`dashboard.report.status.${report.status}`)}
+            </SeverityPill>
+          </Box>
         </Stack>
         <Stack direction="row" justifyContent="space-between" spacing={1}>
           <Stack spacing={1}>
@@ -63,6 +90,7 @@ const ForumReportItem = (props) => {
                 isUpVote={report.voted_by_me?.is_up_vote}
               />
               <CommentChip />
+              <ViewChip viewCount={report.view_count} />
             </Stack>
           </Stack>
           <Box>

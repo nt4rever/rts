@@ -6,6 +6,8 @@ import { Menu } from "react-feather";
 import Account from "./account";
 import styles from "./index.module.scss";
 import NavItem from "./nav-item";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const mockData = [
   {
@@ -31,9 +33,16 @@ const mockData = [
 ];
 
 const Header = () => {
+  const { pathname } = useRouter();
   const [navMobile, setNavMobile] = useState(false);
+
   const navItems = mockData.map((item) => (
-    <NavItem key={item.href} {...item} />
+    <NavItem
+      key={item.href}
+      {...item}
+      onClick={() => setNavMobile(false)}
+      active={item.href === pathname}
+    />
   ));
 
   return (

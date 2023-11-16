@@ -1,3 +1,4 @@
+import { useForumContext } from "@/contexts/forum-context";
 import {
   FormControl,
   MenuItem,
@@ -9,11 +10,23 @@ import { useTranslation } from "next-i18next";
 
 const ForumGroupFilter = (props) => {
   const { t } = useTranslation();
+  const { forumParams, setForumParams } = useForumContext();
+  const handleChange = (e) => {
+    setForumParams((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   return (
     <Stack direction="row" spacing={1}>
       <FormControl>
-        <Select size="small" name="order" defaultValue="created_at|desc">
+        <Select
+          size="small"
+          name="order"
+          value={forumParams.order}
+          onChange={handleChange}
+        >
           <MenuItem disabled>{t("common.sort-by")}</MenuItem>
           <MenuItem value="score|desc">{t("common.most-vote")}</MenuItem>
           <MenuItem value="created_at|desc">{t("common.newest")}</MenuItem>
@@ -21,7 +34,12 @@ const ForumGroupFilter = (props) => {
         </Select>
       </FormControl>
       <FormControl>
-        <Select size="small" name="status" defaultValue="ALL">
+        <Select
+          size="small"
+          name="status"
+          value={forumParams.status}
+          onChange={handleChange}
+        >
           <MenuItem disabled>{t("common.status")}</MenuItem>
           <MenuItem value="ALL">
             {capitalize(t("dashboard.report.status.ALL"))}

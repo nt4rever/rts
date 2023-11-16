@@ -59,6 +59,7 @@
   display: flex;
   align-items: center;
   button {
+    cursor: pointer;
     display: none;
     margin-right: 5px;
     @include mobile {
