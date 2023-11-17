@@ -4,12 +4,38 @@ import { SeverityPill } from "@/components/severity-pill";
 import { reportStatusMap } from "@/constants/report-status";
 import { evidenceTypeMap } from "@/constants/task-status";
 import { baseFormatDateTime } from "@/utils/time";
-import { Card, CardHeader, Stack, Typography, capitalize } from "@mui/material";
+import styled from "@emotion/styled";
+import {
+  Card,
+  CardHeader,
+  Collapse,
+  IconButton,
+  Stack,
+  Typography,
+  capitalize
+} from "@mui/material";
 import { useTranslation } from "next-i18next";
+import { useState } from "react";
+import { ChevronDown } from "react-feather";
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 const ReportInformation = (props) => {
   const { data } = props;
   const { t } = useTranslation();
+  const [evidenceExpanded, setEvidenceExpanded] = useState(false);
+  const handleEvidenceExpand = () => {
+    setEvidenceExpanded((prev) => !prev);
+  };
 
   return (
     <Stack spacing={3}>
@@ -81,50 +107,67 @@ const ReportInformation = (props) => {
       </Card>
       {data.evidences?.length > 0 && (
         <Card>
-          <CardHeader title={t("common.evidences")} />
-          {data?.evidences?.map((evidence) => (
-            <div key={evidence.id}>
-              <CommonTaskRow
-                title={t("common.role.VOLUNTEER")}
-                content={`${evidence.created_by.first_name || ""} ${
-                  evidence.created_by.last_name
-                }`}
-              />
-              <CommonTaskRow
-                title={t("common.content")}
-                content={evidence.content}
-              />
-              <CommonTaskRow title={t("common.status")} hasChild>
-                <SeverityPill color={evidenceTypeMap[evidence.type]}>
-                  {t(`dashboard.report.status.${evidence.type}`)}
-                </SeverityPill>
-              </CommonTaskRow>
-              <CommonTaskRow title={t("common.location")} hasChild>
-                <Stack direction="row" spacing={2}>
-                  <Typography variant="body2">{`${evidence.lat}, ${evidence.lng}`}</Typography>
-                  <MapLink lat={evidence.lat} lng={evidence.lng} />
-                </Stack>
-              </CommonTaskRow>
-              <CommonTaskRow
-                title={t("common.created_at")}
-                content={baseFormatDateTime(evidence.created_at)}
-              />
-              <CommonTaskRow title={t("common.images")} hasChild>
-                <Stack direction="row" gap={1} flexWrap="wrap">
-                  {evidence.images.map((img) => (
-                    <img
-                      key={img}
-                      src={img}
-                      style={{
-                        aspectRatio: "1/1",
-                        width: "200px",
-                      }}
-                    />
-                  ))}
-                </Stack>
-              </CommonTaskRow>
-            </div>
-          ))}
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ px: 3, py: 4 }}
+          >
+            <Typography variant="h6">{t("common.evidences")}</Typography>
+            <ExpandMore
+              expand={evidenceExpanded}
+              onClick={handleEvidenceExpand}
+              aria-expanded={evidenceExpanded}
+              aria-label="show more"
+            >
+              <ChevronDown />
+            </ExpandMore>
+          </Stack>
+          <Collapse in={evidenceExpanded}>
+            {data?.evidences?.map((evidence) => (
+              <div key={evidence.id}>
+                <CommonTaskRow
+                  title={t("common.role.VOLUNTEER")}
+                  content={`${evidence.created_by.first_name || ""} ${
+                    evidence.created_by.last_name
+                  }`}
+                />
+                <CommonTaskRow
+                  title={t("common.content")}
+                  content={evidence.content}
+                />
+                <CommonTaskRow title={t("common.status")} hasChild>
+                  <SeverityPill color={evidenceTypeMap[evidence.type]}>
+                    {t(`dashboard.report.status.${evidence.type}`)}
+                  </SeverityPill>
+                </CommonTaskRow>
+                <CommonTaskRow title={t("common.location")} hasChild>
+                  <Stack direction="row" spacing={2}>
+                    <Typography variant="body2">{`${evidence.lat}, ${evidence.lng}`}</Typography>
+                    <MapLink lat={evidence.lat} lng={evidence.lng} />
+                  </Stack>
+                </CommonTaskRow>
+                <CommonTaskRow
+                  title={t("common.created_at")}
+                  content={baseFormatDateTime(evidence.created_at)}
+                />
+                <CommonTaskRow title={t("common.images")} hasChild>
+                  <Stack direction="row" gap={1} flexWrap="wrap">
+                    {evidence.images.map((img) => (
+                      <img
+                        key={img}
+                        src={img}
+                        style={{
+                          aspectRatio: "1/1",
+                          width: "200px",
+                        }}
+                      />
+                    ))}
+                  </Stack>
+                </CommonTaskRow>
+              </div>
+            ))}
+          </Collapse>
         </Card>
       )}
     </Stack>
