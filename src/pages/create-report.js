@@ -1,6 +1,6 @@
 import { TransitionPage } from "@/components/transition";
 import MainLayout from "@/layouts/main/layout";
-import { CreateReportForm } from "@/sections/report/create-report";
+import { CreateReportForm } from "@/sections/report/create-report-form";
 import useAuthStore from "@/store/useAuthStore";
 import ArrowRightIcon from "@heroicons/react/24/solid/ArrowRightIcon";
 import {

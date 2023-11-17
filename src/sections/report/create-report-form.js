@@ -289,6 +289,7 @@ export const CreateReportForm = () => {
                         </InputLabel>
                         <Select
                           label="Area"
+                          MenuProps={{ disableScrollLock: true }}
                           value={formik.values.area_id}
                           onChange={formik.handleChange}
                           name="area_id"

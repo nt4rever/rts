@@ -26,6 +26,7 @@ const ForumGroupFilter = (props) => {
           name="order"
           value={forumParams.order}
           onChange={handleChange}
+          MenuProps={{ disableScrollLock: true }}
         >
           <MenuItem disabled>{t("common.sort-by")}</MenuItem>
           <MenuItem value="score|desc">{t("common.most-vote")}</MenuItem>
@@ -39,6 +40,7 @@ const ForumGroupFilter = (props) => {
           name="status"
           value={forumParams.status}
           onChange={handleChange}
+          MenuProps={{ disableScrollLock: true }}
         >
           <MenuItem disabled>{t("common.status")}</MenuItem>
           <MenuItem value="ALL">

@@ -47,7 +47,7 @@ const Page = () => {
               />
             </Box>
             <Typography align="center" sx={{ mb: 3 }} variant="h3">
-              Error when handle your request
+              {t("message.error")}
             </Typography>
             <Button
               component={NextLink}

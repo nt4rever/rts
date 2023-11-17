@@ -14,6 +14,7 @@ import { authService } from "@/apis/auth";
 import { userService } from "@/apis/user";
 import { isAxiosError } from "axios";
 import { setTokens } from "@/utils/storage";
+import { TransitionPage } from "@/components/transition";
 
 const Page = () => {
   const { t } = useTranslation();
@@ -77,108 +78,114 @@ const Page = () => {
       <Head>
         <title>Register | RTS</title>
       </Head>
-      <Box
-        sx={{
-          flex: "1 1 auto",
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+      <TransitionPage>
         <Box
           sx={{
-            maxWidth: 550,
-            px: 3,
-            py: "100px",
-            width: "100%",
+            flex: "1 1 auto",
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          <div>
-            <Stack spacing={1} sx={{ mb: 3 }}>
-              <Typography variant="h4">{t("common.register")}</Typography>
-              <Typography color="text.secondary" variant="body2">
-                {t("common.hint-login")} &nbsp;
-                <Link
-                  component={NextLink}
-                  href="/auth/login"
-                  underline="hover"
-                  variant="subtitle2"
-                >
-                  {t("common.login")}
-                </Link>
-              </Typography>
-            </Stack>
-            <form noValidate onSubmit={formik.handleSubmit}>
-              <Stack spacing={3}>
-                <TextField
-                  error={
-                    !!(formik.touched.first_name && formik.errors.first_name)
-                  }
-                  fullWidth
-                  helperText={
-                    formik.touched.first_name && formik.errors.first_name
-                  }
-                  label={t("common.first-name")}
-                  name="first_name"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.first_name}
-                />
-                <TextField
-                  error={
-                    !!(formik.touched.last_name && formik.errors.last_name)
-                  }
-                  fullWidth
-                  helperText={
-                    formik.touched.last_name && formik.errors.last_name
-                  }
-                  label={t("common.last-name")}
-                  name="last_name"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.last_name}
-                />
-                <TextField
-                  error={!!(formik.touched.email && formik.errors.email)}
-                  fullWidth
-                  helperText={formik.touched.email && formik.errors.email}
-                  label={t("common.email")}
-                  name="email"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  type="email"
-                  value={formik.values.email}
-                />
-                <TextField
-                  error={!!(formik.touched.password && formik.errors.password)}
-                  fullWidth
-                  helperText={formik.touched.password && formik.errors.password}
-                  label={t("common.password")}
-                  name="password"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  type="password"
-                  value={formik.values.password}
-                />
-              </Stack>
-              {formik.errors.submit && (
-                <Typography color="error" sx={{ mt: 3 }} variant="body2">
-                  {formik.errors.submit}
+          <Box
+            sx={{
+              maxWidth: 550,
+              px: 3,
+              py: "100px",
+              width: "100%",
+            }}
+          >
+            <div>
+              <Stack spacing={1} sx={{ mb: 3 }}>
+                <Typography variant="h4">{t("common.register")}</Typography>
+                <Typography color="text.secondary" variant="body2">
+                  {t("common.hint-login")} &nbsp;
+                  <Link
+                    component={NextLink}
+                    href="/auth/login"
+                    underline="hover"
+                    variant="subtitle2"
+                  >
+                    {t("common.login")}
+                  </Link>
                 </Typography>
-              )}
-              <Button
-                fullWidth
-                size="large"
-                sx={{ mt: 3 }}
-                type="submit"
-                variant="contained"
-              >
-                {t("common.register")}
-              </Button>
-            </form>
-          </div>
+              </Stack>
+              <form noValidate onSubmit={formik.handleSubmit}>
+                <Stack spacing={3}>
+                  <TextField
+                    error={
+                      !!(formik.touched.first_name && formik.errors.first_name)
+                    }
+                    fullWidth
+                    helperText={
+                      formik.touched.first_name && formik.errors.first_name
+                    }
+                    label={t("common.first-name")}
+                    name="first_name"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.first_name}
+                  />
+                  <TextField
+                    error={
+                      !!(formik.touched.last_name && formik.errors.last_name)
+                    }
+                    fullWidth
+                    helperText={
+                      formik.touched.last_name && formik.errors.last_name
+                    }
+                    label={t("common.last-name")}
+                    name="last_name"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.last_name}
+                  />
+                  <TextField
+                    error={!!(formik.touched.email && formik.errors.email)}
+                    fullWidth
+                    helperText={formik.touched.email && formik.errors.email}
+                    label={t("common.email")}
+                    name="email"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    type="email"
+                    value={formik.values.email}
+                  />
+                  <TextField
+                    error={
+                      !!(formik.touched.password && formik.errors.password)
+                    }
+                    fullWidth
+                    helperText={
+                      formik.touched.password && formik.errors.password
+                    }
+                    label={t("common.password")}
+                    name="password"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    type="password"
+                    value={formik.values.password}
+                  />
+                </Stack>
+                {formik.errors.submit && (
+                  <Typography color="error" sx={{ mt: 3 }} variant="body2">
+                    {formik.errors.submit}
+                  </Typography>
+                )}
+                <Button
+                  fullWidth
+                  size="large"
+                  sx={{ mt: 3 }}
+                  type="submit"
+                  variant="contained"
+                >
+                  {t("common.register")}
+                </Button>
+              </form>
+            </div>
+          </Box>
         </Box>
-      </Box>
+      </TransitionPage>
     </>
   );
 };
