@@ -84,5 +84,6 @@
     "comment-success": "Gửi bình luận thành công"
   },
   "back": "Quay lại",
-  "hint-login-to-comment": "Vui lòng đăng nhập để bình luận"
+  "hint-login-to-comment": "Vui lòng đăng nhập để bình luận",
+  "load-more": "Tải thêm"
 }

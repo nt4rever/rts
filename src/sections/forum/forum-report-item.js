@@ -14,7 +14,6 @@ import {
   Stack,
   Tooltip,
   Typography,
-  capitalize,
 } from "@mui/material";
 import { formatDistanceToNow } from "date-fns";
 import { useTranslation } from "next-i18next";
@@ -102,7 +101,7 @@ const ForumReportItem = (props) => {
                 votedByMe={report.voted_by_me}
                 isUpVote={report.voted_by_me?.is_up_vote}
               />
-              <CommentChip />
+              <CommentChip count={report.comment_count} />
               <ViewChip viewCount={report.view_count || 1000} />
             </Stack>
           </Stack>
