@@ -36,6 +36,7 @@ const ForumReportItem = (props) => {
       }}
       sx={{
         border: "2px solid transparent",
+        transition: "100ms",
         ":hover": {
           border: "2px solid rgb(99, 102, 241)", // theme.shadows[20]
         },
@@ -55,39 +56,46 @@ const ForumReportItem = (props) => {
               <NoSsr>
                 <Tooltip title={baseFormatDateTime(report.updated_at)}>
                   <Typography variant="body2" color="#6C737F">
-                    {capitalize(`${t("common.updated")} ${formatDistanceToNow(
-                      new Date(report.updated_at),
-                      {
-                        locale: dateLocales[locale || "vi"],
-                      }
-                    )}
-            ${t("dashboard.report.ago")}`)}
+                    {`${formatDistanceToNow(new Date(report.updated_at), {
+                      locale: dateLocales[locale || "vi"],
+                    })} ${t("dashboard.report.ago")}`}
                   </Typography>
                 </Tooltip>
               </NoSsr>
             </Stack>
           </Stack>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+            }}
+          >
             <SeverityPill color={reportStatusMap[report.status]}>
               {t(`dashboard.report.status.${report.status}`)}
             </SeverityPill>
           </Box>
         </Stack>
         <Stack direction="row" justifyContent="space-between" spacing={1}>
-          <Stack spacing={1}>
+          <Stack spacing={2}>
             <Typography
-              variant="h6"
+              variant="body1"
               sx={{
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 display: "-webkit-box",
                 WebkitLineClamp: "3",
                 WebkitBoxOrient: "vertical",
+                fontWeight: 500,
+                fontSize: {
+                  xs: 16,
+                  md: 18,
+                },
               }}
             >
               {report.title}
             </Typography>
-            <Stack direction="row" gap={1}>
+            <Stack direction="row" gap={1} flexWrap="wrap">
               <Vote
                 reportId={report.id}
                 score={report.score}
@@ -95,10 +103,17 @@ const ForumReportItem = (props) => {
                 isUpVote={report.voted_by_me?.is_up_vote}
               />
               <CommentChip />
-              <ViewChip viewCount={report.view_count} />
+              <ViewChip viewCount={report.view_count || 1000} />
             </Stack>
           </Stack>
-          <Box>
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                md: "block",
+              },
+            }}
+          >
             <Image src={report.images[0]} width={90} height={60} alt="sample" />
           </Box>
         </Stack>

@@ -1,5 +1,7 @@
 import { commentService } from "@/apis/comment";
 import Vote from "@/components/Chip/vote";
+import useAuthStore from "@/store/useAuthStore";
+import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import {
   Box,
@@ -15,12 +17,15 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import { Send } from "react-feather";
 import * as Yup from "yup";
 
 export const ForumComment = (props) => {
   const { data } = props;
+  const { isLoggedIn } = useAuthStore();
   const { t } = useTranslation();
+  const router = useRouter()
   const mutation = useMutation({
     mutationKey: ["create-comment", data.id],
     mutationFn: commentService.create,
@@ -40,6 +45,23 @@ export const ForumComment = (props) => {
     }),
     onSubmit: async (values, { resetForm }) => {
       try {
+        if (!isLoggedIn) {
+          modals.openConfirmModal({
+            centered: true,
+            title: t("common.hint-login-to-comment"),
+            labels: {
+              confirm: t("report.go-to-login-page"),
+              cancel: t("common.cancel"),
+            },
+            onCancel: () => {},
+            onConfirm: () => {
+              router.push(
+                `/auth/login?continueUrl=${encodeURIComponent(router.asPath)}`
+              );
+            },
+          });
+          return;
+        }
         await mutation.mutateAsync({ id: data.id, content: values.content });
         resetForm();
         notifications.show({
@@ -89,7 +111,7 @@ export const ForumComment = (props) => {
               helperText={formik.touched.content && formik.errors.content}
             />
           </Grid>
-          <Grid item xs={2} display="flex" ml={2}>
+          <Grid item xs={2} display="flex">
             <Box>
               <Button
                 size="large"

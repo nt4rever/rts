@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import styles from "./statistical.module.scss";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export default function RecentReport() {
   const params = { per_page: 4, order: "created_at|desc" };
@@ -27,8 +28,12 @@ export default function RecentReport() {
 }
 
 export const ReportItem = ({ data }) => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/forum/${data.id}`);
+  };
   return (
-    <div className={styles.report_item_container}>
+    <div className={styles.report_item_container} onClick={handleClick}>
       <div>
         <h4>{data.title}</h4>
         <NoSsr>

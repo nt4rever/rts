@@ -82,5 +82,7 @@
   "your-comment": "Để lại bình luận",
   "message": {
     "comment-success": "Gửi bình luận thành công"
-  }
+  },
+  "back": "Quay lại",
+  "hint-login-to-comment": "Vui lòng đăng nhập để bình luận"
 }

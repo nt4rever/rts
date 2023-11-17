@@ -1,30 +1,17 @@
 import { ticketService } from "@/apis/ticket";
-import Vote from "@/components/Chip/vote";
 import { withCSR } from "@/hocs/with-csr";
 import MainLayout from "@/layouts/main/layout";
 import { ForumComment } from "@/sections/forum/forum-comment";
+import { ForumSkeleton } from "@/sections/forum/forum-skeleton";
 import ReportInformation from "@/sections/report/report-information";
 import useAuthStore from "@/store/useAuthStore";
-import {
-  Box,
-  Button,
-  ButtonBase,
-  Card,
-  CardHeader,
-  Container,
-  Divider,
-  Grid,
-  Stack,
-  TextField,
-  Typography,
-  capitalize,
-} from "@mui/material";
+import { Box, ButtonBase, Container, Stack, Typography } from "@mui/material";
 import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { ArrowLeft, Send } from "react-feather";
+import { ArrowLeft } from "react-feather";
 
 const Page = (props) => {
   const { user } = useAuthStore();
@@ -33,7 +20,8 @@ const Page = (props) => {
     query: { id },
   } = useRouter();
   const { t } = useTranslation();
-  const { data: reportData } = useQuery({
+
+  const { data: reportData, isLoading } = useQuery({
     queryKey: ["tickets", { id, user: user?.id || undefined }],
     queryFn: () => ticketService.get(id, { user: user?.id || undefined }),
   });
@@ -63,9 +51,10 @@ const Page = (props) => {
                 }}
               >
                 <ArrowLeft />
-                <Typography variant="body1">{t("common.forum")}</Typography>
+                <Typography variant="body1">{t("common.back")}</Typography>
               </ButtonBase>
             </Stack>
+            {isLoading && <ForumSkeleton />}
             {reportData && (
               <>
                 <ReportInformation data={reportData} />

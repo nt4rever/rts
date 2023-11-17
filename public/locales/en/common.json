@@ -79,5 +79,7 @@
   "comment": "comments",
   "forum": "Forum",
   "hint-login-to-vote": "Please login to vote this report",
-  "your-comment": "Leave your comment"
+  "your-comment": "Leave your comment",
+  "back": "Back",
+  "hint-login-to-comment": "Please login to comment"
 }

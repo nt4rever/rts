@@ -5,6 +5,7 @@ import { withCSR } from "@/hocs/with-csr";
 import MainLayout from "@/layouts/main/layout";
 import ForumContainer from "@/sections/forum/forum-container";
 import ForumHeader from "@/sections/forum/forum-header";
+import { ForumSkeleton } from "@/sections/forum/forum-skeleton";
 import useAuthStore from "@/store/useAuthStore";
 import { Box, Container, Pagination, Stack } from "@mui/material";
 import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
@@ -23,7 +24,7 @@ const Page = (props) => {
     status: props.status || router.query.status || "ALL",
   });
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [
       "tickets",
       {
@@ -81,7 +82,8 @@ const Page = (props) => {
           <Container maxWidth="lg">
             <Stack spacing={3}>
               <ForumHeader />
-              <ForumContainer data={data} />
+              {isLoading && <ForumSkeleton />}
+              {data && <ForumContainer data={data} />}
               <Box
                 sx={{
                   display: "flex",
