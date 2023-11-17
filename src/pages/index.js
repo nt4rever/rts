@@ -1,17 +1,24 @@
 import { ticketService } from "@/apis/ticket";
+import { TransitionPage } from "@/components/transition";
 import { withCSR } from "@/hocs/with-csr";
 import MainLayout from "@/layouts/main/layout";
 import Banner from "@/sections/home/banner";
 import Statistical from "@/sections/home/statistical";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
 
 const Page = () => {
   return (
-    <div>
-      <Banner />
-      <Statistical />
-    </div>
+    <>
+      <Head>
+        <title>Home | RTS</title>
+      </Head>
+      <TransitionPage>
+        <Banner />
+        <Statistical />
+      </TransitionPage>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { areaService } from "@/apis/area";
 import { ticketService } from "@/apis/ticket";
+import { TransitionPage } from "@/components/transition";
 import { ForumContext } from "@/contexts/forum-context";
 import { withCSR } from "@/hocs/with-csr";
 import MainLayout from "@/layouts/main/layout";
@@ -66,47 +67,49 @@ const Page = (props) => {
       <Head>
         <title>Forum | RTS</title>
       </Head>
-      <ForumContext.Provider
-        value={{
-          forumParams,
-          setForumParams,
-        }}
-      >
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            py: 2,
+      <TransitionPage>
+        <ForumContext.Provider
+          value={{
+            forumParams,
+            setForumParams,
           }}
         >
-          <Container maxWidth="lg">
-            <Stack spacing={3}>
-              <ForumHeader />
-              {isLoading && <ForumSkeleton />}
-              {data && <ForumContainer data={data} />}
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  pb: 3,
-                }}
-              >
-                <Pagination
-                  count={count}
-                  page={forumParams.page}
-                  onChange={(e, p) => {
-                    setForumParams((prev) => ({
-                      ...prev,
-                      page: p,
-                    }));
+          <Box
+            component="main"
+            sx={{
+              flexGrow: 1,
+              py: 2,
+            }}
+          >
+            <Container maxWidth="lg">
+              <Stack spacing={3}>
+                <ForumHeader />
+                {isLoading && <ForumSkeleton />}
+                {data && <ForumContainer data={data} />}
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    pb: 3,
                   }}
-                  size="medium"
-                />
-              </Box>
-            </Stack>
-          </Container>
-        </Box>
-      </ForumContext.Provider>
+                >
+                  <Pagination
+                    count={count}
+                    page={forumParams.page}
+                    onChange={(e, p) => {
+                      setForumParams((prev) => ({
+                        ...prev,
+                        page: p,
+                      }));
+                    }}
+                    size="medium"
+                  />
+                </Box>
+              </Stack>
+            </Container>
+          </Box>
+        </ForumContext.Provider>
+      </TransitionPage>
     </>
   );
 };
