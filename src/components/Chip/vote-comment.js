@@ -10,11 +10,11 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { ArrowDownCircle, ArrowUpCircle } from "react-feather";
 import styles from "./vote.module.scss";
-import { useEffect } from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 
-const Vote = (props) => {
-  const { reportId } = props;
+const VoteComment = (props) => {
+  const { commentId } = props;
   const [data, setData] = useState({
     isUpVote: props.isUpVote,
     score: props.score,
@@ -24,8 +24,8 @@ const Vote = (props) => {
   const { t } = useTranslation();
   const { isLoggedIn } = useAuthStore();
   const voteMutation = useMutation({
-    mutationKey: ["vote-ticket", reportId],
-    mutationFn: commentService.voteTicket,
+    mutationKey: ["vote-comment", commentId],
+    mutationFn: commentService.voteComment,
   });
 
   const queryClient = useQueryClient();
@@ -39,6 +39,7 @@ const Vote = (props) => {
   }, [props]);
 
   const handleVote = (e, type) => {
+    let ins = 0;
     e.preventDefault();
     if (!isLoggedIn) {
       modals.openConfirmModal({
@@ -57,9 +58,6 @@ const Vote = (props) => {
       });
       return;
     }
-
-    let ins = 0;
-
     if (data.votedByMe && data.isUpVote === type) {
       return;
     }
@@ -72,7 +70,7 @@ const Vote = (props) => {
 
     voteMutation.mutate(
       {
-        id: reportId,
+        id: commentId,
         upVote: type,
       },
       {
@@ -95,7 +93,7 @@ const Vote = (props) => {
               title: t(`message.${error.response.data.message}`),
               color: "red",
             });
-          queryClient.invalidateQueries(["tickets"]);
+          queryClient.invalidateQueries(["comments"]);
         },
       }
     );
@@ -129,4 +127,4 @@ const Vote = (props) => {
   );
 };
 
-export default Vote;
+export default VoteComment;

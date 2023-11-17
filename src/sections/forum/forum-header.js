@@ -51,6 +51,7 @@ const ForumHeader = (props) => {
               name="area"
               value={forumParams.area}
               onChange={onAreaChange}
+              MenuProps={{ disableScrollLock: true }}
             >
               <MenuItem value={"ALL"}>{t("common.all-area")}</MenuItem>
               {areas?.map((item) => (

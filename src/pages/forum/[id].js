@@ -1,4 +1,5 @@
 import { ticketService } from "@/apis/ticket";
+import { TransitionPage } from "@/components/transition";
 import { withCSR } from "@/hocs/with-csr";
 import MainLayout from "@/layouts/main/layout";
 import { ForumComment } from "@/sections/forum/forum-comment";
@@ -16,7 +17,7 @@ import { ArrowLeft } from "react-feather";
 const Page = (props) => {
   const { user } = useAuthStore();
   const {
-    back,
+    push,
     query: { id },
   } = useRouter();
   const { t } = useTranslation();
@@ -31,39 +32,41 @@ const Page = (props) => {
       <Head>
         <title>Report | RTS</title>
       </Head>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          py: 2,
-        }}
-      >
-        <Container maxWidth="lg">
-          <Stack spacing={3}>
-            <Stack direction="row">
-              <ButtonBase
-                onClick={() => back()}
-                sx={{
-                  gap: 1,
-                  ":hover": {
-                    color: "rgb(99, 102, 241)",
-                  },
-                }}
-              >
-                <ArrowLeft />
-                <Typography variant="body1">{t("common.back")}</Typography>
-              </ButtonBase>
+      <TransitionPage>
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            py: 2,
+          }}
+        >
+          <Container maxWidth="lg">
+            <Stack spacing={3}>
+              <Stack direction="row">
+                <ButtonBase
+                  onClick={()=> push('/forum')}
+                  sx={{
+                    gap: 1,
+                    ":hover": {
+                      color: "rgb(99, 102, 241)",
+                    },
+                  }}
+                >
+                  <ArrowLeft />
+                  <Typography variant="body1">{t("common.back")}</Typography>
+                </ButtonBase>
+              </Stack>
+              {isLoading && <ForumSkeleton />}
+              {reportData && (
+                <>
+                  <ReportInformation data={reportData} />
+                  <ForumComment data={reportData} />
+                </>
+              )}
             </Stack>
-            {isLoading && <ForumSkeleton />}
-            {reportData && (
-              <>
-                <ReportInformation data={reportData} />
-                <ForumComment data={reportData} />
-              </>
-            )}
-          </Stack>
-        </Container>
-      </Box>
+          </Container>
+        </Box>
+      </TransitionPage>
     </>
   );
 };
