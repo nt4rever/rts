@@ -19,8 +19,12 @@ const register = async (payload) => {
   return data;
 };
 
-const logout = async () => {
-  await axiosClient.get(AUTH_ENDPOINT.logout);
+const logout = async ({ token }) => {
+  await axiosClient.get(AUTH_ENDPOINT.logout, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export const authService = { login, logout, register };

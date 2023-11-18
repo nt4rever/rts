@@ -1,5 +1,6 @@
+import { useLogoutMutation } from "@/hooks/mutations/auth";
 import useAuthStore from "@/store/useAuthStore";
-import { clearTokens } from "@/utils/storage";
+import { clearTokens, getAccessToken } from "@/utils/storage";
 import {
   Box,
   Divider,
@@ -21,8 +22,13 @@ export const AccountPopover = (props) => {
   const queryClient = useQueryClient();
   const { user } = useAuthStore();
   const { t } = useTranslation();
+  const mutation = useLogoutMutation();
 
   const handleSignOut = useCallback(() => {
+    const token = getAccessToken();
+    mutation.mutate({
+      token,
+    });
     queryClient.clear();
     onClose?.();
     logout();
