@@ -102,7 +102,7 @@ const ForumReportItem = (props) => {
                 isUpVote={report.voted_by_me?.is_up_vote}
               />
               <CommentChip count={report.comment_count} />
-              <ViewChip viewCount={report.view_count || 1000} />
+              <ViewChip viewCount={report.view_count} />
             </Stack>
           </Stack>
           <Box

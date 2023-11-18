@@ -49,4 +49,8 @@ const get = async (id, params = {}) => {
   return data;
 };
 
-export const ticketService = { create, all, createByMe, get };
+const view = async (id) => {
+  await axiosClient.get(`${TICKET_ENDPOINT.get}/${id}/view`);
+};
+
+export const ticketService = { create, all, createByMe, get, view };
