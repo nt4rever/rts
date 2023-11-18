@@ -13,12 +13,17 @@ const Page = () => {
   const {
     query: { id },
     back,
+    push,
   } = useRouter();
   const { t } = useTranslation();
-  const { data: reportData } = useQuery({
+  const { data: reportData, isError } = useQuery({
     queryKey: ["report", id],
     queryFn: () => ticketService.get(id),
   });
+
+  if (isError) {
+    push("/404");
+  }
 
   return (
     <>

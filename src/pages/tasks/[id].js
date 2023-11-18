@@ -20,11 +20,15 @@ const notVerify = (status) => {
 const Page = () => {
   const router = useRouter();
   const id = router.query.id;
-  const { data: taskData } = useQuery({
+  const { data: taskData, isError } = useQuery({
     queryKey: ["tasks", id],
     queryFn: () => taskService.get(id),
   });
   const { t } = useTranslation();
+
+  if (isError) {
+    router.push("/404");
+  }
 
   return (
     <>
@@ -44,7 +48,9 @@ const Page = () => {
             <Stack direction="row">
               <ButtonBase href="/tasks" component={NextLink} sx={{ gap: 1 }}>
                 <ArrowLeft />
-                <Typography variant="body1">{t("dashboard.nav.tasks")}</Typography>
+                <Typography variant="body1">
+                  {t("dashboard.nav.tasks")}
+                </Typography>
               </ButtonBase>
             </Stack>
             {taskData && (

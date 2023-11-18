@@ -11,20 +11,25 @@ import {
 } from "@mui/material";
 import useAuthStore from "@/store/useAuthStore";
 import { useTranslation } from "next-i18next";
-import { clearTokens } from "@/utils/storage";
+import { clearTokens, getAccessToken } from "@/utils/storage";
+import { useLogoutMutation } from "@/hooks/mutations/auth";
 
 export const AccountPopover = (props) => {
   const { anchorEl, onClose, open } = props;
   const router = useRouter();
   const { user, logout } = useAuthStore();
   const { t } = useTranslation();
+  const mutation = useLogoutMutation();
 
-  const handleSignOut = useCallback(() => {
+  const handleSignOut = () => {
+    const token = getAccessToken();
+    mutation.mutate({
+      token,
+    });
     onClose?.();
     logout();
     clearTokens();
-    router.push("/");
-  }, [logout, onClose, router]);
+  };
 
   const handleOpenDashboard = () => {
     router.push("/dashboard");

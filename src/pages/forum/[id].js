@@ -7,11 +7,17 @@ import { ForumSkeleton } from "@/sections/forum/forum-skeleton";
 import ReportInformation from "@/sections/report/report-information";
 import useAuthStore from "@/store/useAuthStore";
 import { Box, ButtonBase, Container, Stack, Typography } from "@mui/material";
-import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
+import {
+  QueryClient,
+  dehydrate,
+  useMutation,
+  useQuery,
+} from "@tanstack/react-query";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { ArrowLeft } from "react-feather";
 
 const Page = (props) => {
@@ -22,10 +28,33 @@ const Page = (props) => {
   } = useRouter();
   const { t } = useTranslation();
 
-  const { data: reportData, isLoading } = useQuery({
+  const {
+    data: reportData,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["tickets", { id, user: user?.id || undefined }],
     queryFn: () => ticketService.get(id, { user: user?.id || undefined }),
   });
+
+  const viewMutation = useMutation({
+    mutationKey: ["view", id],
+    mutationFn: ticketService.view,
+  });
+
+  useEffect(() => {
+    const timeId = setTimeout(() => {
+      viewMutation.mutate(id);
+    }, 30 * 1000);
+    return () => {
+      clearTimeout(timeId);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (isError) {
+    push("/404");
+  }
 
   return (
     <>
@@ -44,7 +73,7 @@ const Page = (props) => {
             <Stack spacing={3}>
               <Stack direction="row">
                 <ButtonBase
-                  onClick={()=> push('/forum')}
+                  onClick={() => push("/forum")}
                   sx={{
                     gap: 1,
                     ":hover": {
