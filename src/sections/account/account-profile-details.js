@@ -23,6 +23,7 @@ import { isAxiosError } from "axios";
 import { useFormik } from "formik";
 import { useTranslation } from "next-i18next";
 import * as Yup from "yup";
+import { isValid } from "date-fns";
 
 export const AccountProfileDetails = ({ user }) => {
   const profileMutation = useProfileMutation();
@@ -55,7 +56,7 @@ export const AccountProfileDetails = ({ user }) => {
       phone_number: Yup.string()
         .optional()
         .max(15, t("validation.common.max-length", { max: 15 })),
-      date_of_birth: Yup.date().optional(),
+      date_of_birth: Yup.date().optional().nullable(),
       gender: Yup.mixed().oneOf(["MALE", "FEMALE", "OTHER"]).optional(),
       address: Yup.string()
         .optional()
@@ -145,17 +146,24 @@ export const AccountProfileDetails = ({ user }) => {
               </Grid>
               <Grid xs={12} md={6}>
                 <DatePicker
+                  componentsProps={{
+                    actionBar: {
+                      actions: ["clear"],
+                    },
+                  }}
                   label={t("common.date-of-birth")}
                   name="date_of_birth"
                   inputFormat="dd/MM/yyyy"
                   value={formik.values.date_of_birth}
-                  onChange={(value) =>
-                    formik.setFieldValue(
-                      "date_of_birth",
-                      value.toISOString(),
-                      true
-                    )
-                  }
+                  onChange={(value) => {
+                    if (isValid(value))
+                      formik.setFieldValue(
+                        "date_of_birth",
+                        value.toISOString(),
+                        true
+                      );
+                    else formik.setFieldValue("date_of_birth", null, true);
+                  }}
                   renderInput={(params) => <TextField {...params} fullWidth />}
                 />
               </Grid>
