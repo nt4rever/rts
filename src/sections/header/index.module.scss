@@ -20,7 +20,6 @@
   background: #fff;
   z-index: 10;
 
-
   @include mobile {
     padding: 24px 16px;
   }
@@ -53,7 +52,6 @@
     min-width: 70vw;
   }
 }
-
 
 .menu {
   display: flex;
