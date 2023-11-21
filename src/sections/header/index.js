@@ -18,15 +18,15 @@ const mockData = [
     name: "forum",
   },
   {
-    href: "/home3",
+    href: "/map",
     name: "map",
   },
   {
-    href: "/home4",
+    href: "/posts",
     name: "post",
   },
   {
-    href: "/home5",
+    href: "/about",
     name: "about",
   },
 ];
