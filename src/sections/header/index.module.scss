@@ -18,8 +18,7 @@
   position: fixed;
   width: 100%;
   background: #fff;
-  z-index: 9999;
-
+  z-index: 10;
 
   @include mobile {
     padding: 24px 16px;
@@ -53,7 +52,6 @@
     min-width: 70vw;
   }
 }
-
 
 .menu {
   display: flex;

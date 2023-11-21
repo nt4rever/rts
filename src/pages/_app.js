@@ -18,10 +18,9 @@ import {
 import { config } from "@/libs/react-query-config";
 import Devtools from "@/components/Devtools";
 import { appWithTranslation } from "next-i18next";
-import '@mantine/core/styles.css';
-import '@mantine/notifications/styles.css';
+import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 import "@/styles/global.scss";
-import "leaflet/dist/leaflet.css";
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";

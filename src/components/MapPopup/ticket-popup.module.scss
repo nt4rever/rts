@@ -1,0 +1,25 @@
+.wrapper {
+  margin: -13px -24px -13px -20px;
+  padding: 5px 0;
+}
+
+.content {
+  padding: 0px 10px;
+  margin-right: 5px;
+}
+
+.text {
+  margin: 5px !important;
+  & > span {
+    font-weight: 700;
+  }
+
+  & > a {
+    text-decoration: none;
+    color: #000;
+    &:hover {
+      color: rgb(99, 102, 241);
+      text-decoration: underline;
+    }
+  }
+}
