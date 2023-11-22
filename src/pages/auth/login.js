@@ -171,7 +171,13 @@ const Page = () => {
                   >
                     {t("common.login")}
                   </Button>
-                  <Button fullWidth size="large" sx={{ mt: 3 }}>
+                  <Button
+                    fullWidth
+                    size="large"
+                    sx={{ mt: 3 }}
+                    href="/auth/forgot-password"
+                    component={NextLink}
+                  >
                     {t("common.forgot-password")}
                   </Button>
                   <Alert color="primary" severity="info" sx={{ mt: 3 }}>

@@ -29,8 +29,8 @@ const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { t } = useTranslation();
-  const [page, setPage] = useState(1);
-  const [value, setValue] = useState("");
+  const [page, setPage] = useState(+router.query.page || 1);
+  const [value, setValue] = useState(router.query.status || "");
   const { user } = useAuthStore();
   const { data } = useQuery({
     queryKey: ["my-report", { page, created_by: user?.id, status: value }],

@@ -4,6 +4,8 @@ const AUTH_ENDPOINT = {
   login: "/auth/sign-in",
   register: "/auth/sign-up",
   logout: "/auth/logout",
+  forgotPassword: "/auth/forgot-password",
+  resetPassword: "/auth/reset-password",
 };
 
 const login = async ({ email, password }) => {
@@ -27,4 +29,22 @@ const logout = async ({ token }) => {
   });
 };
 
-export const authService = { login, logout, register };
+const forgotPassword = async (payload) => {
+  const { data } = await axiosClient.post(
+    AUTH_ENDPOINT.forgotPassword,
+    payload
+  );
+  return data;
+};
+const resetPassword = async (payload) => {
+  const { data } = await axiosClient.post(AUTH_ENDPOINT.resetPassword, payload);
+  return data;
+};
+
+export const authService = {
+  login,
+  logout,
+  register,
+  forgotPassword,
+  resetPassword,
+};

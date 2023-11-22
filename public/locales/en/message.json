@@ -12,5 +12,9 @@
   "VO_0091": "You have voted this comment",
   "vote-successfully": "You have been voted successfully",
   "comment-success": "Your comment has been recorded",
-  "error": "Error when handle your request"
+  "error": "Error when handle your request",
+  "send-request-successfully": "Your request has been send successfully",
+  "CM_002": "Update fail",
+  "TM_429": "Too many requests",
+  "go-back-to-home-page": "Go back to homepage"
 }
