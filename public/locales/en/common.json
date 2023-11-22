@@ -82,5 +82,7 @@
   "your-comment": "Leave your comment",
   "back": "Back",
   "hint-login-to-comment": "Please login to comment",
-  "load-more": "Load more"
+  "load-more": "Load more",
+  "forgot-password-hint": "Please input your email.",
+  "reset-password-hint": "Please input new password."
 }

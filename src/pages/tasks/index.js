@@ -14,9 +14,9 @@ const Page = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const searchParam = useSearchParams();
-  const [page, setPage] = useState(1);
-  const [value, setValue] = useState("");
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [page, setPage] = useState(+router.query.page || 1);
+  const [value, setValue] = useState(router.query.status || "");
+  const [rowsPerPage, setRowsPerPage] = useState(+router.query.per_page || 5);
 
   const { data } = useQuery({
     queryKey: ["tasks", { page, rowsPerPage, status: value }],

@@ -12,15 +12,7 @@ export const ForumCommentItem = (props) => {
   const { locale } = useRouter();
 
   return (
-    <Card
-      sx={{
-        border: "2px solid transparent",
-        transition: "100ms",
-        ":hover": {
-          border: "2px solid rgb(99, 102, 241)", // theme.shadows[20]
-        },
-      }}
-    >
+    <Card>
       <Stack p={2} spacing={2}>
         <Stack direction="row" justifyContent="space-between">
           <Stack direction="row" alignItems="center" spacing={1}>

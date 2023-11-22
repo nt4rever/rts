@@ -168,7 +168,7 @@ export const ForumComment = (props) => {
           <ForumCommentFilter order={order} setOrder={setOrder} />
         </Stack>
       </Card>
-      <Stack spacing={1}>
+      <Stack spacing={1.5}>
         {comments?.pages?.map((group, i) => (
           <Fragment key={i}>
             {group.items?.map((cm) => (

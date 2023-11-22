@@ -4,6 +4,9 @@ module.exports = {
   reactStrictMode: true,
   i18n,
   images: {
-    domains: ['minio.hmmmm.tech'],
+    domains: ["minio.hmmmm.tech"],
+  },
+  experimental: {
+    scrollRestoration: true,
   },
 };

@@ -8,7 +8,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
-import { default as NextLink } from "next/link";
 import { useRouter } from "next/router";
 import { ArrowLeft } from "react-feather";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
@@ -46,7 +45,7 @@ const Page = () => {
         <Container maxWidth="xl">
           <Stack spacing={3}>
             <Stack direction="row">
-              <ButtonBase href="/tasks" component={NextLink} sx={{ gap: 1 }}>
+              <ButtonBase onClick={() => router.back()} sx={{ gap: 1 }}>
                 <ArrowLeft />
                 <Typography variant="body1">
                   {t("dashboard.nav.tasks")}

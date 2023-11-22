@@ -24,6 +24,7 @@ const Page = (props) => {
   const { user } = useAuthStore();
   const {
     push,
+    back,
     query: { id },
   } = useRouter();
   const { t } = useTranslation();
@@ -73,7 +74,7 @@ const Page = (props) => {
             <Stack spacing={3}>
               <Stack direction="row">
                 <ButtonBase
-                  onClick={() => push("/forum")}
+                  onClick={() => back()}
                   sx={{
                     gap: 1,
                     ":hover": {

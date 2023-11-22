@@ -60,7 +60,7 @@ const Page = () => {
               sx={{ mt: 3 }}
               variant="contained"
             >
-              Go back to homepage
+              {t("message.go-back-to-home-page")}
             </Button>
           </Box>
         </Container>

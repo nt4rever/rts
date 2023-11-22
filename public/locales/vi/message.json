@@ -12,5 +12,9 @@
   "VO_0091": "Bạn đã bình chọn bình luận này",
   "vote-successfully": "Bình chọn thành công",
   "comment-success": "Bình luận đã được gửi đi",
-  "error": "Đã xảy ra lỗi"
+  "error": "Đã xảy ra lỗi",
+  "send-request-successfully": "Gửi yêu cầu thành công",
+  "CM_002": "Cập nhật thất bại",
+  "TM_429": "Quá nhiều yêu cầu, vui lòng thử lại sau",
+  "go-back-to-home-page": "Trở lại trang chủ"
 }
