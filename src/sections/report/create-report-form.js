@@ -29,6 +29,7 @@ import { isAxiosError } from "axios";
 import { useFormik } from "formik";
 import { getDistance } from "geolib";
 import { useTranslation } from "next-i18next";
+import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
@@ -36,11 +37,8 @@ import { useDropzone } from "react-dropzone";
 import { Image, Map, X as XIcon } from "react-feather";
 import * as Yup from "yup";
 import styles from "./create-report.module.scss";
-import dynamic from "next/dynamic";
-import ComponentLoading from "@/components/Loading/ComponentLoading";
 
 const ModalLocation = dynamic(() => import("@/sections/map/modal-location"), {
-  loading: () => <ComponentLoading />,
   ssr: false,
 });
 
