@@ -87,5 +87,7 @@
   "hint-login-to-comment": "Vui lòng đăng nhập để bình luận",
   "load-more": "Tải thêm",
   "forgot-password-hint": "Hãy nhập địa chỉ email của bạn. Chúng tôi sẽ gửi cho bạn liên kết để truy cập lại vào tài khoản.",
-  "reset-password-hint": "Nhập mật khẩu mới."
+  "reset-password-hint": "Nhập mật khẩu mới.",
+  "choose-from-map": "Chọn vị trí từ bản đồ",
+  "choose-location": "Chọn một vị trí trên bản đồ"
 }

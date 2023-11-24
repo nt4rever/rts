@@ -84,5 +84,7 @@
   "hint-login-to-comment": "Please login to comment",
   "load-more": "Load more",
   "forgot-password-hint": "Please input your email.",
-  "reset-password-hint": "Please input new password."
+  "reset-password-hint": "Please input new password.",
+  "choose-from-map": "Choose a location from the map",
+  "choose-location": "Choose a location"
 }

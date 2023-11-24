@@ -21,6 +21,7 @@ import {
   Select,
   SvgIcon,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -32,14 +33,22 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { Image, X as XIcon } from "react-feather";
+import { Image, Map, X as XIcon } from "react-feather";
 import * as Yup from "yup";
 import styles from "./create-report.module.scss";
+import dynamic from "next/dynamic";
+import ComponentLoading from "@/components/Loading/ComponentLoading";
+
+const ModalLocation = dynamic(() => import("@/sections/map/modal-location"), {
+  loading: () => <ComponentLoading />,
+  ssr: false,
+});
 
 export const CreateReportForm = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [openModalLocation, setOpenModalLocation] = useState(false);
 
   const {
     data: areas,
@@ -155,10 +164,16 @@ export const CreateReportForm = () => {
 
   const location = useGeoLocation();
 
+  const handleSetLocation = (loc) => {
+    if (loc) {
+      formik.setFieldValue("lat", loc.lat);
+      formik.setFieldValue("lng", loc.lng);
+    }
+  };
+
   useEffect(() => {
     if (location.loaded) {
-      formik.setFieldValue("lat", location.coordinates.lat);
-      formik.setFieldValue("lng", location.coordinates.lng);
+      handleSetLocation(location.coordinates);
     }
   }, [location.loaded]);
 
@@ -268,6 +283,15 @@ export const CreateReportForm = () => {
         </Box>
       ) : (
         <>
+          <ModalLocation
+            open={openModalLocation}
+            onClose={() => setOpenModalLocation(false)}
+            handleSetLocation={handleSetLocation}
+            location={{
+              lat: formik.values.lat,
+              lng: formik.values.lng,
+            }}
+          />
           <Typography variant="h5" mb={4}>
             {t("report.create-a-report")}
           </Typography>
@@ -338,7 +362,7 @@ export const CreateReportForm = () => {
                         }
                       />
                     </Grid>
-                    <Grid xs={12} md={6}>
+                    <Grid xs={12} md={5}>
                       <TextField
                         fullWidth
                         type="number"
@@ -352,7 +376,7 @@ export const CreateReportForm = () => {
                         helperText={formik.touched.lat && formik.errors.lat}
                       />
                     </Grid>
-                    <Grid xs={12} md={6}>
+                    <Grid xs={12} md={5}>
                       <TextField
                         fullWidth
                         type="number"
@@ -365,6 +389,27 @@ export const CreateReportForm = () => {
                         error={!!(formik.touched.lng && formik.errors.lng)}
                         helperText={formik.touched.lng && formik.errors.lng}
                       />
+                    </Grid>
+                    <Grid xs={12} md={2}>
+                      <Box
+                        sx={{
+                          width: "100%",
+                          height: "100%",
+                          display: "flex",
+                          justifyContent: "flex-start",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Tooltip title={t("common.choose-from-map")}>
+                          <Button
+                            variant="outlined"
+                            size="medium"
+                            onClick={() => setOpenModalLocation(true)}
+                          >
+                            <Map />
+                          </Button>
+                        </Tooltip>
+                      </Box>
                     </Grid>
                     <Grid lg={12} sx={{ width: "100%" }}>
                       <div
