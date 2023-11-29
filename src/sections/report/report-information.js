@@ -89,7 +89,7 @@ const ReportInformation = (props) => {
         </CommonTaskRow>
         <CommonTaskRow
           title={t("common.severity-level")}
-          content={data.severity_level || "-"}
+          content={JSON.stringify(data.severity_level) || "-"}
         />
         <CommonTaskRow
           title={t("common.resolve-message")}
