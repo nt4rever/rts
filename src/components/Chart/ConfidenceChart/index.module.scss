@@ -1,0 +1,30 @@
+.wrapper {
+  max-width: 400px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+
+  span {
+    font-size: 13px;
+    line-height: 13px;
+    font-family: monospace;
+  }
+}
+
+.illustration {
+  flex: 1 1 0%;
+
+  & > .bar {
+    height: 4px;
+    border-radius: 4px;
+    background: rgb(167, 139, 250);
+    background: linear-gradient(
+      90deg,
+      rgba(167, 139, 250, 1) 0%,
+      rgba(167, 139, 250, 0.5438550420168067) 60%
+    );
+  }
+}
