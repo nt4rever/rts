@@ -8,6 +8,7 @@
   "update-task-success": "Task update successfully",
   "update-task-fail": "Task update failed",
   "VO_0099": "You have used up all of today's votes",
+  "TK_0099": "You have used up all of today's report",
   "TK_0091": "You have voted for this report",
   "VO_0091": "You have voted this comment",
   "vote-successfully": "You have been voted successfully",

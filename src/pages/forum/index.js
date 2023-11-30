@@ -8,6 +8,7 @@ import ForumContainer from "@/sections/forum/forum-container";
 import ForumHeader from "@/sections/forum/forum-header";
 import { ForumSkeleton } from "@/sections/forum/forum-skeleton";
 import useAuthStore from "@/store/useAuthStore";
+import { getQueryUrlParams } from "@/utils/url-query";
 import { Box, Container, Pagination, Stack } from "@mui/material";
 import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -16,16 +17,16 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 
 const Page = (props) => {
-  const router = useRouter();
+  const { query, beforePopState, push } = useRouter();
   const { user } = useAuthStore();
   const [forumParams, setForumParams] = useState({
-    page: +props.page || +router.query.page || 1,
-    area: props.area || router.query.area || "ALL",
-    order: props.order || router.query.order || "created_at|desc",
-    status: props.status || router.query.status || "ALL",
+    page: +props.page || +query.page || 1,
+    area: props.area || query.area || "ALL",
+    order: props.order || query.order || "created_at|desc",
+    status: props.status || query.status || "ALL",
   });
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: [
       "tickets",
       {
@@ -49,7 +50,7 @@ const Page = (props) => {
   });
 
   useEffect(() => {
-    router.push(
+    push(
       `?page=${forumParams.page}&area=${forumParams.area}&status=${forumParams.status}&order=${forumParams.order}`,
       null,
       {
@@ -60,7 +61,25 @@ const Page = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forumParams]);
 
+  useEffect(() => {
+    beforePopState(({ url }) => {
+      const params = getQueryUrlParams(url);
+      setForumParams((prev) => ({
+        ...prev,
+        page: +params.page || 1,
+        area: params.area || "ALL",
+        status: params.status || "created_at|desc",
+        order: params.order || "ALL",
+      }));
+      return true;
+    });
+  }, [beforePopState]);
+
   const count = useMemo(() => data?.meta?.page_count || 0, [data]);
+
+  if (isError) {
+    push("/500");
+  }
 
   return (
     <>

@@ -1,3 +1,5 @@
+import ConfidenceChart from "@/components/Chart/ConfidenceChart";
+import ImageSlider from "@/components/ImageSlider";
 import CommonTaskRow from "@/components/Task/common-task-row";
 import MapLink from "@/components/Task/map-link";
 import { SeverityPill } from "@/components/severity-pill";
@@ -10,9 +12,10 @@ import {
   CardHeader,
   Collapse,
   IconButton,
+  NoSsr,
   Stack,
   Typography,
-  capitalize
+  capitalize,
 } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
@@ -36,6 +39,7 @@ const ReportInformation = (props) => {
   const handleEvidenceExpand = () => {
     setEvidenceExpanded((prev) => !prev);
   };
+  const [slideIndex, setSlideIndex] = useState(0);
 
   return (
     <Stack spacing={3}>
@@ -53,14 +57,18 @@ const ReportInformation = (props) => {
             data.created_by.last_name
           }`}
         />
-        <CommonTaskRow
-          title={t("common.created_at")}
-          content={baseFormatDateTime(data.created_at)}
-        />
-        <CommonTaskRow
-          title={t("common.updated_at")}
-          content={baseFormatDateTime(data.updated_at)}
-        />
+        <NoSsr>
+          <CommonTaskRow
+            title={t("common.created_at")}
+            content={baseFormatDateTime(data.created_at)}
+          />
+        </NoSsr>
+        <NoSsr>
+          <CommonTaskRow
+            title={t("common.updated_at")}
+            content={baseFormatDateTime(data.updated_at)}
+          />
+        </NoSsr>
         <CommonTaskRow title={t("common.area")} content={data.area?.name} />
         <CommonTaskRow title={t("common.location")} hasChild>
           <Stack direction="row" spacing={2}>
@@ -75,22 +83,16 @@ const ReportInformation = (props) => {
         </CommonTaskRow>
         <CommonTaskRow title={t("common.images")} hasChild>
           <Stack direction="row" gap={1} flexWrap="wrap">
-            {data.images.map((img) => (
-              <img
-                key={img}
-                src={img}
-                style={{
-                  aspectRatio: "1/1",
-                  width: "300px",
-                }}
-              />
-            ))}
+            <ImageSlider data={data.images} onSlideChange={setSlideIndex} />
           </Stack>
         </CommonTaskRow>
-        <CommonTaskRow
-          title={t("common.severity-level")}
-          content={JSON.stringify(data.severity_level) || "-"}
-        />
+        <CommonTaskRow title={t("common.severity-level")} hasChild>
+          {data.severity_level?.length > 0 ? (
+            <ConfidenceChart data={data.severity_level[slideIndex]} />
+          ) : (
+            "-"
+          )}
+        </CommonTaskRow>
         <CommonTaskRow
           title={t("common.resolve-message")}
           content={data.resolve_message || "-"}
@@ -147,10 +149,12 @@ const ReportInformation = (props) => {
                     <MapLink lat={evidence.lat} lng={evidence.lng} />
                   </Stack>
                 </CommonTaskRow>
-                <CommonTaskRow
-                  title={t("common.created_at")}
-                  content={baseFormatDateTime(evidence.created_at)}
-                />
+                <NoSsr>
+                  <CommonTaskRow
+                    title={t("common.created_at")}
+                    content={baseFormatDateTime(evidence.created_at)}
+                  />
+                </NoSsr>
                 <CommonTaskRow title={t("common.images")} hasChild>
                   <Stack direction="row" gap={1} flexWrap="wrap">
                     {evidence.images.map((img) => (
