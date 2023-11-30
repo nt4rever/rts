@@ -113,7 +113,7 @@ const ForumReportItem = (props) => {
               },
             }}
           >
-            <Image src={report.images[0]} width={90} height={60} alt="sample" />
+            <Image priority={true} src={report.images[0]} width={90} height={60} alt="sample" />
           </Box>
         </Stack>
       </Stack>
