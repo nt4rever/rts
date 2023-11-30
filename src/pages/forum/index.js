@@ -26,7 +26,7 @@ const Page = (props) => {
     status: props.status || query.status || "ALL",
   });
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: [
       "tickets",
       {
@@ -63,19 +63,23 @@ const Page = (props) => {
 
   useEffect(() => {
     beforePopState(({ url }) => {
-      const params = getQueryUrlParams(url)
-      setForumParams((prev)=> ({
+      const params = getQueryUrlParams(url);
+      setForumParams((prev) => ({
         ...prev,
         page: +params.page || 1,
         area: params.area || "ALL",
         status: params.status || "created_at|desc",
         order: params.order || "ALL",
-      }))
+      }));
       return true;
     });
   }, [beforePopState]);
 
   const count = useMemo(() => data?.meta?.page_count || 0, [data]);
+
+  if (isError) {
+    push("/500");
+  }
 
   return (
     <>

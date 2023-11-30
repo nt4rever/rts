@@ -36,6 +36,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { Image, Map, X as XIcon } from "react-feather";
 import * as Yup from "yup";
+import { ForumSkeleton } from "../forum/forum-skeleton";
 import styles from "./create-report.module.scss";
 
 const ModalLocation = dynamic(() => import("@/sections/map/modal-location"), {
@@ -229,7 +230,7 @@ export const CreateReportForm = () => {
   );
 
   if (isLoading) {
-    return null;
+    return <ForumSkeleton />;
   }
 
   if (isError) {

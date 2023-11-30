@@ -116,7 +116,7 @@ export function createComponents(config) {
         },
         '#nprogress .bar': {
           backgroundColor: palette.primary.main,
-          height: 3,
+          height: 2,
           left: 0,
           position: 'fixed',
           top: 0,
