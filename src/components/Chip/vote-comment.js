@@ -27,6 +27,9 @@ const VoteComment = (props) => {
     mutationKey: ["vote-comment", commentId],
     mutationFn: commentService.voteComment,
   });
+  const unVoteMutation = useMutation({
+    mutationFn: commentService.unVote,
+  });
 
   const queryClient = useQueryClient();
 
@@ -59,6 +62,30 @@ const VoteComment = (props) => {
       return;
     }
     if (data.votedByMe && data.isUpVote === type) {
+      unVoteMutation.mutate(
+        {
+          id: commentId,
+          type: "COMMENT",
+        },
+        {
+          onSuccess: () => {
+            setData((prev) => ({
+              ...prev,
+              score: prev.score + (prev.isUpVote ? -1 : 1),
+              votedByMe: false,
+              isUpVote: type,
+            }));
+          },
+          onError: (error) => {
+            if (isAxiosError(error))
+              notifications.show({
+                title: t(`message.${error.response.data.message}`),
+                color: "red",
+              });
+            queryClient.invalidateQueries(["comments"]);
+          },
+        }
+      );
       return;
     }
 

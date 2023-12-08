@@ -27,6 +27,9 @@ const Vote = (props) => {
     mutationKey: ["vote-ticket", reportId],
     mutationFn: commentService.voteTicket,
   });
+  const unVoteMutation = useMutation({
+    mutationFn: commentService.unVote,
+  });
 
   const queryClient = useQueryClient();
 
@@ -61,6 +64,30 @@ const Vote = (props) => {
     let ins = 0;
 
     if (data.votedByMe && data.isUpVote === type) {
+      unVoteMutation.mutate(
+        {
+          id: reportId,
+          type: "TICKET",
+        },
+        {
+          onSuccess: () => {
+            setData((prev) => ({
+              ...prev,
+              score: prev.score + (prev.isUpVote ? -1 : 1),
+              votedByMe: false,
+              isUpVote: type,
+            }));
+          },
+          onError: (error) => {
+            if (isAxiosError(error))
+              notifications.show({
+                title: t(`message.${error.response.data.message}`),
+                color: "red",
+              });
+            queryClient.invalidateQueries(["tickets"]);
+          },
+        }
+      );
       return;
     }
 

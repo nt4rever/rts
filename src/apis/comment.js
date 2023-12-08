@@ -5,6 +5,7 @@ const COMMENT_ENDPOINT = {
   voteComment: (id) => `/comments/${id}/vote-comment`,
   create: "/comments",
   all: (id) => `/comments/${id}`,
+  unVote: (id) => `/comments/${id}/un-vote`,
 };
 
 const voteTicket = async ({ id, upVote }) => {
@@ -37,4 +38,10 @@ const all = async (payload) => {
   return data;
 };
 
-export const commentService = { create, all, voteTicket, voteComment };
+const unVote = async (payload) => {
+  const { id, ...dto } = payload;
+  const { data } = await axiosClient.post(COMMENT_ENDPOINT.unVote(id), dto);
+  return data;
+};
+
+export const commentService = { create, all, voteTicket, voteComment, unVote };
