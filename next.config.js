@@ -4,7 +4,13 @@ module.exports = {
   reactStrictMode: true,
   i18n,
   images: {
-    domains: ["minio.hmmmm.tech"],
+    domains: ["minio.hmmmm.tech", "*"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
   experimental: {
     scrollRestoration: true,

@@ -1,0 +1,88 @@
+$border-radius: 10px;
+@mixin mobile {
+  @media only screen and (max-width: 739px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
+.postItem {
+  border-radius: $border-radius;
+  border: 1px solid rgb(99 102 241 / 13%);
+  cursor: pointer;
+
+  @include mobile {
+    display: flex;
+  }
+
+  & .pictureWrapper {
+    @include mobile {
+      width: 30%;
+    }
+  }
+
+  & .image {
+    border-top-right-radius: $border-radius;
+    border-top-left-radius: $border-radius;
+    width: 100%;
+    @include mobile {
+      height: 100%;
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+    }
+  }
+
+  & .body {
+    padding: 23px 28px 32px;
+    @include mobile {
+      width: 70%;
+      padding: 13px 18px 12px;
+    }
+  }
+
+  & .title {
+    text-decoration: none;
+    color: unset;
+    line-height: 18px;
+  }
+
+  &:hover .title {
+    color: rgb(99, 102, 241);
+  }
+
+  & .quote {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    font-size: 14px;
+    line-height: 24px;
+    cursor: text;
+    @include mobile {
+      display: none;
+    }
+  }
+}
+
+.time {
+  color: #858585;
+  font-size: 14px;
+  line-height: 24px;
+  cursor: text;
+}
+
+.postContent {
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 15px auto;
+  }
+}
