@@ -1,6 +1,7 @@
 import { taskService } from "@/apis/task";
 import { TASK_STATUS } from "@/constants/task-status";
 import { withCSR } from "@/hocs/with-csr";
+import { ForumSkeleton } from "@/sections/forum/forum-skeleton";
 import TaskInformation from "@/sections/tasks/task-information";
 import TaskVerify from "@/sections/tasks/task-verify";
 import { Box, ButtonBase, Container, Stack, Typography } from "@mui/material";
@@ -19,7 +20,11 @@ const notVerify = (status) => {
 const Page = () => {
   const router = useRouter();
   const id = router.query.id;
-  const { data: taskData, isError } = useQuery({
+  const {
+    data: taskData,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["tasks", id],
     queryFn: () => taskService.get(id),
   });
@@ -52,6 +57,7 @@ const Page = () => {
                 </Typography>
               </ButtonBase>
             </Stack>
+            {isLoading && <ForumSkeleton />}
             {taskData && (
               <>
                 <TaskInformation data={taskData} />

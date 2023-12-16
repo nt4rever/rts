@@ -1,4 +1,5 @@
 import { taskService } from "@/apis/task";
+import { ForumSkeleton } from "@/sections/forum/forum-skeleton";
 import { TasksTable } from "@/sections/tasks/tasks-table";
 import { Box, Container, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
@@ -18,7 +19,7 @@ const Page = () => {
   const [value, setValue] = useState(router.query.status || "");
   const [rowsPerPage, setRowsPerPage] = useState(+router.query.per_page || 5);
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["tasks", { page, rowsPerPage, status: value }],
     queryFn: () =>
       taskService.all({
@@ -90,6 +91,7 @@ const Page = () => {
                 />
               </Tabs>
             </Box>
+            {isLoading && <ForumSkeleton />}
             {data && (
               <TasksTable
                 count={data.meta.item_count}

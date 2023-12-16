@@ -1,4 +1,5 @@
 import { ticketService } from "@/apis/ticket";
+import { ForumSkeleton } from "@/sections/forum/forum-skeleton";
 import { ReportCard } from "@/sections/report/report-card";
 import useAuthStore from "@/store/useAuthStore";
 import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
@@ -32,7 +33,7 @@ const Page = () => {
   const [page, setPage] = useState(+router.query.page || 1);
   const [value, setValue] = useState(router.query.status || "");
   const { user } = useAuthStore();
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["my-report", { page, created_by: user?.id, status: value }],
     queryFn: () =>
       ticketService.createByMe({
@@ -134,6 +135,7 @@ const Page = () => {
                 />
               </Tabs>
             </Box>
+            {isLoading && <ForumSkeleton />}
             <Grid container spacing={3}>
               {data?.items?.map((report) => (
                 <Grid xs={12} md={6} lg={4} key={report.id}>

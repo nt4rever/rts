@@ -1,5 +1,6 @@
 import { ticketService } from "@/apis/ticket";
 import { Layout as DashboardLayout } from "@/layouts/dashboard/layout";
+import { ForumSkeleton } from "@/sections/forum/forum-skeleton";
 import ReportInformation from "@/sections/report/report-information";
 import { Box, ButtonBase, Container, Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
@@ -16,7 +17,11 @@ const Page = () => {
     push,
   } = useRouter();
   const { t } = useTranslation();
-  const { data: reportData, isError } = useQuery({
+  const {
+    data: reportData,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["report", id],
     queryFn: () => ticketService.get(id),
   });
@@ -46,6 +51,7 @@ const Page = () => {
                 </Typography>
               </ButtonBase>
             </Stack>
+            {isLoading && <ForumSkeleton />}
             {reportData && (
               <>
                 <ReportInformation data={reportData} />

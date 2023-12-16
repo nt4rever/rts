@@ -1,6 +1,7 @@
 import { Box, Container, Grid } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { PostItem } from "../posts/post-item";
+import { postService } from "@/apis/post";
 
 export const HomePost = () => {
   const { data } = useQuery({

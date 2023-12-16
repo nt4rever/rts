@@ -89,15 +89,17 @@
   }
 
   p {
-    font-style: italic;
     font-weight: 400;
     font-size: 14px;
   }
 
   &:hover {
-    color: #4c1d95;
-    background: #e2e1e4;
+    color: rgb(99, 102, 241);
+    background: rgb(187 187 187 / 13%);
+    border: 1px solid rgba(99, 102, 241, 0.13);
   }
+
+  border: 1px solid transparent;
   padding: 10px;
   border-radius: 8px;
 }

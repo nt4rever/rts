@@ -86,5 +86,6 @@
   "forgot-password-hint": "Please input your email.",
   "reset-password-hint": "Please input new password.",
   "choose-from-map": "Choose a location from the map",
-  "choose-location": "Choose a location"
+  "choose-location": "Choose a location",
+  "last-updated": "last updated"
 }
