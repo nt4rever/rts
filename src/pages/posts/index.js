@@ -27,6 +27,7 @@ const Page = () => {
         postService.all({
           page: pageParam,
           per_page: 9,
+          order: "created_at|desc",
         }),
       getNextPageParam: (lastPage) => {
         if (lastPage.meta?.has_next) return lastPage.meta?.page + 1;
@@ -93,6 +94,7 @@ export const getServerSideProps = withCSR(async (ctx) => {
           .all({
             page: 1,
             per_page: 9,
+            order: "created_at|desc",
           })
           .then((data) => ({ pages: [data] })),
     });
