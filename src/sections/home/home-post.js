@@ -23,7 +23,7 @@ export const HomePost = () => {
     >
       <Container maxWidth="lg">
         <Grid container spacing={3}>
-          {data.items?.map((post) => (
+          {data?.items?.map((post) => (
             <PostItem key={post.id} data={post} />
           ))}
         </Grid>
