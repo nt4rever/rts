@@ -46,6 +46,7 @@ export const AccountPopover = (props) => {
       open={open}
       PaperProps={{ sx: { width: 200 } }}
       disableScrollLock
+      sx={{ zIndex: 3000 }}
     >
       <Box
         sx={{

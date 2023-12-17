@@ -21,7 +21,7 @@ const Page = () => {
       <TransitionPage>
         <Box
           sx={{
-            height: "calc(100vh - 96px)",
+            height: "calc(100vh - 84px)",
           }}
         >
           <ReportMap />

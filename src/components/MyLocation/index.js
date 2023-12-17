@@ -9,7 +9,7 @@ export function MyLocation({ currentStation }) {
   const [position, setPosition] = useState(null);
   const map = useMap();
 
-  const locationHandleClick = () => {
+  const locationHandleClick = (ev) => {
     map.locate().addEventListener("locationfound", (e) => {
       setPosition(e.latlng);
       map.setView(e.latlng);

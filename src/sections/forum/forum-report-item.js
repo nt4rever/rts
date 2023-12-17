@@ -34,10 +34,10 @@ const ForumReportItem = (props) => {
         textDecoration: "none",
       }}
       sx={{
-        border: "2px solid transparent",
+        border: "1px solid transparent",
         transition: "100ms",
         ":hover": {
-          border: "2px solid rgb(99, 102, 241)", // theme.shadows[20]
+          border: "1px solid rgb(99 102 241 / 13%)", // theme.shadows[20]
         },
       }}
     >
@@ -53,9 +53,9 @@ const ForumReportItem = (props) => {
                 )}
               </Typography>
               <NoSsr>
-                <Tooltip title={baseFormatDateTime(report.updated_at)}>
+                <Tooltip title={baseFormatDateTime(report.created_at)}>
                   <Typography variant="body2" color="#6C737F">
-                    {`${formatDistanceToNow(new Date(report.updated_at), {
+                    {`${formatDistanceToNow(new Date(report.created_at), {
                       locale: dateLocales[locale || "vi"],
                     })} ${t("dashboard.report.ago")}`}
                   </Typography>
@@ -113,7 +113,13 @@ const ForumReportItem = (props) => {
               },
             }}
           >
-            <Image priority={true} src={report.images[0]} width={90} height={60} alt="sample" />
+            <Image
+              priority={true}
+              src={report.images[0]}
+              width={90}
+              height={60}
+              alt="sample"
+            />
           </Box>
         </Stack>
       </Stack>

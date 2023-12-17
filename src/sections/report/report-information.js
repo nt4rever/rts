@@ -63,12 +63,6 @@ const ReportInformation = (props) => {
             content={baseFormatDateTime(data.created_at)}
           />
         </NoSsr>
-        <NoSsr>
-          <CommonTaskRow
-            title={t("common.updated_at")}
-            content={baseFormatDateTime(data.updated_at)}
-          />
-        </NoSsr>
         <CommonTaskRow title={t("common.area")} content={data.area?.name} />
         <CommonTaskRow title={t("common.location")} hasChild>
           <Stack direction="row" spacing={2}>

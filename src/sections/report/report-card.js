@@ -107,7 +107,7 @@ export const ReportCard = (props) => {
             <ClockIcon />
           </SvgIcon>
           <Typography color="text.secondary" display="inline" variant="caption">
-            {capitalize(`${formatDistanceToNow(new Date(report.updated_at), {
+            {capitalize(`${formatDistanceToNow(new Date(report.created_at), {
               locale: dateLocales[locale || "vi"],
             })}
             ${t("dashboard.report.ago")}`)}

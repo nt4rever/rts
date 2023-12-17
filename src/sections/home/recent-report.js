@@ -30,24 +30,11 @@ export default function RecentReport() {
   );
 }
 
-const timestampFormat = (
-  createdAt,
-  updatedAt,
-  text = "last updated",
-  locale = "vi"
-) => {
+const timestampFormat = (createdAt, text = "ago", locale = "vi") => {
   const d1 = new Date(createdAt);
-  const d2 = new Date(updatedAt);
-  if (isEqual(d1, d2)) {
-    return `${formatDistanceToNow(d1, {
-      locale: dateLocales[locale],
-    })}}`;
-  }
   return `${formatDistanceToNow(d1, {
     locale: dateLocales[locale],
-  })}, ${text} ${formatDistanceToNow(d2, {
-    locale: dateLocales[locale],
-  })}`;
+  })} ${text}`;
 };
 
 export const ReportItem = ({ data }) => {
@@ -66,8 +53,7 @@ export const ReportItem = ({ data }) => {
           <p>
             {timestampFormat(
               data.created_at,
-              data.updated_at,
-              t("common.last-updated"),
+              t("dashboard.report.ago"),
               router.locale
             )}
           </p>

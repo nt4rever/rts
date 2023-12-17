@@ -9,10 +9,16 @@ import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 
 const ModalLocation = (props) => {
   const { open, onClose, location, handleSetLocation } = props;
-  const {t} = useTranslation()
+  const { t } = useTranslation();
 
   return (
-    <Modal size="lg" title={t('common.choose-location')} opened={open} onClose={onClose}>
+    <Modal
+      size="lg"
+      title={t("common.choose-location")}
+      opened={open}
+      onClose={onClose}
+      zIndex={3000}
+    >
       <Box height="70vh">
         <MapContainer
           center={[16.0471688, 108.206706]}

@@ -5,7 +5,7 @@ const ForumContainer = (props) => {
   const { data } = props;
 
   return (
-    <Stack spacing={1}>
+    <Stack spacing={2}>
       {data?.items.map((report) => (
         <ForumReportItem key={report.id} report={report} />
       ))}

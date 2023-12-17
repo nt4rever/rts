@@ -48,7 +48,7 @@
 .divider {
   height: 5px;
   width: 100%;
-  background: #4C1D95;
+  background: rgb(99, 102, 241);
   margin-top: 10px;
 }
 
@@ -56,9 +56,8 @@
   display: flex;
   @include mobile {
     flex-wrap: wrap;
-  justify-content: center;
+    justify-content: center;
   }
-  
 
   .itemStats {
     padding: 10px;

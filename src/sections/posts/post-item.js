@@ -28,14 +28,28 @@ export const PostItem = ({ data }) => {
               xs: 1,
               md: 1.5,
             }}
+            direction={{
+              xs: "column-reverse",
+              md: "column",
+            }}
           >
             <NoSsr>
-              <Typography className={styles.time}>
+              <p className={styles.time}>
                 {baseFormatDateTime(data.created_at)}
-              </Typography>
+              </p>
             </NoSsr>
             <Link href={`/posts/${data.slug}`} className={styles.title}>
-              <Typography variant="h6">{data.title}</Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontSize: {
+                    xs: 14,
+                    md: 16,
+                  },
+                }}
+              >
+                {data.title}
+              </Typography>
             </Link>
             <Typography variant="body2" className={styles.quote}>
               {data.brief_content}

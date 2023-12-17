@@ -139,6 +139,7 @@ export const CreateReportForm = () => {
               confirm: t("common.confirm"),
               cancel: t("common.dont-submit"),
             },
+            zIndex: 3000,
             confirmProps: { color: "red" },
             onConfirm: async () => {
               await reportMutation.mutateAsync(values);

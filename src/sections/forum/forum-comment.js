@@ -85,6 +85,7 @@ export const ForumComment = (props) => {
               confirm: t("report.go-to-login-page"),
               cancel: t("common.cancel"),
             },
+            zIndex: 3000,
             onCancel: () => {},
             onConfirm: () => {
               router.push(

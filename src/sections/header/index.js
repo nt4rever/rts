@@ -66,6 +66,7 @@ const Header = () => {
         anchor="left"
         open={navMobile}
         onClose={() => setNavMobile(false)}
+        sx={{ zIndex: 3000 }}
       >
         <div className={styles.navMobile}>{navItems}</div>
       </Drawer>
