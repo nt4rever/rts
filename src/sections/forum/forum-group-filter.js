@@ -14,6 +14,7 @@ const ForumGroupFilter = (props) => {
   const handleChange = (e) => {
     setForumParams((prev) => ({
       ...prev,
+      page: prev.page || 1,
       [e.target.name]: e.target.value,
     }));
   };

@@ -3,6 +3,7 @@ import ViewChip from "@/components/Chip/view";
 import Vote from "@/components/Chip/vote";
 import { SeverityPill } from "@/components/severity-pill";
 import { reportStatusMap } from "@/constants/report-status";
+import { calcAiScore } from "@/utils/calcAiScore";
 import { dateLocales } from "@/utils/date-locale";
 import { getFullName } from "@/utils/string";
 import { baseFormatDateTime } from "@/utils/time";
@@ -25,6 +26,7 @@ const ForumReportItem = (props) => {
   const { report } = props;
   const { t } = useTranslation();
   const { locale } = useRouter();
+  const aiEvaluate = calcAiScore(report.severity_level);
 
   return (
     <Card
@@ -61,6 +63,19 @@ const ForumReportItem = (props) => {
                   </Typography>
                 </Tooltip>
               </NoSsr>
+              {aiEvaluate && (
+                <SeverityPill color={aiEvaluate.color}>
+                  <span>{aiEvaluate.score}</span>
+                  <Image
+                    src={
+                      "https://www.gstatic.com/lamda/images/sparkle_resting_v2_darkmode_2bdb7df2724e450073ede.gif"
+                    }
+                    alt="ai-effect"
+                    width={20}
+                    height={20}
+                  />
+                </SeverityPill>
+              )}
             </Stack>
           </Stack>
           <Box
