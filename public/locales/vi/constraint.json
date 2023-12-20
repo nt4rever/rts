@@ -3,5 +3,14 @@
     "MALE": "Nam",
     "FEMALE": "Nữ",
     "OTHER": "Khác"
+  },
+  "ai-level": {
+    "dry_asphalt_severe": "Mặt đường nhựa - Khô ráo - Hư hại nghiêm trọng",
+    "dry_asphalt_smooth": "Mặt đường nhựa - Khô ráo - Tình trạng tốt",
+    "dry_concrete_severe": "Mặt đường bê tông - Khô ráo - Hư hại nghiêm trọng",
+    "dry_concrete_smooth": "Mặt đường bê tông - Khô ráo - Tình trạng tốt",
+    "dry_gravel": "Mặt đường sỏi dá",
+    "wet_asphalt_severe": "Mặt đường nhựa - Ẩm ướt - Hư hại nghiêm trọng",
+    "wet_asphalt_smooth": "Mặt đường nhựa - Ẩm ướt - Tình trạng tốt"
   }
 }

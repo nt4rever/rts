@@ -3,5 +3,14 @@
     "MALE": "Male",
     "FEMALE": "Female",
     "OTHER": "Other"
+  },
+  "ai-level": {
+    "dry_asphalt_severe": "Dry - Asphalt - Severe",
+    "dry_asphalt_smooth": "Dry - Asphalt - Smooth",
+    "dry_concrete_severe": "Dry - Concrete - Severe",
+    "dry_concrete_smooth": "Dry - Concrete - Smooth",
+    "dry_gravel": "Dry - Gravel",
+    "wet_asphalt_severe": "Wet - Asphalt - Severe",
+    "wet_asphalt_smooth": "Wet - Asphalt - Smooth"
   }
 }

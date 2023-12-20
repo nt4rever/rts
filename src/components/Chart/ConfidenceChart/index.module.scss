@@ -1,11 +1,12 @@
 .wrapper {
-  max-width: 400px;
+  max-width: 450px;
 }
 
 .row {
   display: flex;
   justify-content: space-between;
   margin: 5px 0;
+  gap: 20px;
 
   span {
     font-size: 13px;
