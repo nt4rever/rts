@@ -55,7 +55,10 @@ const ForumReportItem = (props) => {
                 )}
               </Typography>
               <NoSsr>
-                <Tooltip title={baseFormatDateTime(report.created_at)}>
+                <Tooltip
+                  title={baseFormatDateTime(report.created_at)}
+                  placement="top"
+                >
                   <Typography variant="body2" color="#6C737F">
                     {`${formatDistanceToNow(new Date(report.created_at), {
                       locale: dateLocales[locale || "vi"],
@@ -66,14 +69,16 @@ const ForumReportItem = (props) => {
               {aiEvaluate && (
                 <SeverityPill color={aiEvaluate.color}>
                   <span>{aiEvaluate.score}</span>
-                  <Image
-                    src={
-                      "https://www.gstatic.com/lamda/images/sparkle_resting_v2_darkmode_2bdb7df2724e450073ede.gif"
-                    }
-                    alt="ai-effect"
-                    width={20}
-                    height={20}
-                  />
+                  <Tooltip title={t("common.powered-by-ai")} placement="top">
+                    <Image
+                      src={
+                        "https://www.gstatic.com/lamda/images/sparkle_resting_v2_darkmode_2bdb7df2724e450073ede.gif"
+                      }
+                      alt="ai-effect"
+                      width={20}
+                      height={20}
+                    />
+                  </Tooltip>
                 </SeverityPill>
               )}
             </Stack>
