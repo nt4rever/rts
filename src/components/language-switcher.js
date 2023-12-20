@@ -9,7 +9,7 @@ export default function LanguageSwitcher() {
       <FormControl>
         <Select
           size="small"
-          inputProps={{ 'aria-label': 'Without label' }}
+          inputProps={{ "aria-label": "Without label" }}
           value={router.locale}
           onChange={(e) =>
             router.push(
@@ -22,6 +22,9 @@ export default function LanguageSwitcher() {
             )
           }
           name="language"
+          MenuProps={{
+            disableScrollLock: true,
+          }}
         >
           <MenuItem value="vi">Tiếng Việt</MenuItem>
           <MenuItem value="en">English</MenuItem>

@@ -20,7 +20,7 @@ const Page = (props) => {
   const { query, beforePopState, push } = useRouter();
   const { user } = useAuthStore();
   const [forumParams, setForumParams] = useState({
-    page: +props.page || +query.page || 1,
+    page: +props.page || +query.page || undefined,
     area: props.area || query.area || "ALL",
     order: props.order || query.order || "created_at|desc",
     status: props.status || query.status || "ALL",
@@ -41,7 +41,7 @@ const Page = (props) => {
       ticketService.all({
         user: user?.id || undefined,
         per_page: 10,
-        page: forumParams.page,
+        page: forumParams.page || 1,
         area: forumParams.area === "ALL" ? undefined : forumParams.area,
         status: forumParams.status === "ALL" ? undefined : forumParams.status,
         order: forumParams.order,
@@ -50,14 +50,17 @@ const Page = (props) => {
   });
 
   useEffect(() => {
-    push(
-      `?page=${forumParams.page}&area=${forumParams.area}&status=${forumParams.status}&order=${forumParams.order}`,
-      null,
-      {
-        scroll: false,
-        shallow: true,
-      }
-    );
+    if (forumParams.page) {
+      push(
+        `?page=${forumParams.page}&area=${forumParams.area}&status=${forumParams.status}&order=${forumParams.order}`,
+        null,
+        {
+          scroll: false,
+          shallow: true,
+        }
+      );
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forumParams]);
 

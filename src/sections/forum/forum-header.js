@@ -28,6 +28,7 @@ const ForumHeader = (props) => {
   const onAreaChange = (e) => {
     setForumParams((prev) => ({
       ...prev,
+      page: prev.page || 1,
       area: e.target.value,
     }));
   };
