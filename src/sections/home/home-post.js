@@ -3,8 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import { PostItem } from "../posts/post-item";
 import { postService } from "@/apis/post";
 import styles from "@/sections/posts/post.module.scss";
+import { useTranslation } from "next-i18next";
 
 export const HomePost = () => {
+  const { t } = useTranslation();
   const { data } = useQuery({
     queryKey: ["home-post"],
     queryFn: () =>
@@ -25,7 +27,7 @@ export const HomePost = () => {
     >
       <Container maxWidth="lg">
         <Stack direction="row" justifyContent="center">
-          <h2 className={styles.sectionTitle}>Tin tức, sự kiện</h2>
+          <h2 className={styles.sectionTitle}>{t("common.news")}</h2>
         </Stack>
         <Grid container spacing={3}>
           {data?.items?.map((post) => (
