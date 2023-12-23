@@ -1,6 +1,9 @@
 import { useTranslation } from "next-i18next";
 import styles from "./guide.module.scss";
 import { capitalize } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import { statsService } from "@/apis/stats";
+import CountUp from "react-countup";
 
 export const GuideItem = ({ index, content }) => {
   return (
@@ -11,7 +14,14 @@ export const GuideItem = ({ index, content }) => {
   );
 };
 
+const formatter = (value) => <CountUp end={value} duration={5} separator="," />;
+
 export default function Guide() {
+  const { data } = useQuery({
+    queryKey: ["report-stats"],
+    queryFn: statsService.report,
+    staleTime: Infinity,
+  });
   const { t } = useTranslation();
 
   return (
@@ -26,15 +36,15 @@ export default function Guide() {
       <div className={styles.divider}></div>
       <div className={styles.number}>
         <div className={styles.itemStats}>
-          <h1>18,348</h1>
+          <h1>{formatter(data?.in_past_week ?? 0)}</h1>
           <p>{capitalize(t("home.report-in-past-week"))}</p>
         </div>
         <div className={styles.itemStats}>
-          <h1>29,540</h1>
+          <h1>{formatter(data?.fixed_in_past_month ?? 0)}</h1>
           <p>{capitalize(t("home.fixed-in-past-month"))}</p>
         </div>
         <div className={styles.itemStats}>
-          <h1>7,855,178</h1>
+          <h1>{formatter(data?.has_been_verified ?? 0)}</h1>
           <p>{capitalize(t("home.updates-on-reports"))}</p>
         </div>
       </div>

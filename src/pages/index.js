@@ -1,4 +1,5 @@
 import { postService } from "@/apis/post";
+import { statsService } from "@/apis/stats";
 import { ticketService } from "@/apis/ticket";
 import { TransitionPage } from "@/components/transition";
 import { withCSR } from "@/hocs/with-csr";
@@ -42,6 +43,10 @@ export const getServerSideProps = withCSR(async (ctx) => {
             per_page: 3,
             order: "created_at|desc",
           }),
+      }),
+      queryClient.fetchQuery({
+        queryKey: ["report-stats"],
+        queryFn: statsService.report,
       }),
     ]);
   } catch (error) {}
