@@ -34,10 +34,11 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { Image, Map, X as XIcon } from "react-feather";
+import { Image as ImageIcon, Map, X as XIcon } from "react-feather";
 import * as Yup from "yup";
 import { ForumSkeleton } from "../forum/forum-skeleton";
 import styles from "./create-report.module.scss";
+import Image from "next/image";
 
 const ModalLocation = dynamic(() => import("@/sections/map/modal-location"), {
   ssr: false,
@@ -215,7 +216,7 @@ export const CreateReportForm = () => {
         <div key={index} className={styles.container}>
           <div className={styles.text}>
             <span>
-              <Image size={20} />
+              <ImageIcon size={20} />
             </span>
             {file.name}
           </div>
@@ -257,14 +258,15 @@ export const CreateReportForm = () => {
               textAlign: "center",
             }}
           >
-            <img
+            <Image
               alt="Under development"
               src="/assets/icons/iconly-glass-tick.svg"
               style={{
                 display: "inline-block",
                 maxWidth: "100%",
-                width: 150,
               }}
+              width={150}
+              height={150}
             />
           </Box>
           <Button

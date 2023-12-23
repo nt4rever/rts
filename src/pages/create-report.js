@@ -14,6 +14,7 @@ import {
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
+import Image from "next/image";
 import NextLink from "next/link";
 
 const Page = () => {
@@ -52,14 +53,15 @@ const Page = () => {
                         textAlign: "center",
                       }}
                     >
-                      <img
+                      <Image
                         alt="Under development"
                         src="/assets/errors/error-401.png"
                         style={{
                           display: "inline-block",
                           maxWidth: "100%",
-                          width: 200,
                         }}
+                        width={200}
+                        height={200}
                       />
                     </Box>
                     <Typography align="center" sx={{ mb: 3 }} variant="h4">

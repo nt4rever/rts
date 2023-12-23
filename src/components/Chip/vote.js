@@ -52,6 +52,7 @@ const Vote = (props) => {
           cancel: t("common.cancel"),
         },
         zIndex: 3000,
+        lockScroll: false,
         onCancel: () => {},
         onConfirm: () => {
           router.push(

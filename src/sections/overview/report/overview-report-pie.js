@@ -1,3 +1,4 @@
+import EmptyData from "@/components/emty-data";
 import {
   Box,
   Card,
@@ -72,42 +73,48 @@ export const OverviewReportPie = (props) => {
     <Card sx={sx}>
       <CardHeader title={t("dashboard.chart-report")} />
       <CardContent>
-        <Chart
-          height={300}
-          options={chartOptions}
-          series={chartSeries}
-          type="donut"
-          width="100%"
-        />
-        <Stack
-          alignItems="center"
-          direction="row"
-          justifyContent="center"
-          spacing={2}
-          sx={{ mt: 2 }}
-        >
-          {chartSeries.map((item, index) => {
-            const label = labelTrans[index];
+        {labels?.length ? (
+          <>
+            <Chart
+              height={300}
+              options={chartOptions}
+              series={chartSeries}
+              type="donut"
+              width="100%"
+            />
+            <Stack
+              alignItems="center"
+              direction="row"
+              justifyContent="center"
+              spacing={2}
+              sx={{ mt: 2 }}
+            >
+              {chartSeries.map((item, index) => {
+                const label = labelTrans[index];
 
-            return (
-              <Box
-                key={label}
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <Typography sx={{ my: 1 }} variant="h6">
-                  {label}
-                </Typography>
-                <Typography color="text.secondary" variant="subtitle2">
-                  {item}%
-                </Typography>
-              </Box>
-            );
-          })}
-        </Stack>
+                return (
+                  <Box
+                    key={label}
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography sx={{ my: 1 }} variant="h6">
+                      {label}
+                    </Typography>
+                    <Typography color="text.secondary" variant="subtitle2">
+                      {item}
+                    </Typography>
+                  </Box>
+                );
+              })}
+            </Stack>
+          </>
+        ) : (
+          <EmptyData />
+        )}
       </CardContent>
     </Card>
   );

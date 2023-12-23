@@ -1,5 +1,6 @@
 import { areaService } from "@/apis/area";
 import { ticketService } from "@/apis/ticket";
+import EmptyData from "@/components/emty-data";
 import { TransitionPage } from "@/components/transition";
 import { ForumContext } from "@/contexts/forum-context";
 import { withCSR } from "@/hocs/with-csr";
@@ -107,26 +108,34 @@ const Page = (props) => {
               <Stack spacing={3}>
                 <ForumHeader />
                 {isLoading && <ForumSkeleton />}
-                {data && <ForumContainer data={data} />}
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    pb: 3,
-                  }}
-                >
-                  <Pagination
-                    count={count}
-                    page={forumParams.page}
-                    onChange={(e, p) => {
-                      setForumParams((prev) => ({
-                        ...prev,
-                        page: p,
-                      }));
-                    }}
-                    size="medium"
-                  />
-                </Box>
+                {data && (
+                  <>
+                    <ForumContainer data={data} />
+                    {data.items.length > 0 ? (
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          pb: 3,
+                        }}
+                      >
+                        <Pagination
+                          count={count}
+                          page={forumParams.page}
+                          onChange={(e, p) => {
+                            setForumParams((prev) => ({
+                              ...prev,
+                              page: p,
+                            }));
+                          }}
+                          size="medium"
+                        />
+                      </Box>
+                    ) : (
+                      <EmptyData />
+                    )}
+                  </>
+                )}
               </Stack>
             </Container>
           </Box>

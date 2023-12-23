@@ -1,6 +1,6 @@
-import { useCallback } from "react";
-import { useRouter } from "next/navigation";
-import PropTypes from "prop-types";
+import { useLogoutMutation } from "@/hooks/mutations/auth";
+import useAuthStore from "@/store/useAuthStore";
+import { clearTokens, getAccessToken } from "@/utils/storage";
 import {
   Box,
   Divider,
@@ -9,26 +9,31 @@ import {
   Popover,
   Typography,
 } from "@mui/material";
-import useAuthStore from "@/store/useAuthStore";
 import { useTranslation } from "next-i18next";
-import { clearTokens, getAccessToken } from "@/utils/storage";
-import { useLogoutMutation } from "@/hooks/mutations/auth";
+import { useRouter } from "next/navigation";
+import PropTypes from "prop-types";
 
 export const AccountPopover = (props) => {
   const { anchorEl, onClose, open } = props;
   const router = useRouter();
-  const { user, logout } = useAuthStore();
+  const { user } = useAuthStore();
   const { t } = useTranslation();
   const mutation = useLogoutMutation();
 
   const handleSignOut = () => {
     const token = getAccessToken();
-    mutation.mutate({
-      token,
-    });
-    onClose?.();
-    logout();
-    clearTokens();
+    mutation.mutate(
+      {
+        token,
+      },
+      {
+        onSettled: () => {
+          onClose?.();
+          clearTokens();
+          router.refresh();
+        },
+      }
+    );
   };
 
   const handleOpenDashboard = () => {

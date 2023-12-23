@@ -126,7 +126,7 @@ const Page = () => {
                   sx={{ height: "100%" }}
                 />
               </Grid> */}
-              {data?.total_report > 0 && (
+              {data?.total_report !== "undefined" && (
                 <Grid xs={12} md={6} lg={4}>
                   <OverviewReportPie
                     chartSeries={reportChartData(data?.summary_report).data}

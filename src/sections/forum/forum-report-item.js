@@ -138,6 +138,9 @@ const ForumReportItem = (props) => {
               src={report.images[0]}
               width={90}
               height={60}
+              style={{
+                objectFit: "cover",
+              }}
               alt="sample"
             />
           </Box>

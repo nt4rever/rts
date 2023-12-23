@@ -9,7 +9,6 @@ import {
   Popover,
   Typography,
 } from "@mui/material";
-import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/navigation";
 import PropTypes from "prop-types";
@@ -18,24 +17,27 @@ import { useCallback } from "react";
 export const AccountPopover = (props) => {
   const { anchorEl, onClose, open } = props;
   const router = useRouter();
-  const { logout } = useAuthStore();
-  const queryClient = useQueryClient();
   const { user } = useAuthStore();
   const { t } = useTranslation();
   const mutation = useLogoutMutation();
 
   const handleSignOut = useCallback(() => {
     const token = getAccessToken();
-    mutation.mutate({
-      token,
-    });
-    queryClient.clear();
-    onClose?.();
-    logout();
-    clearTokens();
-    router.push("/auth/login");
+    mutation.mutate(
+      {
+        token,
+      },
+      {
+        onSettled: () => {
+          onClose?.();
+          clearTokens();
+          router.refresh();
+        },
+      }
+    );
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onClose, logout]);
+  }, [onClose]);
 
   const handleOpenHomePage = () => {
     router.push("/");

@@ -1,4 +1,5 @@
 import { taskService } from "@/apis/task";
+import EmptyData from "@/components/emty-data";
 import { ForumSkeleton } from "@/sections/forum/forum-skeleton";
 import { TasksTable } from "@/sections/tasks/tasks-table";
 import { Box, Container, Stack, Tab, Tabs, Typography } from "@mui/material";
@@ -92,7 +93,7 @@ const Page = () => {
               </Tabs>
             </Box>
             {isLoading && <ForumSkeleton />}
-            {data && (
+            {data?.items?.length ? (
               <TasksTable
                 count={data.meta.item_count}
                 items={data.items}
@@ -101,6 +102,8 @@ const Page = () => {
                 page={page - 1}
                 rowsPerPage={rowsPerPage}
               />
+            ) : (
+              <EmptyData />
             )}
           </Stack>
         </Container>

@@ -92,5 +92,6 @@
   "powered-by-ai": "Powered by AI",
   "report": "Report",
   "interactive": "Interactive",
-  "task": "Task"
+  "task": "Task",
+  "empty-data": "No data"
 }

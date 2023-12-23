@@ -86,6 +86,7 @@ export const ForumComment = (props) => {
               cancel: t("common.cancel"),
             },
             zIndex: 3000,
+            lockScroll: false,
             onCancel: () => {},
             onConfirm: () => {
               router.push(
@@ -110,6 +111,7 @@ export const ForumComment = (props) => {
         });
       }
     },
+    validateOnBlur: false,
   });
 
   return (

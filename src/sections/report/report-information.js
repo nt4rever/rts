@@ -156,8 +156,8 @@ const ReportInformation = (props) => {
                         key={img}
                         src={img}
                         style={{
-                          aspectRatio: "1/1",
-                          width: "200px",
+                          maxHeight: "400px",
+                          maxWidth: "400px",
                         }}
                       />
                     ))}

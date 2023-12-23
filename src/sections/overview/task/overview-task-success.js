@@ -43,9 +43,11 @@ export const OverviewTaskSuccess = (props) => {
             </SvgIcon>
           </Avatar>
         </Stack>
-        <Box sx={{ mt: 3 }}>
-          <LinearProgress value={value ?? 100} variant="determinate" />
-        </Box>
+        {value && (
+          <Box sx={{ mt: 3 }}>
+            <LinearProgress value={value} variant="determinate" />
+          </Box>
+        )}
       </CardContent>
     </Card>
   );

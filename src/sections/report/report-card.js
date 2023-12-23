@@ -59,7 +59,10 @@ export const ReportCard = (props) => {
           <Image
             src={report.images[0]}
             width={150}
-            height={150}
+            height={120}
+            style={{
+              objectFit: "cover",
+            }}
             alt="img-report"
           />
         </Box>

@@ -60,7 +60,15 @@ export const ReportItem = ({ data }) => {
         </NoSsr>
       </div>
       <div>
-        <Image src={data.images[0]} width={90} height={60} alt="sample" />
+        <Image
+          src={data.images[0]}
+          width={90}
+          height={60}
+          style={{
+            objectFit: "cover",
+          }}
+          alt="sample"
+        />
       </div>
     </div>
   );

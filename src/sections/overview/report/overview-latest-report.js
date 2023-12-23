@@ -6,6 +6,7 @@ import {
   Button,
   Card,
   CardActions,
+  CardContent,
   CardHeader,
   Divider,
   SvgIcon,
@@ -21,6 +22,7 @@ import { reportStatusMap } from "@/constants/report-status";
 import { truncateText } from "@/utils/string";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import EmptyData from "@/components/emty-data";
 
 export const OverviewLatestReports = (props) => {
   const { push } = useRouter();
@@ -30,57 +32,65 @@ export const OverviewLatestReports = (props) => {
   return (
     <Card sx={sx}>
       <CardHeader title={t("dashboard.latest-report")} />
-      <Scrollbar sx={{ flexGrow: 1 }}>
-        <Box sx={{ minWidth: 500 }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>{t("common.title")}</TableCell>
-                <TableCell sortDirection="desc">
-                  {t("common.created_at")}
-                </TableCell>
-                <TableCell>{t("common.status")}</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {reports.map((report) => {
-                const createdAt = format(
-                  new Date(report.created_at),
-                  "dd/MM/yyyy"
-                );
-
-                return (
-                  <TableRow hover key={report.id}>
-                    <TableCell>{truncateText(report.title, 70)}</TableCell>
-                    <TableCell>{createdAt}</TableCell>
-                    <TableCell>
-                      <SeverityPill color={reportStatusMap[report.status]}>
-                        {t(`dashboard.report.status.${report.status}`)}
-                      </SeverityPill>
+      {reports?.length ? (
+        <>
+          <Scrollbar sx={{ flexGrow: 1 }}>
+            <Box sx={{ minWidth: 500 }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>{t("common.title")}</TableCell>
+                    <TableCell sortDirection="desc">
+                      {t("common.created_at")}
                     </TableCell>
+                    <TableCell>{t("common.status")}</TableCell>
                   </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </Box>
-      </Scrollbar>
-      <Divider />
-      <CardActions sx={{ justifyContent: "flex-end" }}>
-        <Button
-          color="inherit"
-          endIcon={
-            <SvgIcon fontSize="small">
-              <ArrowRightIcon />
-            </SvgIcon>
-          }
-          size="small"
-          variant="text"
-          onClick={() => push("/my-report")}
-        >
-          {t("dashboard.view-all")}
-        </Button>
-      </CardActions>
+                </TableHead>
+                <TableBody>
+                  {reports.map((report) => {
+                    const createdAt = format(
+                      new Date(report.created_at),
+                      "dd/MM/yyyy"
+                    );
+
+                    return (
+                      <TableRow hover key={report.id}>
+                        <TableCell>{truncateText(report.title, 70)}</TableCell>
+                        <TableCell>{createdAt}</TableCell>
+                        <TableCell>
+                          <SeverityPill color={reportStatusMap[report.status]}>
+                            {t(`dashboard.report.status.${report.status}`)}
+                          </SeverityPill>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </Box>
+          </Scrollbar>
+          <Divider />
+          <CardActions sx={{ justifyContent: "flex-end" }}>
+            <Button
+              color="inherit"
+              endIcon={
+                <SvgIcon fontSize="small">
+                  <ArrowRightIcon />
+                </SvgIcon>
+              }
+              size="small"
+              variant="text"
+              onClick={() => push("/my-report")}
+            >
+              {t("dashboard.view-all")}
+            </Button>
+          </CardActions>
+        </>
+      ) : (
+        <CardContent>
+          <EmptyData />
+        </CardContent>
+      )}
     </Card>
   );
 };

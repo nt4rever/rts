@@ -123,10 +123,10 @@ const Page = () => {
                   </Link>
                 </Typography>
               </Stack>
-              <Tabs onChange={handleMethodChange} sx={{ mb: 3 }} value={method}>
+              {/* <Tabs onChange={handleMethodChange} sx={{ mb: 3 }} value={method}>
                 <Tab label="Email" value="email" />
                 <Tab label={t("common.phone-number")} value="phoneNumber" />
-              </Tabs>
+              </Tabs> */}
               {method === "email" && (
                 <form noValidate onSubmit={formik.handleSubmit}>
                   <Stack spacing={3}>

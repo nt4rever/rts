@@ -1,4 +1,5 @@
 import { ticketService } from "@/apis/ticket";
+import EmptyData from "@/components/emty-data";
 import { ForumSkeleton } from "@/sections/forum/forum-skeleton";
 import { ReportCard } from "@/sections/report/report-card";
 import useAuthStore from "@/store/useAuthStore";
@@ -40,6 +41,7 @@ const Page = () => {
         page,
         created_by: user?.id,
         status: value || undefined,
+        order: "created_at|desc",
       }),
     keepPreviousData: true,
     enabled: !!user?.id,
@@ -143,21 +145,25 @@ const Page = () => {
                 </Grid>
               ))}
             </Grid>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <Pagination
-                count={count}
-                page={page}
-                onChange={(e, p) => {
-                  setPage(p);
+            {data?.items?.length > 0 ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
                 }}
-                size="small"
-              />
-            </Box>
+              >
+                <Pagination
+                  count={count}
+                  page={page}
+                  onChange={(e, p) => {
+                    setPage(p);
+                  }}
+                  size="small"
+                />
+              </Box>
+            ) : (
+              <EmptyData />
+            )}
           </Stack>
         </Container>
       </Box>

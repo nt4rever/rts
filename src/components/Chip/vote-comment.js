@@ -52,6 +52,7 @@ const VoteComment = (props) => {
           confirm: t("report.go-to-login-page"),
           cancel: t("common.cancel"),
         },
+        lockScroll: false,
         onCancel: () => {},
         onConfirm: () => {
           router.push(
