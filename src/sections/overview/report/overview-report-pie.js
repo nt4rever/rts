@@ -5,8 +5,10 @@ import {
   CardHeader,
   Stack,
   Typography,
+  capitalize,
   useTheme,
 } from "@mui/material";
+import { useTranslation } from "next-i18next";
 import PropTypes from "prop-types";
 import { Chart } from "src/components/chart";
 
@@ -60,11 +62,15 @@ const useChartOptions = (labels) => {
 
 export const OverviewReportPie = (props) => {
   const { chartSeries, labels, sx } = props;
-  const chartOptions = useChartOptions(labels);
+  const { t } = useTranslation();
+  const labelTrans = labels.map((l) =>
+    capitalize(t(`dashboard.report.status.${l}`))
+  );
+  const chartOptions = useChartOptions(labelTrans);
 
   return (
     <Card sx={sx}>
-      <CardHeader title="Your report status" />
+      <CardHeader title={t("dashboard.chart-report")} />
       <CardContent>
         <Chart
           height={300}
@@ -81,7 +87,7 @@ export const OverviewReportPie = (props) => {
           sx={{ mt: 2 }}
         >
           {chartSeries.map((item, index) => {
-            const label = labels[index];
+            const label = labelTrans[index];
 
             return (
               <Box

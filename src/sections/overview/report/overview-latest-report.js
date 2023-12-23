@@ -20,22 +20,26 @@ import { SeverityPill } from "src/components/severity-pill";
 import { reportStatusMap } from "@/constants/report-status";
 import { truncateText } from "@/utils/string";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 export const OverviewLatestReports = (props) => {
   const { push } = useRouter();
   const { reports = [], sx } = props;
+  const { t } = useTranslation();
 
   return (
     <Card sx={sx}>
-      <CardHeader title="Latest reports" />
+      <CardHeader title={t("dashboard.latest-report")} />
       <Scrollbar sx={{ flexGrow: 1 }}>
         <Box sx={{ minWidth: 500 }}>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Title</TableCell>
-                <TableCell sortDirection="desc">Date</TableCell>
-                <TableCell>Status</TableCell>
+                <TableCell>{t("common.title")}</TableCell>
+                <TableCell sortDirection="desc">
+                  {t("common.created_at")}
+                </TableCell>
+                <TableCell>{t("common.status")}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -51,7 +55,7 @@ export const OverviewLatestReports = (props) => {
                     <TableCell>{createdAt}</TableCell>
                     <TableCell>
                       <SeverityPill color={reportStatusMap[report.status]}>
-                        {report.status}
+                        {t(`dashboard.report.status.${report.status}`)}
                       </SeverityPill>
                     </TableCell>
                   </TableRow>
@@ -74,7 +78,7 @@ export const OverviewLatestReports = (props) => {
           variant="text"
           onClick={() => push("/my-report")}
         >
-          View all
+          {t("dashboard.view-all")}
         </Button>
       </CardActions>
     </Card>

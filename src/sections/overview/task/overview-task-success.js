@@ -10,9 +10,11 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "next-i18next";
 
 export const OverviewTaskSuccess = (props) => {
   const { value, sx } = props;
+  const { t } = useTranslation();
 
   return (
     <Card sx={sx}>
@@ -25,7 +27,7 @@ export const OverviewTaskSuccess = (props) => {
         >
           <Stack spacing={1}>
             <Typography color="text.secondary" gutterBottom variant="overline">
-              Task Success
+              {t("dashboard.task-success")}
             </Typography>
             <Typography variant="h4">{value ? `${value}%` : "--"}</Typography>
           </Stack>

@@ -31,5 +31,11 @@
     "reports": "Reports",
     "tasks": "Tasks",
     "account": "Account"
-  }
+  },
+  "thank-contribution": "Thank you for your contribution",
+  "vote-and-comment": "Vote and Comment",
+  "task-success": "Task success",
+  "chart-report": "Your report status",
+  "latest-report": "Latest reports",
+  "view-all": "View all"
 }

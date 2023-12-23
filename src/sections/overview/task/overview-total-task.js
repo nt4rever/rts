@@ -9,9 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import ShieldCheckIcon from "@heroicons/react/24/solid/ShieldCheckIcon";
+import { useTranslation } from "next-i18next";
 
 export const OverviewTotalTask = (props) => {
   const { value, sx } = props;
+  const { t } = useTranslation();
 
   return (
     <Card sx={sx}>
@@ -24,7 +26,7 @@ export const OverviewTotalTask = (props) => {
         >
           <Stack spacing={1}>
             <Typography color="text.secondary" variant="overline">
-              Task
+              {t("common.task")}
             </Typography>
             <Typography variant="h4">{value}</Typography>
           </Stack>

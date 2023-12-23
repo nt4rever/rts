@@ -7,10 +7,12 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "next-i18next";
 import PropTypes from "prop-types";
 
 export const OverviewReport = (props) => {
   const { sx, value } = props;
+  const { t } = useTranslation();
 
   return (
     <Card sx={sx}>
@@ -23,7 +25,7 @@ export const OverviewReport = (props) => {
         >
           <Stack spacing={1}>
             <Typography color="text.secondary" variant="overline">
-              Report
+              {t("common.report")}
             </Typography>
             <Typography variant="h4">{value}</Typography>
           </Stack>
@@ -42,7 +44,8 @@ export const OverviewReport = (props) => {
 
         <Stack alignItems="center" direction="row" spacing={2} sx={{ mt: 2 }}>
           <Typography color="text.secondary" variant="caption">
-            Thank you for your contribution❤️
+            {t("dashboard.thank-contribution")}
+            ❤️
           </Typography>
         </Stack>
       </CardContent>

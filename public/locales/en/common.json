@@ -89,5 +89,8 @@
   "choose-location": "Choose a location",
   "last-updated": "last updated",
   "news": "News",
-  "powered-by-ai": "Powered by AI"
+  "powered-by-ai": "Powered by AI",
+  "report": "Report",
+  "interactive": "Interactive",
+  "task": "Task"
 }
