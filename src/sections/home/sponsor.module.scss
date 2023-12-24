@@ -1,0 +1,39 @@
+@mixin mobile {
+  @media only screen and (max-width: 739px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
+.authorWrapper {
+  & > div {
+    font-size: 42px;
+    font-weight: bold;
+    background-clip: text;
+    color: transparent;
+    background-color: white;
+    background-image: url("/assets/backgrounds/text.jpg");
+    line-height: 40px;
+    text-transform: uppercase;
+    text-align: right;
+
+    @include mobile {
+      font-size: 28px;
+      line-height: 30px;
+    }
+  }
+}
+
+.img {
+  width: 114px;
+  height: 80px;
+  @include mobile {
+    width: 78px;
+    height: 60px;
+  }
+}

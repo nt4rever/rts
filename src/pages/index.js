@@ -6,6 +6,7 @@ import { withCSR } from "@/hocs/with-csr";
 import MainLayout from "@/layouts/main/layout";
 import Banner from "@/sections/home/banner";
 import { HomePost } from "@/sections/home/home-post";
+import HomeSponsor from "@/sections/home/sponsor";
 import Statistical from "@/sections/home/statistical";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -21,6 +22,7 @@ const Page = () => {
         <Banner />
         <Statistical />
         <HomePost />
+        <HomeSponsor />
       </TransitionPage>
     </>
   );

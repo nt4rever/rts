@@ -93,5 +93,7 @@
   "report": "Report",
   "interactive": "Interactive",
   "task": "Task",
-  "empty-data": "No data"
+  "empty-data": "No data",
+  "note": "Note",
+  "sponsor": "Sponsor"
 }

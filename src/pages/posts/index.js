@@ -54,6 +54,9 @@ const Page = () => {
             }}
           >
             <Container maxWidth="lg">
+              <Stack direction="row" justifyContent="center">
+                <h2 className="section-heading">{t("common.news")}</h2>
+              </Stack>
               {isLoading && <ForumSkeleton />}
               <Grid container spacing={3}>
                 {data?.pages?.map((group, i) => (

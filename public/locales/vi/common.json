@@ -96,5 +96,7 @@
   "report": "Báo cáo",
   "interactive": "Tương tác",
   "task": "Nhiệm vụ",
-  "empty-data": "Không có dữ liệu"
+  "empty-data": "Không có dữ liệu",
+  "note": "Ghi chú",
+  "sponsor": "Sponsor"
 }

@@ -30,6 +30,11 @@ const TaskInformation = (props) => {
         </Stack>
       </Stack>
       <Stack spacing={3}>
+        {data.note && (
+          <Card>
+            <CommonTaskRow title={t("common.note")} content={data.note} />
+          </Card>
+        )}
         <Card>
           <CardHeader title={t("dashboard.report.report-information")} />
           <CommonTaskRow title="ID" content={data.ticket.id} />
