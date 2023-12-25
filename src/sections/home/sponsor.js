@@ -12,7 +12,7 @@ const HomeSponsor = () => {
       sx={{
         flexGrow: 1,
         pt: 6,
-        pb: 10,
+        pb: 6,
       }}
     >
       <Container maxWidth="lg">
