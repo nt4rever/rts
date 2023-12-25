@@ -3,6 +3,7 @@ import { ActionIcon } from "@mantine/core";
 import { Divider } from "@mui/material";
 import { CornerRightUp } from "react-feather";
 import styles from "./index.module.scss";
+import { getYear } from "date-fns";
 
 export default function Footer() {
   const backToTop = () => {
@@ -12,7 +13,9 @@ export default function Footer() {
     <div className={styles.footer}>
       <Divider />
       <div className={styles.reserveBox}>
-        <div>@2023 RTS. All rights reserved</div>
+        <div className={styles.textSignContainer}>
+          @{getYear(new Date())} RTS.&nbsp;<div>All rights reserved</div>
+        </div>
         <div className={styles.groupBtn}>
           <LanguageSwitcher />
           <ActionIcon

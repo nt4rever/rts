@@ -119,3 +119,12 @@ a.rts {
     font-size: 18px;
   }
 }
+
+.static-page-content {
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 15px auto;
+  }
+}

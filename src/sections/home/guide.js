@@ -14,7 +14,7 @@ export const GuideItem = ({ index, content }) => {
   );
 };
 
-const formatter = (value) => <CountUp end={value} duration={5} separator="," />;
+const formatter = (value) => <CountUp end={value} duration={3} separator="," />;
 
 export default function Guide() {
   const { data } = useQuery({

@@ -93,7 +93,6 @@ const Page = () => {
       <TransitionPage>
         <Box
           sx={{
-            backgroundColor: "background.paper",
             flex: "1 1 auto",
             alignItems: "center",
             display: "flex",

@@ -107,12 +107,12 @@ const ReportInformation = (props) => {
             direction="row"
             alignItems="center"
             justifyContent="space-between"
-            sx={{ px: 3, py: 4 }}
+            sx={{ px: 3, py: 4, cursor: "pointer" }}
+            onClick={handleEvidenceExpand}
           >
             <Typography variant="h6">{t("common.evidences")}</Typography>
             <ExpandMore
               expand={evidenceExpanded}
-              onClick={handleEvidenceExpand}
               aria-expanded={evidenceExpanded}
               aria-label="show more"
             >
