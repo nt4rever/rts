@@ -59,12 +59,15 @@ export const getStaticProps = async (ctx) => {
   const queryClient = new QueryClient();
 
   let isError = false;
-  let data = undefined;
+  let data = null;
+  const locale = ctx.locale || "vi";
 
   try {
     data = await queryClient.fetchQuery(["static-pages", params], () =>
       pageService.get(params)
     );
+    const content = data?.content?.find((ele) => ele?.lang === locale)?.value;
+    data.content = content;
   } catch (error) {
     isError = true;
   }
@@ -73,7 +76,7 @@ export const getStaticProps = async (ctx) => {
     props: {
       isError,
       data,
-      ...(await serverSideTranslations(ctx.locale || "vi")),
+      ...(await serverSideTranslations(locale)),
     },
     revalidate: 3600 * 24,
   };
