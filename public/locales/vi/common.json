@@ -98,5 +98,7 @@
   "task": "Nhiệm vụ",
   "empty-data": "Không có dữ liệu",
   "note": "Ghi chú",
-  "sponsor": "Sponsor"
+  "sponsor": "Sponsor",
+  "number-of-votes": "Lượt bình chọn",
+  "number-of-ticket-post": "Lượt báo cáo"
 }

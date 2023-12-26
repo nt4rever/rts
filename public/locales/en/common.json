@@ -95,5 +95,7 @@
   "task": "Task",
   "empty-data": "No data",
   "note": "Note",
-  "sponsor": "Sponsor"
+  "sponsor": "Sponsor",
+  "number-of-votes": "Number of votes:",
+  "number-of-ticket-post": "Number of tickets"
 }

@@ -90,6 +90,14 @@ export const AccountProfile = ({ user }) => {
           <Typography color="text.secondary" variant="body2">
             {user.email}
           </Typography>
+          <Typography color="text.secondary" variant="body2">
+            {`${t("common.number-of-votes")}: ${user?.vote_per_day?.point}`}
+          </Typography>
+          <Typography color="text.secondary" variant="body2">
+            {`${t("common.number-of-ticket-post")}: ${
+              user?.ticket_per_day?.count
+            }`}
+          </Typography>
         </Box>
       </CardContent>
       <Divider />
