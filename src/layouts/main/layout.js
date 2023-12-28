@@ -5,7 +5,7 @@ import Footer from "@/sections/footer";
 
 const MainLayout = (props) => {
   const { children } = props;
-  useIsFetch();
+  // useIsFetch();
 
   return (
     <div className={styles.wrapper}>
