@@ -19,7 +19,7 @@ const formatter = (value) => <CountUp end={value} duration={3} separator="," />;
 export default function Guide() {
   const { data } = useQuery({
     queryKey: ["report-stats"],
-    queryFn: statsService.report,
+    queryFn: () => statsService.report(),
     staleTime: Infinity,
   });
   const { t } = useTranslation();
