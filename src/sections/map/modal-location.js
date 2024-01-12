@@ -29,8 +29,8 @@ const ModalLocation = (props) => {
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            url="https://maps.vnpost.vn/api/tm/{z}/{x}/{y}@2x.png?apikey=674052d5aeb7658157d37306d8fc0bb42e7b69cff5e37440&api-version=1.1"
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            // url="https://maps.vnpost.vn/api/tm/{z}/{x}/{y}@2x.png?apikey=674052d5aeb7658157d37306d8fc0bb42e7b69cff5e37440&api-version=1.1"
           />
           <MyLocation />
           <LocationMaker
